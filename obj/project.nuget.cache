@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "cL/LVkAGD2vWeQvJkcrAmXvrj+zftOl14IX9W0ors3aWBDuC5vQjK/czc48yCsA3UySd+RU5Tieh4Zmej1EHhQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\Comp1640\\Comp1640.csproj",
+=======
+  "dgSpecHash": "XzKmvEhMMHq2LiQaIdTpxOZVbCPwh5LHH9i/OedYuxR9yD8o2Mm55aSrrxDoBVi9qDSgBRcGPFiXH2ieaKnVxQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\Backup\\Comp1640\\Comp1640.csproj",
+>>>>>>> 8742804b8660ae18666c22b2f5518386df137d07
   "expectedPackageFiles": [
     "C:\\Users\\huynh\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\huynh\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
