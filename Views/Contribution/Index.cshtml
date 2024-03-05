@@ -1,0 +1,76 @@
+@model IEnumerable<Comp1640.Models.Contribution>
+
+@{
+    Layout = "~/Views/Shared/UserLO.cshtml";
+}
+<style>
+    
+    .table {
+        width: 80%;
+        min-height: 600px;
+        display: flex;
+        justify-content: center;
+        margin-left: 10%;
+    }
+</style>
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+
+<body>  
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ConName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Startus)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.File)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Startus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.File)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ConId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ConId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ConId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</body>
+
+</html>

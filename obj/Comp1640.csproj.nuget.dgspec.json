@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\Backup\\Comp1640\\Comp1640.csproj": {}
+    "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640 - Backup\\Comp1640.csproj": {}
   },
   "projects": {
-    "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\Backup\\Comp1640\\Comp1640.csproj": {
+    "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640 - Backup\\Comp1640.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\Backup\\Comp1640\\Comp1640.csproj",
+        "projectUniqueName": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640 - Backup\\Comp1640.csproj",
         "projectName": "Comp1640",
-        "projectPath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\Backup\\Comp1640\\Comp1640.csproj",
+        "projectPath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640 - Backup\\Comp1640.csproj",
         "packagesPath": "C:\\Users\\huynh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\Backup\\Comp1640\\obj\\",
+        "outputPath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640 - Backup\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\huynh\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,6 +38,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.0, )"
@@ -49,6 +53,12 @@
               "version": "[7.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.0, )"
             },

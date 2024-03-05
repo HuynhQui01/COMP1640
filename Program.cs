@@ -1,5 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Comp1640.Models;
 var builder = WebApplication.CreateBuilder(args);
+var connectionTestDbConnection = builder.Configuration.GetConnectionString("MyConnect");
 
+builder.Services.AddDbContext<Comp1640.Models.Comp1640Context>(options =>
+   options.UseSqlServer(connectionTestDbConnection));
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -12,6 +18,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

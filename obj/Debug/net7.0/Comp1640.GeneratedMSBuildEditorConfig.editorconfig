@@ -9,41 +9,89 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Comp1640
 build_property.RootNamespace = Comp1640
-build_property.ProjectDir = C:\Users\huynh\Documents\COMP1640\Project\Comp1640\
+build_property.ProjectDir = C:\Users\huynh\Documents\COMP1640\Project\COMP1640 - Backup\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\huynh\Documents\COMP1640\Project\Comp1640
+build_property.MSBuildProjectDirectory = C:\Users\huynh\Documents\COMP1640\Project\COMP1640 - Backup
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/huynh/Documents/COMP1640/Project/Comp1640/Views/Home/Index.cshtml]
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Contribution/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJpYnV0aW9uXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Contribution/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJpYnV0aW9uXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Contribution/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJpYnV0aW9uXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Contribution/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJpYnV0aW9uXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Contribution/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJpYnV0aW9uXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Faculty/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFjdWx0eVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Faculty/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFjdWx0eVxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Faculty/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFjdWx0eVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Faculty/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFjdWx0eVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Faculty/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFjdWx0eVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Home/Admin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/huynh/Documents/COMP1640/Project/Comp1640/Views/Home/Privacy.cshtml]
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/huynh/Documents/COMP1640/Project/Comp1640/Views/Shared/Error.cshtml]
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Shared/AdminLO.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEFkbWluTE8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/huynh/Documents/COMP1640/Project/Comp1640/Views/Shared/UserLO.cshtml]
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Shared/UserLO.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFVzZXJMTy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/huynh/Documents/COMP1640/Project/Comp1640/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/huynh/Documents/COMP1640/Project/Comp1640/Views/_ViewImports.cshtml]
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/huynh/Documents/COMP1640/Project/Comp1640/Views/_ViewStart.cshtml]
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/huynh/Documents/COMP1640/Project/Comp1640/Views/Shared/_Layout.cshtml]
+[C:/Users/huynh/Documents/COMP1640/Project/COMP1640 - Backup/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-oo3d2tk894
