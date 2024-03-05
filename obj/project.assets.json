@@ -10913,19 +10913,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\huynh\\.nuget\\packages\\": {}
+    "C:\\Users\\kirit\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\Comp1640.csproj",
+      "projectUniqueName": "D:\\UoG\\Enterprise Web Software Development (COMP1640)\\Groupwork\\COMP1640\\Comp1640.csproj",
       "projectName": "Comp1640",
-      "projectPath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\Comp1640.csproj",
-      "packagesPath": "C:\\Users\\huynh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\obj\\",
+      "projectPath": "D:\\UoG\\Enterprise Web Software Development (COMP1640)\\Groupwork\\COMP1640\\Comp1640.csproj",
+      "packagesPath": "C:\\Users\\kirit\\.nuget\\packages\\",
+      "outputPath": "D:\\UoG\\Enterprise Web Software Development (COMP1640)\\Groupwork\\COMP1640\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\huynh\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\kirit\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
