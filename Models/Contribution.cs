@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Comp1640.Models;
 
+[Index("FeedbackId", Name = "IX_Contributions_FeedbackId")]
 public partial class Contribution
 {
     [Key]
@@ -19,7 +20,7 @@ public partial class Contribution
 
     [StringLength(50)]
     [Unicode(false)]
-    public string? Startus { get; set; }
+    public string? Status { get; set; }
 
     [StringLength(50)]
     [Unicode(false)]
@@ -30,8 +31,4 @@ public partial class Contribution
     [ForeignKey("FeedbackId")]
     [InverseProperty("Contributions")]
     public virtual Feedback? Feedback { get; set; }
-
-    [ForeignKey("UserId")]
-    [InverseProperty("Contributions")]
-    public virtual User? User { get; set; }
 }

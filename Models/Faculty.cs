@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Comp1640.Models;
 
+[Index("Ayid", Name = "IX_Faculties_AYId")]
 public partial class Faculty
 {
     [Key]
@@ -22,7 +23,4 @@ public partial class Faculty
     [ForeignKey("Ayid")]
     [InverseProperty("Faculties")]
     public virtual AcademicYear? Ay { get; set; }
-
-    [InverseProperty("Fac")]
-    public virtual ICollection<User> Users { get; } = new List<User>();
 }
