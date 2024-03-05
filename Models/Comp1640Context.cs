@@ -72,7 +72,17 @@ public partial class Comp1640Context : DbContext
 
         modelBuilder.Entity<Contribution>(entity =>
         {
-            entity.HasOne(d => d.Feedback).WithMany(p => p.Contributions).HasConstraintName("FK_Contributions_Feedbacks");
+            entity.HasKey(e => e.ConId).HasName("PK__Contribu__E19F47A9C5D82B89");
+
+            entity.Property(e => e.ConId).ValueGeneratedNever();
+
+            entity.HasOne(d => d.Feedback).WithMany(p => p.Contributions)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Contribut__Feedb__787EE5A0");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Contributions)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Contribut__UserI__778AC167");
         });
 
         modelBuilder.Entity<Faculty>(entity =>
@@ -83,6 +93,8 @@ public partial class Comp1640Context : DbContext
         modelBuilder.Entity<Feedback>(entity =>
         {
             entity.Property(e => e.FeedbackId).ValueGeneratedNever();
+
+            entity.HasOne(d => d.User).WithMany(p => p.Feedbacks).HasConstraintName("FK__Feedbacks__UserI__797309D9");
         });
 
         OnModelCreatingPartial(modelBuilder);
