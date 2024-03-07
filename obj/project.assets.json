@@ -10913,19 +10913,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\HP\\.nuget\\packages\\": {}
+    "C:\\Users\\huynh\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HP\\Desktop\\Project\\COMP1640\\COMP1640\\Comp1640.csproj",
+      "projectUniqueName": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640-backup\\Comp1640.csproj",
       "projectName": "Comp1640",
-      "projectPath": "C:\\Users\\HP\\Desktop\\Project\\COMP1640\\COMP1640\\Comp1640.csproj",
-      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HP\\Desktop\\Project\\COMP1640\\COMP1640\\obj\\",
+      "projectPath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640-backup\\Comp1640.csproj",
+      "packagesPath": "C:\\Users\\huynh\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640-backup\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\huynh\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
