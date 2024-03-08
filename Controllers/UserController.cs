@@ -22,24 +22,24 @@ namespace Comp1640.Controllers
 
         public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (User.IsInRole("Admin"))
-                {
+            // if (User.Identity.IsAuthenticated)
+            // {
+            //     if (User.IsInRole("Admin"))
+            //     {
                     var users = _userManager.Users.ToList();
                     
                     return View(users);
-                }
-            }
-            return Redirect("/");
+            //     }
+            // }
+            // return Redirect("/");
         }
 
         public IActionResult Delete(string id)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (User.IsInRole("Admin"))
-                {
+            // if (User.Identity.IsAuthenticated)
+            // {
+            //     if (User.IsInRole("Admin"))
+            //     {
                     var user = _userManager.FindByIdAsync(id).Result;
                     if (user != null)
                     {
@@ -50,17 +50,17 @@ namespace Comp1640.Controllers
                         }
                     }
                     return View("Error");
-                }
-            }
-            return Redirect("/");
+            //     }
+            // }
+            // return Redirect("/");
         }
 
         public IActionResult ManageRoles(string id)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (User.IsInRole("Admin"))
-                {
+            // if (User.Identity.IsAuthenticated)
+            // {
+            //     if (User.IsInRole("Admin"))
+            //     {
                     var user = _userManager.FindByIdAsync(id).Result;
                     var roles = _roleManager.Roles.Select(r => r.Name).ToList();
                     return View(model: new UserRoleViewModel
@@ -68,18 +68,18 @@ namespace Comp1640.Controllers
                         User = user,
                         Roles = roles
                     });
-                }
-            }
-            return Redirect("/");
+            //     }
+            // }
+            // return Redirect("/");
         }
 
         [HttpPost]
         public IActionResult SetRoles(string id, List<string> Roles)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (User.IsInRole("Admin"))
-                {
+            // if (User.Identity.IsAuthenticated)
+            // {
+            //     if (User.IsInRole("Admin"))
+            //     {
                     var user = _userManager.FindByIdAsync(id).Result;
 
                     var result = _userManager.AddToRolesAsync(user, Roles).Result;
@@ -89,9 +89,9 @@ namespace Comp1640.Controllers
                     }
                     else
                         return View("Error");
-                }
-            }
-            return Redirect("/");
+        //         }
+        //     }
+        //     return Redirect("/");
         }
     }
 }

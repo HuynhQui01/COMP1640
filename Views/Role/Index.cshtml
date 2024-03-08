@@ -1,0 +1,39 @@
+@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+@{
+    Layout = "";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-danger text-center" style="font-size: 40px;">Roles Management</h6>
+    </div>
+    <div class="p-3"><a class="btn btn-primary" asp-action="Create">Create New</a></div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="datatables" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            Roles
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var role in Model)
+                    {
+                    <tr>
+                        <td>@role.Name</td>
+                        <td>
+                            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@role.Id">Edit</a> |
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@role.Id">Delete</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+@model List<Microsoft.AspNetCore.Identity.IdentityUser>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    Layout = "~/Views/Shared/AdminLO.cshtml";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-danger text-center" style="font-size: 40px;">Accounts</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="datatables" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>@user.Email</td>
+                            <td>
+                                @{
+                                    var roles = await UserManager.GetRolesAsync(user);
+                                    if (roles.Count > 0)
+                                    {
+                                        @foreach (var role in roles)
+                                        {
+                                            <p>@role</p>
+                                        }
+                                    }
+                                }
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@user.Id">Delete</a> |
+                                <a class="btn btn-success" asp-action="ManageRoles" asp-route-id="@user.Id">Manage Roles</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -7,7 +7,8 @@ var connectionTestDbConnection = builder.Configuration.GetConnectionString("MyCo
 builder.Services.AddDbContext<Comp1640.Models.Comp1640Context>(options =>
    options.UseSqlServer(connectionTestDbConnection));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<Comp1640Context>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+.AddRoles<IdentityRole>().AddEntityFrameworkStores<Comp1640Context>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

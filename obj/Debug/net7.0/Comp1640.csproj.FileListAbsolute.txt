@@ -2234,3 +2234,4 @@ D:\University\TopUp\COMP1640\Code\Project\COMP1640\obj\Debug\net7.0\refint\Comp1
 D:\University\TopUp\COMP1640\Code\Project\COMP1640\obj\Debug\net7.0\Comp1640.pdb
 D:\University\TopUp\COMP1640\Code\Project\COMP1640\obj\Debug\net7.0\Comp1640.genruntimeconfig.cache
 D:\University\TopUp\COMP1640\Code\Project\COMP1640\obj\Debug\net7.0\ref\Comp1640.dll
+C:\Users\huynh\Documents\COMP1640\Project\COMP1640 - Backup\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
