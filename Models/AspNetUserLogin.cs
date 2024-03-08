@@ -25,4 +25,6 @@ public partial class AspNetUserLogin
     [ForeignKey("UserId")]
     [InverseProperty("AspNetUserLogins")]
     public virtual AspNetUser User { get; set; } = null!;
+
+    
 }
