@@ -3,16 +3,7 @@
 @{
     Layout = "~/Views/Shared/UserLO.cshtml";
 }
-<style>
-    
-    .table {
-        width: 80%;
-        min-height: 600px;
-        display: flex;
-        justify-content: center;
-        margin-left: 10%;
-    }
-</style>
+
 <!DOCTYPE html>
 
 <html>
@@ -22,54 +13,55 @@
     <title>Index</title>
 </head>
 
-<body>  
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.ConName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Status)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Filepath)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ConName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Filepath)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.ConId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.ConId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ConId">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
+<body>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-danger text-center" style="font-size: 40px;">Table of Contributions
+            </h6>
+        </div>
+        <div class="p-3"><a class="btn btn-primary" asp-action="Create">Create New</a></div>
+        <div class="card-body" style="box-sizing: border-box;">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="datatables" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                Contribution's Name
+                            </th>
+                            <th>
+                                File Submitted
+                            </th>
+                            <th>
+                                Upload Date
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ConName</td>
+                                <td>@item.Filepath</td>
+                                <td>
+                                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ConId">Edit</a> |
+                                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ConId">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>Internet</td>
+                            <td>Internet</td>
+                            <td>8/3/2024</td>
+                            <td>View</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
 </body>
 
