@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+1AdIYW35Ok76Dqg33YcJODAqI1tUtc68LXfJvZqs0WP/KfOwW2Ff2OGqqyvK5bCr+w5nR/sHYK+GmZuENXGbg==",
+  "dgSpecHash": "1npnkfKzsZ/0nYaSqeIvf/lMKnstqWFz6OCkucsgj/ZnYg9EzOZehcA3tOXW28wYXT/xMxc89tiq7SB5zvfLlg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640 - Backup\\Comp1640.csproj",
+  "projectFilePath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\Comp1640.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\huynh\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\huynh\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

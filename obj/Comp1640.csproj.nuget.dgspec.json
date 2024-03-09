@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640 - Backup\\Comp1640.csproj": {}
+    "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\Comp1640.csproj": {}
   },
   "projects": {
-    "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640 - Backup\\Comp1640.csproj": {
+    "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\Comp1640.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640 - Backup\\Comp1640.csproj",
+        "projectUniqueName": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\Comp1640.csproj",
         "projectName": "Comp1640",
-        "projectPath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640 - Backup\\Comp1640.csproj",
+        "projectPath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\Comp1640.csproj",
         "packagesPath": "C:\\Users\\huynh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640 - Backup\\obj\\",
+        "outputPath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\huynh\\AppData\\Roaming\\NuGet\\NuGet.Config"
