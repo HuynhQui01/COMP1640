@@ -7,8 +7,52 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<div class="main">
+<style>
+    #signup {
+        width: 300px;
+        border: none;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        background-color: #6dabe4;
+        color: #fff;
+        border: 2px solid #6dabe4;
+        border-radius: 5px;
+    }
 
+    #signup:hover {
+        background-color: #fff;
+        color: #6dabe4;
+    }
+    #back {
+        width: fit-content;
+        border: none;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        background-color: white;
+        color: black;
+        border: 2px solid #555555;
+        border-radius: 5px;
+    }
+
+    #back:hover {
+        background-color: #555555;
+        color: white;
+    }
+</style>
+
+<div class="main">
     <!-- Sign up form -->
     <section class="signup">
         <div class="container">
@@ -65,7 +109,7 @@
                 </div>
                 <div class="signup-image">
                     <figure><img src="~/css/login/images/signup-image.jpg" alt="sing up image"></figure>
-                    <a href="#" class="signup-image-link">I am already member</a>
+                    <a asp-area="Identity" asp-page="/Account/Login" class="signup-image-link" id="back">I am already member</a>
                 </div>
             </div>
         </div>
