@@ -24,8 +24,8 @@ namespace Comp1640.Controllers
             // {
                 // if (User.IsInRole("Admin"))
                 // {
-                    // var roles = _roleManager.Roles.ToList();
-                    // return View(roles);
+                    var roles = _roleManager.Roles.ToList();
+                    return View(roles);
                 // }
             // }
             return Redirect("/");

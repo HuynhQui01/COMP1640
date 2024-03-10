@@ -24,14 +24,13 @@ namespace Comp1640.Controllers
         {
             // if (User.Identity.IsAuthenticated)
             // {
-            //     if (User.IsInRole("Admin"))
+            //     if (User.IsInRole("Student"))
             //     {
                     var users = _userManager.Users.ToList();
-                    
                     return View(users);
             //     }
             // }
-            // return Redirect("/");
+            // return Redirect("Identity/Account/Login");
         }
 
         public IActionResult Delete(string id)

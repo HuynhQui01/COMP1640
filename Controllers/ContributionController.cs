@@ -21,9 +21,16 @@ namespace Comp1640.Controllers
         // GET: Contribution
         public async Task<IActionResult> Index()
         {
-              return _context.Contributions != null ? 
+            if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Student"))
+                {
+                    return _context.Contributions != null ? 
                           View(await _context.Contributions.ToListAsync()) :
                           Problem("Entity set 'Comp1640Context.Contributions'  is null.");
+                }
+            }
+            return Redirect("/");
         }
 
         // GET: Contribution/Details/5
