@@ -13,9 +13,10 @@ namespace Comp1640.Controllers
     {
         private readonly Comp1640Context _context;
 
-        public ContributionController(Comp1640Context context)
-        {
-            _context = context;
+        private readonly IWebHostEnvironment _webHost;
+
+        public ContributionController(IWebHostEnvironment webHost){
+            _webHost = webHost;
         }
 
         // GET: Contribution
@@ -57,20 +58,68 @@ namespace Comp1640.Controllers
             return View();
         }
 
-        // POST: Contribution/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ConId,ConName,UserId,Startus,File")] Contribution contribution)
+        public async Task<IActionResult> Create(IFormFile file)
         {
-            if (ModelState.IsValid)
+            if (file == null || file.Length == 0)
             {
-                _context.Add(contribution);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewBag.Message = "Error: No file selected or empty file.";
+                return View();
             }
-            return View(contribution);
+
+            try
+            {
+                string uploadsFolder = Path.Combine(_webHost.WebRootPath, "uploads");
+
+                // Ensure the uploads directory exists
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                // Sanitize the filename to prevent directory traversal attacks
+                string fileName = Path.GetFileName(file.FileName);
+                fileName = Path.Combine(uploadsFolder, fileName);
+
+                // Check if the file already exists and generate a unique filename if necessary
+                if (System.IO.File.Exists(fileName))
+                {
+                    string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
+                    string fileExtension = Path.GetExtension(fileName);
+                    fileName = Path.Combine(uploadsFolder, $"{fileNameWithoutExtension}_{DateTime.Now.Ticks}{fileExtension}");
+                }
+
+                // Validate the file (e.g., size, type) before saving
+                if (file.Length > 0 && IsFileValid(file))
+                {
+                    // Use asynchronous file operations for improved performance
+                    using (FileStream stream = new FileStream(fileName, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    ViewBag.Message = $"{Path.GetFileName(fileName)} uploaded successfully!";
+                }
+                else
+                {
+                    ViewBag.Message = "Error: Invalid file.";
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = $"Error: {ex.Message}";
+            }
+
+            return View();
+        }
+
+        private bool IsFileValid(IFormFile file)
+        {
+            // Example validation: Check file size and allowed extensions
+            long fileSizeLimit = 10 * 1024 * 1024; // 10 MB
+            string[] allowedExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".docx", ".doc", ".pdf" };
+
+            return file.Length <= fileSizeLimit && allowedExtensions.Contains(Path.GetExtension(file.FileName).ToLower());
         }
 
         // GET: Contribution/Edit/5
