@@ -67,11 +67,17 @@ namespace Comp1640.Controllers
             }
         }
 
+         public ActionResult studentmanage()
+        {
+            return View();
+        }
+
         // GET: Manager/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
+        
 
         // POST: Manager/Delete/5
         [HttpPost]

@@ -1,26 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "D:\\University\\TopUp\\COMP1640\\Code\\Project\\COMP1640\\Comp1640.csproj": {}
+    "D:\\1640\\code\\COMP1640\\Comp1640.csproj": {}
   },
   "projects": {
-    "D:\\University\\TopUp\\COMP1640\\Code\\Project\\COMP1640\\Comp1640.csproj": {
+    "D:\\1640\\code\\COMP1640\\Comp1640.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\University\\TopUp\\COMP1640\\Code\\Project\\COMP1640\\Comp1640.csproj",
+        "projectUniqueName": "D:\\1640\\code\\COMP1640\\Comp1640.csproj",
         "projectName": "Comp1640",
-        "projectPath": "D:\\University\\TopUp\\COMP1640\\Code\\Project\\COMP1640\\Comp1640.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "D:\\University\\TopUp\\COMP1640\\Code\\Project\\COMP1640\\obj\\",
+        "projectPath": "D:\\1640\\code\\COMP1640\\Comp1640.csproj",
+        "packagesPath": "C:\\Users\\BAO ANH\\.nuget\\packages\\",
+        "outputPath": "D:\\1640\\code\\COMP1640\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\BAO ANH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files\\dotnet\\sdk\\7.0.305\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -91,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.305\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
