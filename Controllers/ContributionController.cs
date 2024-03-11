@@ -15,8 +15,9 @@ namespace Comp1640.Controllers
 
         private readonly IWebHostEnvironment _webHost;
 
-        public ContributionController(IWebHostEnvironment webHost){
+        public ContributionController(IWebHostEnvironment webHost, Comp1640Context context){
             _webHost = webHost;
+            _context = context;
         }
 
         // GET: Contribution

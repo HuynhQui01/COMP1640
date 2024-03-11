@@ -3,7 +3,14 @@
 @{
     Layout = "~/Views/Shared/UserLO.cshtml";
 }
-
+<style>
+    tr>th{
+        color: red;
+    }
+    tr>td{
+        border-bottom: black solid 1px !important;
+    }
+</style>
 <!DOCTYPE html>
 
 <html>
@@ -25,16 +32,16 @@
                 <table class="table table-bordered" id="datatables" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>
+                            <th scope="col" >
                                 Contribution's Name
                             </th>
-                            <th>
+                            <th  scope="col">
                                 File Submitted
                             </th>
-                            <th>
+                            <th scope="col">
                                 Upload Date
                             </th>
-                            <th>
+                            <th scope="col">
                                 Action
                             </th>
                         </tr>
@@ -42,7 +49,7 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>s
+                            <tr>
                                 <td>@item.ConName</td>
                                 <td>@item.Filepath</td>
                                 <td>

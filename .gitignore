@@ -85,4 +85,7 @@ publish/
 *.[Pp]ublish.xml
 *.azurePubxml
 
+#appsettings.json
+appsettings.json
+
 # TODO: Comment the next line if you want to check in your web deploy settings
