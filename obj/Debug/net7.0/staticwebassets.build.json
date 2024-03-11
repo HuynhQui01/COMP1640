@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "loxszQuX5Xgsg3iLPb6Id7CWYTTYn4bzWm8YbfTqhKU=",
+  "Hash": "nhyVq5AQekpOnY/yoZZ+KWpAGFF238i1CWiZin+/qq4=",
   "Source": "Comp1640",
   "BasePath": "_content/Comp1640",
   "Mode": "Default",
@@ -44878,23 +44878,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\wow\\wow.min.js"
-    },
-    {
-      "Identity": "D:\\University\\TopUp\\COMP1640\\Code\\Project\\COMP1640\\wwwroot\\uploads\\1641_Assignment1_Frontsheet_NguyenThanhQuy_GCC210142.pdf",
-      "SourceId": "Comp1640",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\TopUp\\COMP1640\\Code\\Project\\COMP1640\\wwwroot\\",
-      "BasePath": "_content/Comp1640",
-      "RelativePath": "uploads/1641_Assignment1_Frontsheet_NguyenThanhQuy_GCC210142.pdf",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\1641_Assignment1_Frontsheet_NguyenThanhQuy_GCC210142.pdf"
     },
     {
       "Identity": "D:\\University\\TopUp\\COMP1640\\Code\\Project\\COMP1640\\wwwroot\\user\\css\\about.css",

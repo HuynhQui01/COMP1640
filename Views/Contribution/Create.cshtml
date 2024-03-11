@@ -25,7 +25,7 @@
 <hr style="width: 75%; height: 1px; margin: 15px auto;">
 <div class="row" id="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group mt-2">
                 <label asp-for="ConName" class="control-label" style="font-weight: 1000;">Contribution Name</label>
