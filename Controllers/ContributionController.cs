@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Comp1640.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Comp1640.Controllers
 {

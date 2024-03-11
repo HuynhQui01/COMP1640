@@ -2,13 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Comp1640.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Comp1640.Controllers
 {
     public class ManagerController : Controller
     {
+        private readonly Comp1640Context _context;
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public ManagerController(Comp1640Context context, UserManager<IdentityUser> userManager)
+        {
+            _context = context;
+            _userManager = userManager;
+        }
         // GET: Manager
         public ActionResult Index()
         {
@@ -67,9 +77,10 @@ namespace Comp1640.Controllers
             }
         }
 
-         public ActionResult studentmanage()
+         public async Task<ActionResult> studentmanage()
         {
-            return View();
+            var users = _userManager.Users.ToList();
+            return View(users);
         }
 
         // GET: Manager/Delete/5
