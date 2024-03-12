@@ -27,7 +27,7 @@ public partial class Contribution
     [Unicode(false)]
     public string? Filepath { get; set; }
 
-    public int FeedbackId { get; set; }
+    public int? FeedbackId { get; set; }    
 
     [Column(TypeName = "datetime")]
     public DateTime SubmitDate { get; set; }
