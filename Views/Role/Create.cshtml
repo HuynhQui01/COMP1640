@@ -1,13 +1,13 @@
 @model Comp1640.Models.CreateRoleViewModel
 @{
-    Layout = "";
+    Layout = "~/Views/Shared/AdminLO.cshtml";
 }
 
-<h2>Create Role</h2>
+<h2 style="margin: 2px 0">Create Role</h2>
 
-<form asp-action="Create">
-    <div class="form-group">
-        <label for="roleName">Role Name</label>
+<form asp-action="Create" style="width: 50%">
+    <div class="form-group mb-2">
+        <label for="roleName" class="fw-bold">Role Name</label>
         <input asp-for="roleName" class="form-control" />
     </div>
     <button type="submit" class="btn btn-primary">Create</button>

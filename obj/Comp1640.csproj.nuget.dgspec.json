@@ -1,25 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\Comp1640.csproj": {}
+    "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\Comp1640.csproj": {}
   },
   "projects": {
-    "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\Comp1640.csproj": {
+    "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\Comp1640.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\Comp1640.csproj",
+        "projectUniqueName": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\Comp1640.csproj",
         "projectName": "Comp1640",
-        "projectPath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\Comp1640.csproj",
-        "packagesPath": "C:\\Users\\huynh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\obj\\",
+        "projectPath": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\Comp1640.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\huynh\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files\\dotnet\\sdk\\7.0.305\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -90,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.406\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.305\\RuntimeIdentifierGraph.json"
         }
       }
     }

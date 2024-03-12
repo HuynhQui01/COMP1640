@@ -1,12 +1,12 @@
 @model Microsoft.AspNetCore.Identity.IdentityRole;
 @{
-    Layout = "";
+    Layout = "~/Views/Shared/AdminLO.cshtml";
 }
 
 <h2>Edit Role</h2>
 
 <form asp-action="Edit" asp-route-id="@Model.Id">
-    <div class="form-group">
+    <div class="form-group mb-2">
         <label for="roleName">Role Name</label>
         <input asp-for="Name" class="form-control" />
     </div>

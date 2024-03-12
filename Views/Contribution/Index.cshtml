@@ -33,9 +33,12 @@
                     <thead>
                         <tr>
                             <th scope="col" >
-                                Contribution's Name
+                                Title
                             </th>
-                            <th  scope="col">
+                            <th scope="col" >
+                                Faculty
+                            </th>
+                            <th >
                                 File Submitted
                             </th>
                             <th scope="col">
@@ -51,19 +54,15 @@
                         {
                             <tr>
                                 <td>@item.ConName</td>
+                                <td></td>
                                 <td>@item.Filepath</td>
+                                <td>@item.SubmitDate</td>
                                 <td>
                                     <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ConId">Edit</a> |
                                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ConId">Delete</a>
                                 </td>
                             </tr>
                         }
-                        <tr>
-                            <td>Internet</td>
-                            <td>Internet</td>
-                            <td>8/3/2024</td>
-                            <td>View</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
