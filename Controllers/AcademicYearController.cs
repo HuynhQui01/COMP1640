@@ -9,90 +9,89 @@ using Comp1640.Models;
 
 namespace Comp1640.Controllers
 {
-    public class FacultyController : Controller
+    public class AcademicYearController : Controller
     {
         private readonly Comp1640Context _context;
 
-        public FacultyController(Comp1640Context context)
+        public AcademicYearController(Comp1640Context context)
         {
             _context = context;
         }
 
-        // GET: Faculty
+        // GET: AcademicYear
         public async Task<IActionResult> Index()
         {
-            var comp1640Context = _context.Faculties.Include(f => f.Ay);
-              return View(await comp1640Context.ToListAsync());
+              return _context.AcademicYear != null ? 
+                          View(await _context.AcademicYear.ToListAsync()) :
+                          Problem("Entity set 'Comp1640Context.AcademicYear'  is null.");
         }
 
-        // GET: Faculty/Details/5
+        // GET: AcademicYear/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Faculties == null)
+            if (id == null || _context.AcademicYear == null)
             {
                 return NotFound();
             }
 
-            var faculty = await _context.Faculties
-                .FirstOrDefaultAsync(m => m.FacId == id);
-            if (faculty == null)
+            var academicYear = await _context.AcademicYear
+                .FirstOrDefaultAsync(m => m.Ayid == id);
+            if (academicYear == null)
             {
                 return NotFound();
             }
 
-            return View(faculty);
+            return View(academicYear);
         }
 
-
-        // GET: Faculty/Create
+        // GET: AcademicYear/Create
         public IActionResult Create()
         {
-            ViewData["Ayid"] = new SelectList(_context.AcademicYear, "Ayid", "CloseDate");
             return View();
         }
 
-        // POST: Faculty/Create
+        // POST: AcademicYear/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FacId,FacName,Ayid")] Faculty faculty)
+        public async Task<IActionResult> Create([Bind("Ayid,CloseDate,FinalCloseDate")] AcademicYear academicYear)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(faculty);
+                var count = await _context.AcademicYear.CountAsync();
+                academicYear.Ayid = count;
+                _context.Add(academicYear);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(faculty);
+            return View(academicYear);
         }
 
-        // GET: Faculty/Edit/5
+        // GET: AcademicYear/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Faculties == null)
+            if (id == null || _context.AcademicYear == null)
             {
                 return NotFound();
             }
 
-            var faculty = await _context.Faculties.FindAsync(id);
-            // var ayId =  _context.AcademicYear.Select(y => y.CloseDate).ToList();
-            if (faculty == null)
+            var academicYear = await _context.AcademicYear.FindAsync(id);
+            if (academicYear == null)
             {
                 return NotFound();
             }
-            ViewData["Ayid"] = new SelectList(_context.AcademicYear, "Ayid", "CloseDate", faculty.Ayid);
-            return View(faculty);
+            return View(academicYear);
         }
 
-        // POST: Faculty/Edit/5
+        // POST: AcademicYear/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FacId,FacName,Ayid")] Faculty faculty)
+        public async Task<IActionResult> Edit(int id, [Bind("Ayid,CloseDate,FinalCloseDate")] AcademicYear academicYear)
         {
-            if (id != faculty.FacId)
+            if (id != academicYear.Ayid)
             {
                 return NotFound();
             }
@@ -101,12 +100,12 @@ namespace Comp1640.Controllers
             {
                 try
                 {
-                    _context.Update(faculty);
+                    _context.Update(academicYear);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FacultyExists(faculty.FacId))
+                    if (!AcademicYearExists(academicYear.Ayid))
                     {
                         return NotFound();
                     }
@@ -117,49 +116,49 @@ namespace Comp1640.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(faculty);
+            return View(academicYear);
         }
 
-        // GET: Faculty/Delete/5
+        // GET: AcademicYear/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Faculties == null)
+            if (id == null || _context.AcademicYear == null)
             {
                 return NotFound();
             }
 
-            var faculty = await _context.Faculties
-                .FirstOrDefaultAsync(m => m.FacId == id);
-            if (faculty == null)
+            var academicYear = await _context.AcademicYear
+                .FirstOrDefaultAsync(m => m.Ayid == id);
+            if (academicYear == null)
             {
                 return NotFound();
             }
 
-            return View(faculty);
+            return View(academicYear);
         }
 
-        // POST: Faculty/Delete/5
+        // POST: AcademicYear/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Faculties == null)
+            if (_context.AcademicYear == null)
             {
-                return Problem("Entity set 'Comp1640Context.Faculties'  is null.");
+                return Problem("Entity set 'Comp1640Context.AcademicYear'  is null.");
             }
-            var faculty = await _context.Faculties.FindAsync(id);
-            if (faculty != null)
+            var academicYear = await _context.AcademicYear.FindAsync(id);
+            if (academicYear != null)
             {
-                _context.Faculties.Remove(faculty);
+                _context.AcademicYear.Remove(academicYear);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FacultyExists(int id)
+        private bool AcademicYearExists(int id)
         {
-          return (_context.Faculties?.Any(e => e.FacId == id)).GetValueOrDefault();
+          return (_context.AcademicYear?.Any(e => e.Ayid == id)).GetValueOrDefault();
         }
     }
 }

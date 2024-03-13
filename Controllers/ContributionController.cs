@@ -63,7 +63,14 @@ namespace Comp1640.Controllers
         // GET: Contribution/Create
         public IActionResult Create()
         {
-            return View();
+            if (User.Identity.IsAuthenticated){
+                if (User.IsInRole("Student")){
+                    ViewData["FacId"] = new SelectList(_context
+                    .Faculties, "FacId", "FacName");
+                    return View();
+                }
+            }
+            return Redirect("/");
         }
 
         [HttpPost]

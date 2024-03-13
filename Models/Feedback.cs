@@ -24,7 +24,7 @@ public partial class Feedback
     [InverseProperty("Feedback")]
     public virtual ICollection<Contribution> Contributions { get; } = new List<Contribution>();
 
-    // [ForeignKey("UserId")]
-    // [InverseProperty("Feedbacks")]
-    // public virtual AspNetUser? User { get; set; }
+    [ForeignKey("UserId")]
+    [InverseProperty("Feedbacks")]
+    public virtual AspNetUser? User { get; set; }
 }

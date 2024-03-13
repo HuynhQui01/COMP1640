@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/AdminLO.cshtml";
 }
 
-<h2>Manage Role for @Model.User.UserName</h2>
+<h2 style="color: red;">Manage Role for "@Model.User.UserName"</h2>
 
 <form asp-action="SetRoles" method="post" style="margin-bottom: 535px;">
     <input asp-for="User.Id" name ="id" type="hidden"/>

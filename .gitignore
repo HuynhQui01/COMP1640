@@ -85,7 +85,8 @@ publish/
 *.[Pp]ublish.xml
 *.azurePubxml
 
-#appsettings.json
+# Windows shortcuts
+*.lnk
 appsettings.json
 
 # TODO: Comment the next line if you want to check in your web deploy settings

@@ -1,4 +1,4 @@
-@model Comp1640.Models.Faculty
+@model Comp1640.Models.AcademicYear
 
 @{
     Layout = "~/Views/Shared/AdminLO.cshtml";
@@ -18,15 +18,21 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            Faculty's Name:
+            @Html.DisplayNameFor(model => model.CloseDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FacName)
+            @Html.DisplayFor(model => model.CloseDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FinalCloseDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FinalCloseDate)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="FacId" />
+        <input type="hidden" asp-for="Ayid" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a class="btn btn-dark" asp-action="Index">Back to List</a>
     </form>

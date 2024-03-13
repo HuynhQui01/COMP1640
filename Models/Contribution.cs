@@ -23,18 +23,24 @@ public partial class Contribution
     [Unicode(false)]
     public string Status { get; set; } = null!;
 
-    [StringLength(50)]
-    [Unicode(false)]
+    [StringLength(450)]
     public string? Filepath { get; set; }
 
-    public int? FeedbackId { get; set; }    
+    public int? FeedbackId { get; set; }
 
     [Column(TypeName = "datetime")]
     public DateTime SubmitDate { get; set; }
 
+    [Column("FacID")]
+    public int? FacId { get; set; }
+
+    [ForeignKey("FacId")]
+    [InverseProperty("Contributions")]
+    public virtual Faculty? Fac { get; set; }
+
     [ForeignKey("FeedbackId")]
     [InverseProperty("Contributions")]
-    public virtual Feedback Feedback { get; set; } = null!;
+    public virtual Feedback? Feedback { get; set; }
 
     [ForeignKey("UserId")]
     [InverseProperty("Contributions")]

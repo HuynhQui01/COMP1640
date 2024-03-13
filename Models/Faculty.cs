@@ -6,16 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Comp1640.Models;
 
-[Index("Ayid", Name = "IX_Faculties_AYId")]
 public partial class Faculty
 {
     [Key]
-    [Column("FacID")]
     public int FacId { get; set; }
 
     [StringLength(50)]
     [Unicode(false)]
-    public string? FacName { get; set; }
+    public string FacName { get; set; } = null!;
 
     [Column("AYId")]
     public int? Ayid { get; set; }
@@ -23,4 +21,7 @@ public partial class Faculty
     [ForeignKey("Ayid")]
     [InverseProperty("Faculties")]
     public virtual AcademicYear? Ay { get; set; }
+
+    [InverseProperty("Fac")]
+    public virtual ICollection<Contribution> Contributions { get; } = new List<Contribution>();
 }
