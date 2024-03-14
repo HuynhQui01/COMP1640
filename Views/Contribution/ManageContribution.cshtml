@@ -1,0 +1,116 @@
+@model IEnumerable<Comp1640.Models.Contribution>
+
+@{
+    ViewData["Title"] = "ManageContribution";
+    Layout = "~/Views/Shared/UserLO.cshtml";
+}
+<style>
+    tr>th {
+        color: red;
+    }
+
+    tr>td {
+        border-bottom: black solid 1px !important;
+    }
+</style>
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+
+<body>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-danger text-center" style="font-size: 40px;">Table of Contributions
+            </h6>
+        </div>
+        <div class="p-3"><a class="btn btn-primary" asp-controller="Contribution" asp-action="Create">Create New</a>
+        </div>
+        <div class="card-body" style="box-sizing: border-box;">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="datatables" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                Contribution's Name
+                            </th>
+                            <th scope="col">
+                                File Submitted
+                            </th>
+                            <th scope="col">
+                                Upload Date
+                            </th>
+                            <th scope="col">
+                                Status
+                            </th>
+                            <th scope="col">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ConName</td>
+                                <td>@item.Filepath</td>
+                                <td>@item.SubmitDate</td>
+                                <td>@item.Status</td>
+                                <td>
+                                    <form asp-controller="Contribution" asp-action="UpdateStatus" method="post">
+                                        <input type="hidden" name="id" value="@item.ConId" />
+                                        <input type="hidden" name="status" value="Approved"/>
+                                        <button type="submit" class="btn btn-success">Approve</button>
+                                    </form>
+
+                                    <form asp-controller="Contribution" asp-action="UpdateStatus" method="post">
+                                        <input type="hidden" name="id" value="@item.ConId" />
+                                        <input type="hidden" name="status" value="Rejected" />
+                                        <button type="submit" class="btn btn-danger">Reject</button>
+                                    </form>
+                                </td>
+
+
+                                @* <a class="btn btn-primary"asp-asp-controller="ContributionController"
+                            asp-action="UpdateStatus" asp-route-id="@item.ConId" asp-route-status="Approved"
+                            method="post">Approved</a> |
+                            <a class="btn btn-danger" asp-asp-controller="ContributionController"
+                            asp-action="UpdateStatus" asp-route-id="@item.ConId"
+                            asp-route-status="Rejected"method="post">Rejected</a>
+                            *@
+                                @* <td>
+                            <form asp-controller="ControbutionController" asp-action="UpdateStatus"
+                            asp-route-id="@item.ConId"
+                            method="post">
+                            <button class="btn btn-primary" type="submit" name="status"
+                            asp-route-status="Approved">Approve</button>
+                            </form>
+                            <form asp-controller="ControbutionController" asp-action="UpdateStatus"
+                            asp-route-id="@item.ConId"
+                            method="post">
+                            <button class="btn btn-danger" type="submit" name="status"
+                            asp-route-status="Rejected">Reject</button>
+                            </form>
+                            </td> *@
+
+                            </tr>
+                        }
+                        <tr>
+                            <td>Internet</td>
+                            <td>Internet</td>
+                            <td>8/3/2024</td>
+                            <td>View</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

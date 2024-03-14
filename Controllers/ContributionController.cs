@@ -42,6 +42,48 @@ namespace Comp1640.Controllers
             return Redirect("/");
         }
 
+             public async Task<IActionResult> ManageContribution()
+        {
+             if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Marketing Coordinator "))
+                {
+                    return _context.Contributions != null ?
+                          View(await _context.Contributions.ToListAsync()) :
+                          Problem("Entity set 'Comp1640Context.Contributions'  is null.");
+                }
+            }
+            return Redirect("/");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateStatus(int id, string status)
+        {
+            var contribution = await _context.Contributions.FindAsync(id);
+            if (contribution == null)
+            {
+                return NotFound();
+            }
+
+            switch (status)
+            {
+                case "Rejected":
+                    contribution.Status = "Rejected";
+                    break;
+                case "Approved":
+                    contribution.Status = "Approved";
+                    break;
+                default:
+                    contribution.Status = "Pending";
+                    break;
+            }
+
+            _context.Update(contribution);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(ManageContribution));
+
+        }
         // GET: Contribution/Details/5
         public async Task<IActionResult> Details(int? id)
         {
