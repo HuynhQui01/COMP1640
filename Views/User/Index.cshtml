@@ -1,6 +1,6 @@
-@model List<Microsoft.AspNetCore.Identity.IdentityUser>
+@model List<Comp1640.Models.CustomUser>
 @using Microsoft.AspNetCore.Identity
-@inject UserManager<IdentityUser> UserManager
+@inject UserManager<CustomUser> UserManager
 
 @{
     Layout = "~/Views/Shared/AdminLO.cshtml";
@@ -24,6 +24,7 @@
                         <th>Username</th>
                         <th>Email</th>
                         <th>Role</th>
+                        <th>Faculty</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -45,9 +46,12 @@
                                     }
                                 }
                             </td>
+                            <td>@Html.DisplayFor(modelUser => user.FacName)</td>
                             <td>
                                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@user.Id">Delete</a> |
                                 <a class="btn btn-success" asp-action="ManageRoles" asp-route-id="@user.Id">Manage Roles</a>
+                                <a class="btn btn-success" asp-action="ManageFaculty" asp-route-id="@user.Id">Manage Faculty</a>
+
                             </td>
                         </tr>
                     }

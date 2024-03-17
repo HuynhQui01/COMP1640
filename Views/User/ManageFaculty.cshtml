@@ -5,13 +5,8 @@
 
 <h2 style="color: red;">Manage Role for "@Model.User.UserName"</h2>
 
-<form asp-action="SetRoles" method="post" style="margin-bottom: 535px;">
+<form asp-action="SetFaculty" method="post" style="margin-bottom: 535px;">
     <input asp-for="User.Id" name ="id" type="hidden"/>
-    <div class="form-group">
-        <label for="roleNames">Roles</label>
-        <select asp-for="Roles" asp-items="new SelectList(Model.Roles)" multiple class="form-control" style="height: 150px">
-        </select>
-    </div>
     <div class="form-group">
         <label for="roleNames">Faculties</label>
         <select asp-for="Faculties" asp-items="new SelectList(Model.Faculties)" multiple class="form-control" style="height: 150px">

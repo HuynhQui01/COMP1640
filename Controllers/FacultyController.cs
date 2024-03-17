@@ -47,7 +47,7 @@ namespace Comp1640.Controllers
         // GET: Faculty/Create
         public IActionResult Create()
         {
-            ViewData["Ayid"] = new SelectList(_context.AcademicYear, "Ayid", "CloseDate");
+            ViewData["Ayid"] = new SelectList(_context.AcademicYears, "Ayid", "CloseDate");
             return View();
         }
 
@@ -81,7 +81,7 @@ namespace Comp1640.Controllers
             {
                 return NotFound();
             }
-            ViewData["Ayid"] = new SelectList(_context.AcademicYear, "Ayid", "CloseDate", faculty.Ayid);
+            ViewData["Ayid"] = new SelectList(_context.AcademicYears, "Ayid", "CloseDate", faculty.Ayid);
             return View(faculty);
         }
 

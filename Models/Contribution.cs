@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Comp1640.Models;
 
+[Index("FacId", Name = "IX_Contributions_FacId")]
+[Index("FeedbackId", Name = "IX_Contributions_FeedbackId")]
+[Index("UserId", Name = "IX_Contributions_UserID")]
 public partial class Contribution
 {
     [Key]
@@ -16,7 +19,6 @@ public partial class Contribution
     public string ConName { get; set; } = null!;
 
     [Column("UserID")]
-    [StringLength(450)]
     public string UserId { get; set; } = null!;
 
     [StringLength(50)]
@@ -31,18 +33,16 @@ public partial class Contribution
     [Column(TypeName = "datetime")]
     public DateTime SubmitDate { get; set; }
 
-    [Column("FacID")]
     public int? FacId { get; set; }
 
     [ForeignKey("FacId")]
     [InverseProperty("Contributions")]
     public virtual Faculty? Fac { get; set; }
 
-    [ForeignKey("FeedbackId")]
-    [InverseProperty("Contributions")]
-    public virtual Feedback? Feedback { get; set; }
+    [InverseProperty("Con")]
+    public virtual ICollection<Feedback> Feedbacks { get; } = new List<Feedback>();
 
     [ForeignKey("UserId")]
     [InverseProperty("Contributions")]
-    public virtual AspNetUser User { get; set; } = null!;
+    public virtual CustomUser User { get; set; } = null!;
 }

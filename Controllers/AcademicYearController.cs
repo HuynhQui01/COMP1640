@@ -21,20 +21,20 @@ namespace Comp1640.Controllers
         // GET: AcademicYear
         public async Task<IActionResult> Index()
         {
-              return _context.AcademicYear != null ? 
-                          View(await _context.AcademicYear.ToListAsync()) :
+              return _context.AcademicYears != null ? 
+                          View(await _context.AcademicYears.ToListAsync()) :
                           Problem("Entity set 'Comp1640Context.AcademicYear'  is null.");
         }
 
         // GET: AcademicYear/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.AcademicYear == null)
+            if (id == null || _context.AcademicYears == null)
             {
                 return NotFound();
             }
 
-            var academicYear = await _context.AcademicYear
+            var academicYear = await _context.AcademicYears
                 .FirstOrDefaultAsync(m => m.Ayid == id);
             if (academicYear == null)
             {
@@ -59,8 +59,8 @@ namespace Comp1640.Controllers
         {
             if (ModelState.IsValid)
             {
-                var count = await _context.AcademicYear.CountAsync();
-                academicYear.Ayid = count;
+                var count = await _context.AcademicYears.CountAsync();
+                // academicYear.Ayid = count;
                 _context.Add(academicYear);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -71,12 +71,12 @@ namespace Comp1640.Controllers
         // GET: AcademicYear/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.AcademicYear == null)
+            if (id == null || _context.AcademicYears == null)
             {
                 return NotFound();
             }
 
-            var academicYear = await _context.AcademicYear.FindAsync(id);
+            var academicYear = await _context.AcademicYears.FindAsync(id);
             if (academicYear == null)
             {
                 return NotFound();
@@ -122,12 +122,12 @@ namespace Comp1640.Controllers
         // GET: AcademicYear/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.AcademicYear == null)
+            if (id == null || _context.AcademicYears == null)
             {
                 return NotFound();
             }
 
-            var academicYear = await _context.AcademicYear
+            var academicYear = await _context.AcademicYears
                 .FirstOrDefaultAsync(m => m.Ayid == id);
             if (academicYear == null)
             {
@@ -142,14 +142,14 @@ namespace Comp1640.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.AcademicYear == null)
+            if (_context.AcademicYears == null)
             {
                 return Problem("Entity set 'Comp1640Context.AcademicYear'  is null.");
             }
-            var academicYear = await _context.AcademicYear.FindAsync(id);
+            var academicYear = await _context.AcademicYears.FindAsync(id);
             if (academicYear != null)
             {
-                _context.AcademicYear.Remove(academicYear);
+                _context.AcademicYears.Remove(academicYear);
             }
             
             await _context.SaveChangesAsync();
@@ -158,7 +158,7 @@ namespace Comp1640.Controllers
 
         private bool AcademicYearExists(int id)
         {
-          return (_context.AcademicYear?.Any(e => e.Ayid == id)).GetValueOrDefault();
+          return (_context.AcademicYears?.Any(e => e.Ayid == id)).GetValueOrDefault();
         }
     }
 }

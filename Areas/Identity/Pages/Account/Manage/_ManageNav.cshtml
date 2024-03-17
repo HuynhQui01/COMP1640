@@ -1,4 +1,7 @@
+@* @model Comp1640.Models.CustomUser *@
 @inject SignInManager<IdentityUser> SignInManager
+@* @inject SignInManager<CustomeUser> SignInManagers *@
+
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

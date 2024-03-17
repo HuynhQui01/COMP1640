@@ -16,11 +16,11 @@ namespace Comp1640.Controllers
         private readonly Comp1640Context _context;
 
         private readonly IWebHostEnvironment _webHost;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<CustomUser> _userManager;
 
 
 
-        public ContributionController(IWebHostEnvironment webHost, Comp1640Context context, UserManager<IdentityUser> userManager)
+        public ContributionController(IWebHostEnvironment webHost, Comp1640Context context, UserManager<CustomUser> userManager)
         {
             _webHost = webHost;
             _context = context;
@@ -34,6 +34,8 @@ namespace Comp1640.Controllers
             {
                 if (User.IsInRole("Student"))
                 {
+                    var comp1640Context = _context.Contributions.Include(f => f.Fac);
+                    return View(await comp1640Context.ToListAsync());
                     return _context.Contributions != null ?
                           View(await _context.Contributions.ToListAsync()) :
                           Problem("Entity set 'Comp1640Context.Contributions'  is null.");
@@ -42,9 +44,9 @@ namespace Comp1640.Controllers
             return Redirect("/");
         }
 
-             public async Task<IActionResult> ManageContribution()
+        public async Task<IActionResult> ManageContribution()
         {
-             if (User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
                 if (User.IsInRole("Marketing Coordinator "))
                 {
@@ -105,8 +107,10 @@ namespace Comp1640.Controllers
         // GET: Contribution/Create
         public IActionResult Create()
         {
-            if (User.Identity.IsAuthenticated){
-                if (User.IsInRole("Student")){
+            if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Student"))
+                {
                     ViewData["FacId"] = new SelectList(_context
                     .Faculties, "FacId", "FacName");
                     return View();
@@ -116,7 +120,7 @@ namespace Comp1640.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(IFormFile file, [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate")] Contribution contribution)
+        public async Task<IActionResult> Create(IFormFile file, [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,FacId")] Contribution contribution, string Fac)
         {
             if (file == null || file.Length == 0)
             {
@@ -136,7 +140,7 @@ namespace Comp1640.Controllers
 
                 // Sanitize the filename to prevent directory traversal attacks
                 string fileName = Path.GetFileName(file.FileName);
-                var filepath= fileName;
+                var filepath = fileName;
                 fileName = Path.Combine(uploadsFolder, fileName);
 
                 // Check if the file already exists and generate a unique filename if necessary
@@ -158,10 +162,10 @@ namespace Comp1640.Controllers
 
                     var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     var count = await _context.Contributions.CountAsync();
-                    contribution.ConId = count + 1;
+                    // contribution.ConId = count + 1;
                     contribution.UserId = userID;
                     contribution.Filepath = filepath;
-
+                    // contribution.FacId = FacId;
                     contribution.Status = "Pending";
                     contribution.SubmitDate = DateTime.Now;
                     _context.Add(contribution);

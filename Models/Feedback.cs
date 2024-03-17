@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Comp1640.Models;
 
+[Index("ConId", Name = "IX_Feedbacks_ConId")]
 public partial class Feedback
 {
     [Key]
@@ -21,10 +22,9 @@ public partial class Feedback
     [StringLength(450)]
     public string? UserId { get; set; }
 
-    [InverseProperty("Feedback")]
-    public virtual ICollection<Contribution> Contributions { get; } = new List<Contribution>();
+    public int? ConId { get; set; }
 
-    [ForeignKey("UserId")]
+    [ForeignKey("ConId")]
     [InverseProperty("Feedbacks")]
-    public virtual AspNetUser? User { get; set; }
+    public virtual Contribution? Con { get; set; }
 }
