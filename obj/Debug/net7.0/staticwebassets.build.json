@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RbaBMzElbW/1kD/mewoj8zyH4Xoe51rJZ9XV5nkPvQw=",
+  "Hash": "XAKYcYpMEtX361EhYK2GzyVrH53HIq13F4bn+N3W4T4=",
   "Source": "Comp1640",
   "BasePath": "_content/Comp1640",
   "Mode": "Default",
@@ -44895,6 +44895,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\Assignment 2 brief .docx"
+    },
+    {
+      "Identity": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\uploads\\Bài 5 Lập Trình Game 2D Với Unity - Thành phần vật lý và xử lý va chạm.docx",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "uploads/Bài 5 Lập Trình Game 2D Với Unity - Thành phần vật lý và xử lý va chạm.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Bài 5 Lập Trình Game 2D Với Unity - Thành phần vật lý và xử lý va chạm.docx"
     },
     {
       "Identity": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\user\\css\\about.css",

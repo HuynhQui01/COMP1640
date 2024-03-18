@@ -1,0 +1,39 @@
+@model Comp1640.Models.UserRoleViewModel
+@{
+    ViewData["Title"] = "Remove Roles";
+    Layout = "~/Views/Shared/adminLO.cshtml";
+}
+<h2>User Information</h2>
+<table>
+    @* <tr>
+        <th>User Id:</th>
+        <td>@(Model.User != null ? Model.User.Id : "N/A")</td>
+    </tr> *@
+    <tr>
+        <th>User Name:</th>
+        <td>@(Model.User != null ? Model.User.UserName : "N/A")</td>
+    </tr>
+</table>
+<h2>Roles</h2>
+@if (Model.Roles.Count == 0)
+{
+    <p>This user has no roles.</p>
+}
+else
+{
+    <form asp-controller="User" asp-action="RemoveRoles" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <input name="userId" type="hidden" value="@Model.User.Id">
+            <label for="selectedRole">Select a Role to Remove:</label>
+            <select class="form-control" name="selectedRole" id="selectedRole">
+                @foreach (var role in Model.Roles)
+                {
+                    <option value="@role">@role</option>
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-danger my-3">Remove Role</button>
+    </form>
+}
