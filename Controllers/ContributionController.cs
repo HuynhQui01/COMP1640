@@ -28,22 +28,24 @@ namespace Comp1640.Controllers
         }
 
         // GET: Contribution
-        public async Task<IActionResult> Index()
+     public async Task<IActionResult> Index()
+{
+    if (User.Identity.IsAuthenticated && User.IsInRole("Student"))
+    {
+        var user = await _userManager.GetUserAsync(User);
+        if (user != null)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (User.IsInRole("Student"))
-                {
-                    var comp1640Context = _context.Contributions.Include(f => f.Fac);
-                    return View(await comp1640Context.ToListAsync());
-                    return _context.Contributions != null ?
-                          View(await _context.Contributions.ToListAsync()) :
-                          Problem("Entity set 'Comp1640Context.Contributions'  is null.");
-                }
-            }
-            return Redirect("/");
-        }
+            var userContributions = await _context.Contributions
+                .Where(c => c.UserId == user.Id)
+                .Include(f => f.Fac) // Bổ sung Include để load thông tin về khoa (faculty)
+                .ToListAsync();
 
+            return View(userContributions);
+        }
+    }
+    
+    return Redirect("/");
+}
         public async Task<IActionResult> ManageContribution()
         {
             if (User.Identity.IsAuthenticated)
