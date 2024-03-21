@@ -18,12 +18,21 @@ namespace Comp1640.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<CustomUser> _userManager;
         private readonly SignInManager<CustomUser> _signInManager;
 
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+
+ private readonly IHttpContextAccessor _httpContextAccessor;
+
         public IndexModel(
             UserManager<CustomUser> userManager,
-            SignInManager<CustomUser> signInManager)
+            SignInManager<CustomUser> signInManager,
+            IHttpContextAccessor httpContextAccessor,
+            IWebHostEnvironment webHostEnvironment)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _httpContextAccessor = httpContextAccessor;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         /// <summary>
@@ -46,6 +55,8 @@ namespace Comp1640.Areas.Identity.Pages.Account.Manage
         [BindProperty]
         public InputModel Input { get; set; }
 
+        public string ProfileImagePath { get; set; }
+
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -59,14 +70,26 @@ namespace Comp1640.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "Profile picture")]
+            public IFormFile ProfilePicture { get; set; }
         }
 
         private async Task LoadAsync(CustomUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            // Lấy thông tin người dùng từ HttpContext.User thay vì _signInManager.Context.User
+        var claimsPrincipal = _httpContextAccessor.HttpContext.User;
+
+        // Truy cập đối tượng CustomUser từ ClaimsPrincipal
+        var customUser = await _userManager.GetUserAsync(claimsPrincipal);
+
+        // Lấy đường dẫn ảnh đại diện từ CustomUser
+        var profileImagePath = customUser.ProfileImagePath;
 
             Username = userName;
+            ProfileImagePath = profileImagePath;
 
             Input = new InputModel
             {
@@ -110,6 +133,27 @@ namespace Comp1640.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+
+            // Xử lý và lưu ảnh đại diện
+            if (Input.ProfilePicture != null)
+            {
+                // Tạo đường dẫn duy nhất cho tệp ảnh
+                string uniqueFileName = Guid.NewGuid().ToString() + "_" + Input.ProfilePicture.FileName;
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "avatar");
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                // Lưu tệp ảnh vào thư mục wwwroot/avatar
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await Input.ProfilePicture.CopyToAsync(fileStream);
+                }
+
+                // Lưu đường dẫn tệp ảnh vào đối tượng user
+                user.ProfileImagePath = uniqueFileName;
+            }
+
+            // Cập nhật thông tin người dùng trong cơ sở dữ liệu
+            await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

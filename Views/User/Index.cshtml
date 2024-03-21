@@ -14,7 +14,7 @@
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-danger text-center" style="font-size: 40px;">Accounts</h6>
+        <h6 class="m-0 font-weight-bold text-danger text-center" style="font-size: 40px;">Accounts Management</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -48,11 +48,20 @@
                             </td>
                             <td>@Html.DisplayFor(modelUser => user.FacName)</td>
                             <td>
-                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@user.Id">Delete</a> |
-                                <a class="btn btn-success" asp-action="ManageRoles" asp-route-id="@user.Id">Manage Roles</a>
-                                <a class="btn btn-success" asp-action="RemoveRoles" asp-route-id="@user.Id">Remove Roles</a>
-                                <a class="btn btn-success" asp-action="ManageFaculty" asp-route-id="@user.Id">Manage Faculty</a>
-
+                                <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+                                <a class="btn btn-success btn-sm" asp-action="ManageRoles" asp-route-id="@user.Id">Manage Roles</a>
+                                @* <a class="btn btn-info btn-sm" asp-action="RemoveRoles" asp-route-id="@user.Id">Remove Roles</a> *@
+                                @{
+                                    if (roles.Count > 0)
+                                    {
+                                        @foreach (var role in roles)
+                                        {
+                                            @if (role == "Coordinator"){
+                                            <a class="btn btn-warning btn-sm" asp-action="ManageFaculty" asp-route-id="@user.Id">Manage Faculty</a>
+                                            }
+                                        }
+                                    }
+                                }
                             </td>
                         </tr>
                     }

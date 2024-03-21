@@ -83,13 +83,13 @@ namespace Comp1640.Controllers
                 User = user,
                 Roles = roles,
                 Faculties = fac
-                 
+
             });
             //     }
             // }
             // return Redirect("/");
         }
-          public async Task<IActionResult> RemoveRoles(string id)
+        public async Task<IActionResult> RemoveRoles(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
 
@@ -109,54 +109,59 @@ namespace Comp1640.Controllers
             return View(userRoleViewModel);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> RemoveRoles(string userId, string selectedRole)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
+        // [HttpPost]
+        // public async Task<IActionResult> RemoveRoles(string userId, string selectedRole)
+        // {
+        //     var user = await _userManager.FindByIdAsync(userId);
 
-            if (user == null)
+        //     if (user == null)
+        //     {
+        //         return View("Error");
+        //     }
+
+        //     if (!string.IsNullOrEmpty(selectedRole))
+        //     {
+        //         var result = await _userManager.RemoveFromRoleAsync(user, selectedRole);
+
+        //         if (result.Succeeded)
+        //         {
+        //             return RedirectToAction("Index");
+        //         }
+        //         else
+        //         {
+        //             return View("Error");
+        //         }
+        //     }
+
+        //     return RedirectToAction("Index");
+        // }
+
+
+        [HttpPost]
+        public IActionResult SetRoles(string id, List<string> Roles)
+        {
+            var user = _userManager.FindByIdAsync(id).Result;
+            var userRoles = _userManager.GetRolesAsync(user).Result;
+
+            // Xóa tất cả các vai trò hiện có của người dùng
+            var removeResult = _userManager.RemoveFromRolesAsync(user, userRoles).Result;
+            if (!removeResult.Succeeded)
             {
+                // Xử lý lỗi nếu cần thiết
                 return View("Error");
             }
 
-            if (!string.IsNullOrEmpty(selectedRole))
-            {
-                var result = await _userManager.RemoveFromRoleAsync(user, selectedRole);
-
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    return View("Error");
-                }
-            }
-
-            return RedirectToAction("Index");
-        }
-
-
-        [HttpPost]
-        public IActionResult SetRoles(string id, List<string> Roles, List<string> Faculties )
-        {
-            // if (User.Identity.IsAuthenticated)
-            // {
-            //     if (User.IsInRole("Admin"))
-            //     {
-            var user = _userManager.FindByIdAsync(id).Result;
-            var faculty = Faculties[0];
-            user.FacName = faculty;
-            var result = _userManager.AddToRolesAsync(user, Roles).Result;
-            if (result.Succeeded)
+            // Thêm các vai trò mới cho người dùng
+            var addResult = _userManager.AddToRolesAsync(user, Roles).Result;
+            if (addResult.Succeeded)
             {
                 return RedirectToAction("Index");
             }
             else
+            {
+                // Xử lý lỗi nếu cần thiết
                 return View("Error");
-            //         }
-            //     }
-            //     return Redirect("/");
+            }
         }
 
         [HttpPost]
@@ -165,7 +170,7 @@ namespace Comp1640.Controllers
             var user = _userManager.FindByIdAsync(id).Result;
             var faculty = Faculties[0];
             user.FacName = faculty;
-            
+
             return RedirectToAction("Index");
         }
     }

@@ -10,6 +10,8 @@ public class CustomUser : IdentityUser
     [InverseProperty("User")]
     public virtual ICollection<Contribution> Contributions { get; } = new List<Contribution>();
 
+    public string ProfileImagePath { get; set; }
+
     // [ForeignKey("FacId")]
     // [InverseProperty("Users")]
     // public virtual Faculty Fac { get; set; } = null!;

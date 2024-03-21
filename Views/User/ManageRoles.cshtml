@@ -12,11 +12,6 @@
         <select asp-for="Roles" asp-items="new SelectList(Model.Roles)" multiple class="form-control" style="height: 150px">
         </select>
     </div>
-    <div class="form-group">
-        <label for="roleNames">Faculties</label>
-        <select asp-for="Faculties" asp-items="new SelectList(Model.Faculties)" multiple class="form-control" style="height: 150px">
-        </select>
-    </div>
     <button type="submit" class="btn btn-primary">Save</button>
     <a class="btn btn-dark" asp-action="Index">Back to List</a>
 </form>
