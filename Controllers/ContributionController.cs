@@ -28,24 +28,46 @@ namespace Comp1640.Controllers
         }
 
         // GET: Contribution
-     public async Task<IActionResult> Index()
-{
-    if (User.Identity.IsAuthenticated && User.IsInRole("Student"))
-    {
-        var user = await _userManager.GetUserAsync(User);
-        if (user != null)
+        public async Task<IActionResult> Index()
         {
-            var userContributions = await _context.Contributions
-                .Where(c => c.UserId == user.Id)
-                .Include(f => f.Fac) // Bổ sung Include để load thông tin về khoa (faculty)
-                .ToListAsync();
+            if (User.Identity.IsAuthenticated && User.IsInRole("Student"))
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user != null)
+                {
+                    var userContributions = await _context.Contributions
+                        .Where(c => c.UserId == user.Id)
+                        .Include(f => f.Fac) // Bổ sung Include để load thông tin về khoa (faculty)
+                        .ToListAsync();
 
-            return View(userContributions);
+                    return View(userContributions);
+                }
+            }
+
+            return Redirect("/");
         }
-    }
-    
-    return Redirect("/");
-}
+          public IActionResult AprovedContribution()
+        {
+            var approvedContributions = _context.Contributions
+                .Where(c => c.Status == "Approved")
+                .Include(c => c.User)
+                .Include(c => c.Fac)
+                .ToList();
+
+            return View(approvedContributions);
+        }
+
+        [HttpPost]
+        public IActionResult Search(string searchString)
+        {
+            var contributions = _context.Contributions
+                .Where(c => c.Status == "Approved" && c.ConName.Contains(searchString))
+                .Include(c => c.User)
+                .Include(c => c.Fac)
+                .ToList();
+
+            return View("AprovedContribution", contributions);
+        }
         public async Task<IActionResult> ManageContribution()
         {
             if (User.Identity.IsAuthenticated)

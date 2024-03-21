@@ -1,0 +1,46 @@
+@model IEnumerable<Comp1640.Models.Contribution>
+
+@{
+    ViewData["Title"] = "AprovedContribution";
+    Layout = "~/Views/Shared/UserLO.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center my-3">
+        <div class="col-md-6">
+            <form asp-action="Search" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="searchString" placeholder="Enter search term">
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+    @foreach (var contribution in Model)
+    {
+        <section class="mx-auto my-3 px-3 border border-dark" style="max-width: 600px;">
+            <div class="container py-400 px-250">
+                @if (contribution.Status == "Approved")
+                {
+                    <article class="postcard dark red mx-250">
+                        <div class="postcard__text">
+                            <h1 class="postcard__title red"><a href="#">Contribution: @contribution.ConName</a></h1>
+                            <div class="postcard__subtitle small">
+                                @contribution.SubmitDate
+                            </div>
+                            <div class="postcard__bar"></div>
+                            <div class="postcard__preview-txt">This Contribution belong to : <a>@contribution.User.UserName</a>
+                            </div>
+                            <ul class="postcard__tagbox">
+                                <li class="tag__item play red">
+                                    <a href="#">Faculty : <i class="fas fa-play mr-2"></i>@contribution.Fac.FacName</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+                }
+            </div>
+        </section>
+    }
+
+    <script src="path/to/your/js/scripts.js"></script>
