@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Comp1640.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using Microsoft.AspNetCore.StaticFiles;
 
 namespace Comp1640.Controllers
 {
@@ -67,6 +68,31 @@ namespace Comp1640.Controllers
                 .ToList();
 
             return View("AprovedContribution", contributions);
+        }
+         [HttpGet]
+        public async Task<IActionResult> Download(int fileId)
+        {
+            var contribution = await _context.Contributions.FindAsync(fileId);
+
+            if (contribution == null)
+            {
+                return NotFound();
+            }
+
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", contribution.Filepath);
+
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound();
+            }
+
+            var provider = new FileExtensionContentTypeProvider();
+            if (!provider.TryGetContentType(filePath, out var contentType))
+            {
+                contentType = "application/octet-stream";
+            }
+
+            return PhysicalFile(filePath, contentType, contribution.Filepath);
         }
         public async Task<IActionResult> ManageContribution()
         {
