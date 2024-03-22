@@ -7,43 +7,39 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Edit</title>
 </head>
+
 <body>
-
-<h4>Contribution</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ConId" />
-            <div class="form-group mt-2">
-                <label>Contribution Name</label>
-                <input disabled asp-for="ConName" class="form-control" />
-                <span asp-validation-for="ConName" class="text-danger"></span>
-            </div>
-            @* <div class="form-group mt-2">
-                <label asp-for="FacId" class="control-label" style="font-weight: 1000;">Faculty</label>
-                <select asp-for="FacId" class="form-control rounded-3" asp-items="ViewBag.FacId"></select>
-            </div> *@
-            <div class="form-group mt-2">
-                <label asp-for="Filepath" class="control-label"></label>
-                <input type="file" name="file" class="form-control" />
-                <span asp-validation-for="Filepath" class="text-danger"></span>
-            </div>
+    <h6 class="mt-4 font-weight-bold text-danger text-center" style="font-size: 40px;">Edit Contribution</h6>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ConId" />
+                <div class="form-group mt-2">
+                    <label>Title</label>
+                    <input disabled asp-for="ConName" class="form-control" />
+                    @* <span asp-validation-for="ConName" class="text-danger"></span> *@
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="Filepath" class="control-label" style="font-weight: 1000;">Choose a file for Contribution</label>
+                    <input type="file" name="file" class="form-control-file" required />
+                    @* <span asp-validation-for="Filepath" class="text-danger"></span> *@
+                </div>
+                <div class="form-group col-md-12 form-group">
+                    <button class="btn btn-primary my-4 rounded-3 w-100" type="submit">Save Changes</button>
+                </div>
+            </form>
             <div class="form-group col-md-12 form-group">
-                <button class="btn btn-primary my-4 rounded-3 w-100" type="submit">Save Changes</button>
+                <a asp-controller="Contribution" asp-action="Index" class="btn btn-dark my-1 rounded-3 w-100" type="submit">Back to list</a>
             </div>
-            <div class="form-group col-md-12 form-group">
-                <button asp-controller="Contribution" asp-action="Index" class="btn btn-dark my-1 rounded-3 w-100" type="submit">Back to list</button>
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-
 </body>
+
 </html>

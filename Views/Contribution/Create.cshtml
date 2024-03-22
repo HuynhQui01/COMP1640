@@ -29,23 +29,27 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group mt-2">
                 <label asp-for="ConName" class="control-label" style="font-weight: 1000;">Title</label>
-                <input asp-for="ConName" class="form-control rounded-3" />
+                <input asp-for="ConName" class="form-control rounded-3" required/>
             </div>
             <div class="form-group mt-2">
                 <label asp-for="FacId" class="control-label" style="font-weight: 1000;">Faculty</label>
                 <select asp-for="FacId" class="form-control rounded-3" asp-items="ViewBag.FacId"></select>
             </div>
             <div class="form-group mt-2">
-                <label asp-for="Filepath" class="control-label" style="font-weight: 1000;">File</label>
-                <input type="file" name="file" class="form-control-file rounded-3" />
+                <label asp-for="Filepath" class="control-label" style="font-weight: 1000;">Choose a file for Contribution</label>
+                <input type="file" name="file" class="form-control-file rounded-3" required/>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="ImageFilePath" class="control-label" style="font-weight: 1000;">Choose Image File</label>
+                <input type="file" name="imageFile" class="form-control-file rounded-3" required/>
             </div>
             <div class="form-group col-md-12 form-group">
                 <button class="btn btn-primary my-4 rounded-3 w-100" type="submit">Submit file</button>
             </div>
-            <div class="form-group col-md-12 form-group">
-                <button asp-controller="Contribution" asp-action="Index" class="btn btn-dark my-1 rounded-3 w-100" type="submit">Back to list</button>
-            </div>
         </form>
+            <div class="col-md-12">
+                <a asp-controller="Contribution" asp-action="Index" class="btn btn-dark my-1 rounded-3 w-100">Back to list</a>
+            </div>
     </div>
 </div>
 

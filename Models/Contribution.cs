@@ -27,6 +27,9 @@ public partial class Contribution
 
     [StringLength(450)]
     public string? Filepath { get; set; }
+    
+    [StringLength(450)]
+    public string? ImageFilePath { get; set; }
 
     public int? FeedbackId { get; set; }
 

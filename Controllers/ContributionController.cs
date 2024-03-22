@@ -170,7 +170,7 @@ namespace Comp1640.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(IFormFile file, [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,FacId")] Contribution contribution, string Fac)
+        public async Task<IActionResult> Create(IFormFile imageFile, IFormFile file, [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,FacId")] Contribution contribution)
         {
             if (file == null || file.Length == 0)
             {
@@ -190,8 +190,13 @@ namespace Comp1640.Controllers
 
                 // Sanitize the filename to prevent directory traversal attacks
                 string fileName = Path.GetFileName(file.FileName);
+                string imageFileName = Path.GetFileName(imageFile.FileName);
+
                 var filepath = fileName;
+                var imageFilePath = imageFileName;
+
                 fileName = Path.Combine(uploadsFolder, fileName);
+                imageFileName = Path.Combine(uploadsFolder, imageFileName);
 
                 // Check if the file already exists and generate a unique filename if necessary
                 if (System.IO.File.Exists(fileName))
@@ -202,22 +207,25 @@ namespace Comp1640.Controllers
                 }
 
                 // Validate the file (e.g., size, type) before saving
-                if (file.Length > 0 && IsFileValid(file))
+                if (file.Length > 0 && imageFile.Length > 0 && IsFileValid(file) && IsImageFileValid(imageFile))
                 {
                     // Use asynchronous file operations for improved performance
-                    using (FileStream stream = new FileStream(fileName, FileMode.Create))
+                    using (FileStream fileStream = new FileStream(fileName, FileMode.Create))
+                    using (FileStream imageFileStream = new FileStream(imageFileName, FileMode.Create))
                     {
-                        await file.CopyToAsync(stream);
+                        await file.CopyToAsync(fileStream);
+                        await imageFile.CopyToAsync(imageFileStream);
                     }
 
                     var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     var count = await _context.Contributions.CountAsync();
-                    // contribution.ConId = count + 1;
+
                     contribution.UserId = userID;
                     contribution.Filepath = filepath;
-                    // contribution.FacId = FacId;
+                    contribution.ImageFilePath = imageFilePath;
                     contribution.Status = "Pending";
                     contribution.SubmitDate = DateTime.Now;
+
                     _context.Add(contribution);
                     await _context.SaveChangesAsync();
 
@@ -225,7 +233,8 @@ namespace Comp1640.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = "Error: Invalid file.";
+                    ModelState.AddModelError(string.Empty, "Error: Invalid file.");
+                    Create();
                 }
             }
             catch (Exception ex)
@@ -233,16 +242,23 @@ namespace Comp1640.Controllers
                 ViewBag.Message = $"Error: {ex.Message}";
             }
 
-            return View();
+            return RedirectToAction("Index");
         }
 
         private bool IsFileValid(IFormFile file)
         {
             // Example validation: Check file size and allowed extensions
             long fileSizeLimit = 10 * 1024 * 1024; // 10 MB
-            string[] allowedExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".docx", ".doc", ".pdf" };
+            string[] allowedExtensions = { ".gif", ".docx", ".doc" };
 
             return file.Length <= fileSizeLimit && allowedExtensions.Contains(Path.GetExtension(file.FileName).ToLower());
+        }
+
+        private bool IsImageFileValid(IFormFile file)
+        {
+            string[] allowedExtensions = { ".jpg", ".jpeg", ".png", ".gif" };
+            var fileExtension = Path.GetExtension(file.FileName).ToLower();
+            return allowedExtensions.Contains(fileExtension);
         }
 
         // GET: Contribution/Edit/5
@@ -269,7 +285,7 @@ namespace Comp1640.Controllers
         public async Task<IActionResult> Edit(int id, IFormFile file, [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,FacId")] Contribution newCon)
         {
             var existingContribution = await _context.Contributions.FindAsync(id);
-            if (file != null)
+            if (file != null && file.Length > 0 && IsFileValid(file))
             {
                 if (!string.IsNullOrEmpty(existingContribution.Filepath))
                 {
@@ -286,8 +302,13 @@ namespace Comp1640.Controllers
                     await file.CopyToAsync(fileStream);
                 }
                 existingContribution.Filepath = uniqueFileName;
+                await _context.SaveChangesAsync();
             }
-            await _context.SaveChangesAsync();
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Error: Invalid file.");
+                // return RedirectToAction(nameof(Edit));
+            }
             return RedirectToAction(nameof(Index));
         }
         private string GetUniqueFileName(string fileName)

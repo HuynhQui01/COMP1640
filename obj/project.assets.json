@@ -10918,11 +10918,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\Comp1640.csproj",
+      "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\test\\COMP1640\\Comp1640.csproj",
       "projectName": "Comp1640",
-      "projectPath": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\Comp1640.csproj",
+      "projectPath": "C:\\Users\\ADMIN\\Desktop\\test\\COMP1640\\Comp1640.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\obj\\",
+      "outputPath": "C:\\Users\\ADMIN\\Desktop\\test\\COMP1640\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config"
