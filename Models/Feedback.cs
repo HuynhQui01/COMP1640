@@ -27,4 +27,8 @@ public partial class Feedback
     [ForeignKey("ConId")]
     [InverseProperty("Feedbacks")]
     public virtual Contribution? Con { get; set; }
+
+    [ForeignKey("UserId")]
+    [InverseProperty("Feedbacks")]
+    public virtual CustomUser? User { get; set; }
 }
