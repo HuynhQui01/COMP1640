@@ -47,7 +47,7 @@ namespace Comp1640.Controllers
 
             return Redirect("/");
         }
-          public IActionResult AprovedContribution()
+        public IActionResult AprovedContribution()
         {
             var approvedContributions = _context.Contributions
                 .Where(c => c.Status == "Approved")
@@ -69,7 +69,7 @@ namespace Comp1640.Controllers
 
             return View("AprovedContribution", contributions);
         }
-         [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> Download(int fileId)
         {
             var contribution = await _context.Contributions.FindAsync(fileId);
@@ -266,34 +266,37 @@ namespace Comp1640.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ConId,ConName,UserId,Startus,File")] Contribution contribution)
+        public async Task<IActionResult> Edit(int id, IFormFile file, [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,FacId")] Contribution newCon)
         {
-            if (id != contribution.ConId)
+            var existingContribution = await _context.Contributions.FindAsync(id);
+            if (file != null)
             {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                if (!string.IsNullOrEmpty(existingContribution.Filepath))
                 {
-                    _context.Update(contribution);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ContributionExists(contribution.ConId))
+                    string existingFilePath = Path.Combine(_webHost.WebRootPath, "uploads", existingContribution.Filepath);
+                    if (System.IO.File.Exists(existingFilePath))
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
+                        System.IO.File.Delete(existingFilePath);
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                string uniqueFileName = GetUniqueFileName(file.FileName);
+                string newFilePath = Path.Combine(_webHost.WebRootPath, "uploads", uniqueFileName);
+                using (var fileStream = new FileStream(newFilePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
+                existingContribution.Filepath = uniqueFileName;
             }
-            return View(contribution);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        private string GetUniqueFileName(string fileName)
+        {
+            fileName = Path.GetFileName(fileName);
+            return Path.GetFileNameWithoutExtension(fileName)
+                   + "_"
+                   + Guid.NewGuid().ToString().Substring(0, 4)
+                   + Path.GetExtension(fileName);
         }
 
         // GET: Contribution/Delete/5
