@@ -10913,25 +10913,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
+    "C:\\Users\\kirit\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\test\\COMP1640\\Comp1640.csproj",
+      "projectUniqueName": "D:\\UoG\\Enterprise Web Software Development (COMP1640)\\4push\\COMP1640\\Comp1640.csproj",
       "projectName": "Comp1640",
-      "projectPath": "C:\\Users\\ADMIN\\Desktop\\test\\COMP1640\\Comp1640.csproj",
-      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ADMIN\\Desktop\\test\\COMP1640\\obj\\",
+      "projectPath": "D:\\UoG\\Enterprise Web Software Development (COMP1640)\\4push\\COMP1640\\Comp1640.csproj",
+      "packagesPath": "C:\\Users\\kirit\\.nuget\\packages\\",
+      "outputPath": "D:\\UoG\\Enterprise Web Software Development (COMP1640)\\4push\\COMP1640\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\kirit\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files\\dotnet\\sdk\\7.0.305\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -11002,7 +11001,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.305\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.406\\RuntimeIdentifierGraph.json"
       }
     }
   }

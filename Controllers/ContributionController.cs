@@ -182,13 +182,11 @@ namespace Comp1640.Controllers
             {
                 string uploadsFolder = Path.Combine(_webHost.WebRootPath, "uploads");
 
-                // Ensure the uploads directory exists
                 if (!Directory.Exists(uploadsFolder))
                 {
                     Directory.CreateDirectory(uploadsFolder);
                 }
 
-                // Sanitize the filename to prevent directory traversal attacks
                 string fileName = Path.GetFileName(file.FileName);
                 string imageFileName = Path.GetFileName(imageFile.FileName);
 
@@ -198,7 +196,6 @@ namespace Comp1640.Controllers
                 fileName = Path.Combine(uploadsFolder, fileName);
                 imageFileName = Path.Combine(uploadsFolder, imageFileName);
 
-                // Check if the file already exists and generate a unique filename if necessary
                 if (System.IO.File.Exists(fileName))
                 {
                     string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
@@ -206,10 +203,8 @@ namespace Comp1640.Controllers
                     fileName = Path.Combine(uploadsFolder, $"{fileNameWithoutExtension}_{DateTime.Now.Ticks}{fileExtension}");
                 }
 
-                // Validate the file (e.g., size, type) before saving
                 if (file.Length > 0 && imageFile.Length > 0 && IsFileValid(file) && IsImageFileValid(imageFile))
                 {
-                    // Use asynchronous file operations for improved performance
                     using (FileStream fileStream = new FileStream(fileName, FileMode.Create))
                     using (FileStream imageFileStream = new FileStream(imageFileName, FileMode.Create))
                     {
@@ -247,16 +242,15 @@ namespace Comp1640.Controllers
 
         private bool IsFileValid(IFormFile file)
         {
-            // Example validation: Check file size and allowed extensions
-            long fileSizeLimit = 10 * 1024 * 1024; // 10 MB
-            string[] allowedExtensions = { ".gif", ".docx", ".doc" };
+            long fileSizeLimit = 3 * 1024 * 1024;
+            string[] allowedExtensions = { ".docx", ".doc" };
 
             return file.Length <= fileSizeLimit && allowedExtensions.Contains(Path.GetExtension(file.FileName).ToLower());
         }
 
         private bool IsImageFileValid(IFormFile file)
         {
-            string[] allowedExtensions = { ".jpg", ".jpeg", ".png", ".gif" };
+            string[] allowedExtensions = { ".jpg", ".jpeg", ".png" };
             var fileExtension = Path.GetExtension(file.FileName).ToLower();
             return allowedExtensions.Contains(fileExtension);
         }
@@ -307,7 +301,6 @@ namespace Comp1640.Controllers
             else
             {
                 ModelState.AddModelError(string.Empty, "Error: Invalid file.");
-                // return RedirectToAction(nameof(Edit));
             }
             return RedirectToAction(nameof(Index));
         }
