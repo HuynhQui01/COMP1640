@@ -50,18 +50,17 @@
                             <td>
                                 <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@user.Id">Delete</a>
                                 <a class="btn btn-success btn-sm" asp-action="ManageRoles" asp-route-id="@user.Id">Manage Roles</a>
-                                @* <a class="btn btn-info btn-sm" asp-action="RemoveRoles" asp-route-id="@user.Id">Remove Roles</a> *@
-                                @* @{
+                                @{
                                     if (roles.Count > 0)
                                     {
                                         @foreach (var role in roles)
                                         {
-                                            @if (role == "Coordinator"){ *@
+                                            @if (role == "Coordinator"){
                                             <a class="btn btn-warning btn-sm" asp-action="ManageFaculty" asp-route-id="@user.Id">Manage Faculty</a>
-                                            @* }
+                                            }
                                         }
                                     }
-                                } *@
+                                }
                             </td>
                         </tr>
                     }

@@ -6,15 +6,16 @@ using Comp1640.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Comp1640.Controllers
 {
     public class ManagerController : Controller
     {
         private readonly Comp1640Context _context;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<CustomUser> _userManager;
 
-        public ManagerController(Comp1640Context context, UserManager<IdentityUser> userManager)
+        public ManagerController(Comp1640Context context, UserManager<CustomUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -22,7 +23,9 @@ namespace Comp1640.Controllers
         // GET: Manager
         public ActionResult Index()
         {
-            return View();
+            var contributions = _context.Contributions.Include(c => c.User).Include(c => c.Fac).ToList();
+
+            return View(contributions);
         }
 
         // GET: Manager/Details/5
@@ -77,7 +80,7 @@ namespace Comp1640.Controllers
             }
         }
 
-         public async Task<ActionResult> studentmanage()
+        public async Task<ActionResult> studentmanage()
         {
             var users = _userManager.Users.ToList();
             return View(users);
@@ -88,7 +91,7 @@ namespace Comp1640.Controllers
         {
             return View();
         }
-        
+
 
         // POST: Manager/Delete/5
         [HttpPost]

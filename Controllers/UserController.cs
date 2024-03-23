@@ -58,26 +58,17 @@ namespace Comp1640.Controllers
 
         public async Task<IActionResult> Delete(string id)
         {
-            // if (User.Identity.IsAuthenticated)
-            // {
-            //     if (User.IsInRole("Admin"))
-            //     {
-            var user = _userManager.FindByIdAsync(id).Result;
+            var user = await _userManager.FindByIdAsync(id);
             if (user != null)
             {
-                var result = _userManager.DeleteAsync(user).Result;
+                var result = await _userManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index");
                 }
             }
             return View("Error");
-            //     }
-            // }
-            // return Redirect("/");
         }
-
-        
 
         public IActionResult ManageRoles(string id)
         {
@@ -207,7 +198,7 @@ namespace Comp1640.Controllers
                 ProfileImagePath = model.ProfileImagePath
 
             };
-            
+
             await _userStore.SetUserNameAsync(user, model.Email, CancellationToken.None);
             await _emailStore.SetEmailAsync(user, model.Email, CancellationToken.None);
             var result = await _userManager.CreateAsync(user, password);

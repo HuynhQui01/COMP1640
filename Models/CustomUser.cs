@@ -14,6 +14,7 @@ public class CustomUser : IdentityUser
     public virtual ICollection<Feedback> Feedbacks { get; } = new List<Feedback>();
 
     public string? ProfileImagePath { get; set; }
+    public string FullName { get; set; }
 
     // [ForeignKey("FacId")]
     // [InverseProperty("Users")]

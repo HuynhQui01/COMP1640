@@ -4483,3 +4483,7 @@ D:\UoG\Enterprise Web Software Development (COMP1640)\New folder\COMP1640\obj\De
 D:\UoG\Enterprise Web Software Development (COMP1640)\New folder\COMP1640\obj\Debug\net7.0\Comp1640.pdb
 D:\UoG\Enterprise Web Software Development (COMP1640)\New folder\COMP1640\obj\Debug\net7.0\Comp1640.genruntimeconfig.cache
 D:\UoG\Enterprise Web Software Development (COMP1640)\New folder\COMP1640\obj\Debug\net7.0\ref\Comp1640.dll
+D:\University\TopUp\COMP1640\Code\Project\COMP1640\bin\Debug\net7.0\MailKit.dll
+D:\University\TopUp\COMP1640\Code\Project\COMP1640\bin\Debug\net7.0\MimeKit.dll
+D:\University\TopUp\COMP1640\Code\Project\COMP1640\bin\Debug\net7.0\NETCore.MailKit.dll
+D:\University\TopUp\COMP1640\Code\Project\COMP1640\bin\Debug\net7.0\BouncyCastle.Crypto.dll
