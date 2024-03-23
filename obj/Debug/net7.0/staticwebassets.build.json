@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "3qCFj1CJsiLGGGT3abt9gRiay5WojIZJCB52MkE7MSw=",
+  "Hash": "RddVqVwziuF90F87Z7IFDVXbOi3q6IOYmpOCd9Bpf0E=",
   "Source": "Comp1640",
   "BasePath": "_content/Comp1640",
   "Mode": "Default",
@@ -44914,6 +44914,23 @@
       "OriginalItemSpec": "wwwroot\\uploads\\1_Unit 2 - Assignment 1 frontsheet.docx"
     },
     {
+      "Identity": "D:\\University\\TopUp\\COMP1640\\Code\\Project\\COMP1640\\wwwroot\\uploads\\1. Form Thông tin ứng tuyển.docx",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\University\\TopUp\\COMP1640\\Code\\Project\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "uploads/1. Form Thông tin ứng tuyển.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\1. Form Thông tin ứng tuyển.docx"
+    },
+    {
       "Identity": "D:\\University\\TopUp\\COMP1640\\Code\\Project\\COMP1640\\wwwroot\\uploads\\19-02-2024_0ebf.pdf",
       "SourceId": "Comp1640",
       "SourceType": "Discovered",
@@ -44929,6 +44946,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\19-02-2024_0ebf.pdf"
+    },
+    {
+      "Identity": "D:\\University\\TopUp\\COMP1640\\Code\\Project\\COMP1640\\wwwroot\\uploads\\329898380_718169453302048_4330086234355252459_n.jpg",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\University\\TopUp\\COMP1640\\Code\\Project\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "uploads/329898380_718169453302048_4330086234355252459_n.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\329898380_718169453302048_4330086234355252459_n.jpg"
     },
     {
       "Identity": "D:\\University\\TopUp\\COMP1640\\Code\\Project\\COMP1640\\wwwroot\\uploads\\Assignment 2 brief .docx",

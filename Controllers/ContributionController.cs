@@ -144,7 +144,7 @@ namespace Comp1640.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                if (User.IsInRole("Marketing Coordinator "))
+                if (User.IsInRole("Coordinator"))
                 {
                     return _context.Contributions != null ?
                           View(await _context.Contributions.ToListAsync()) :

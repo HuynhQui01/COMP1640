@@ -58,16 +58,26 @@ namespace Comp1640.Controllers
 
         public async Task<IActionResult> Delete(string id)
         {
-            var user = await _userManager.FindByIdAsync(id);
-            if (user != null)
+            var user = _userManager.FindByIdAsync(id).Result;
+            try
             {
+                _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Contributions NOCHECK CONSTRAINT FK__Contribut__UserI__571DF1D5");
+
                 var result = await _userManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index");
                 }
+                _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Contributions WITH CHECK CHECK CONSTRAINT FK__Contribut__UserI__571DF1D5");
+
+                return RedirectToAction(nameof(Index));
             }
-            return View("Error");
+            catch (DbUpdateException)
+            {
+                // Handle exception or display error message
+                // return RedirectToAction(nameof(Error));
+            }
+            return View("Index");
         }
 
         public IActionResult ManageRoles(string id)
