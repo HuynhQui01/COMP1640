@@ -31,10 +31,10 @@ public class HomeController : Controller
     {
         return View();
     }
-     public IActionResult Cordinator()
+     public IActionResult Coordinator()
     {
         return View();
-        // return Redirect("~/Home/Cordinator");    
+        // return Redirect("~/Home/Coordinator");    
     }
     public IActionResult About()
     {
