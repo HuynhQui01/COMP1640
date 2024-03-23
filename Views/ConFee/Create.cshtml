@@ -1,0 +1,40 @@
+@model Comp1640.Models.ContributionFeedbackView
+@{
+    Layout = "~/Views/Shared/UserLO.cshtml";
+
+}
+
+<style>
+    #form{
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+<div class="row" id="form">
+    <div class="col-md-4">
+        <form asp-controller="ConFee" asp-action="Create" method="post">
+            <div class="form-group">
+                <label asp-for="@Model.contribution.ConId" class="control-label" hidden></label>
+                <input asp-for="@Model.contribution.ConId" name="id" value="@Model.contribution.ConId" class="form-control" type="hidden">
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.contribution.ConName" class="control-label"></label>
+                <input asp-for="@Model.contribution.ConName" value="@Model.contribution.ConName" readonly class="form-control">
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="@Model.contribution.Status" class="control-label"></label>
+                <select asp-for="@Model.contribution.Status" class="form-control">
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.feedback.Comment" class="control-label"></label>
+                <input asp-for="@Model.feedback.Comment" name="comment" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Save Feedback</button>
+        </form>
+    </div>
+
+</div>

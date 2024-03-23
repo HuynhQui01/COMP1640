@@ -46,8 +46,7 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
         aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" style="text-align: center;"
-        asp-action="Admin" asp-controller="Home" target="_blank">
+      <a class="navbar-brand m-0" style="text-align: center;" asp-action="Admin" asp-controller="Home" target="_blank">
         <span class="font-weight-bold text-white" style="font-size: 20px;">Admin</span>
       </a>
     </div>
@@ -87,7 +86,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" asp-action="Index" asp-controller="AcademicYear" >
+          <a class="nav-link text-white" asp-action="Index" asp-controller="AcademicYear">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
             </div>
@@ -100,6 +99,14 @@
               <i class="material-icons opacity-10">notifications</i>
             </div>
             <span class="nav-link-text ms-1">Notifications</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " asp-action="CreateUser" asp-controller="User">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Create User</span>
           </a>
         </li>
         <li class="nav-item mt-3">
@@ -160,7 +167,8 @@
           </div>
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
-              <a asp-area="Identity" asp-page="/Account/Manage/index" class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity?.Name</a>
+              <a asp-area="Identity" asp-page="/Account/Manage/index" class="nav-link" data-toggle="dropdown"
+                role="button" aria-haspopup="true" aria-expanded="false">@User.Identity?.Name</a>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
