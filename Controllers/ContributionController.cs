@@ -48,7 +48,7 @@ namespace Comp1640.Controllers
 
             return Redirect("/");
         }
-        public IActionResult AprovedContribution()
+        public IActionResult Approve()
         {
             var approvedContributions = _context.Contributions
                 .Where(c => c.Status == "Approved")
@@ -68,7 +68,7 @@ namespace Comp1640.Controllers
                 .Include(c => c.Fac)
                 .ToList();
 
-            return View("AprovedContribution", contributions);
+            return View("Approve", contributions);
         }
         [HttpGet]
         public async Task<IActionResult> Download(int fileId)
@@ -140,7 +140,7 @@ namespace Comp1640.Controllers
             }
         }
 
-        public async Task<IActionResult> ManageContribution()
+        public async Task<IActionResult> Manage()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -179,7 +179,7 @@ namespace Comp1640.Controllers
             _context.Update(contribution);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(ManageContribution));
+            return RedirectToAction(nameof(Manage));
 
         }
         // GET: Contribution/Details/5

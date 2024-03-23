@@ -79,6 +79,10 @@
                 {
                     <a asp-controller="Contribution" asp-action="Index" class="nav-item nav-link">My Submitions</a>
                 }
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Coordinator"))
+                {
+                    <a asp-controller="Home" asp-action="Coordinator" class="nav-item nav-link">Coordinator</a>
+                }
                 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                 {
                     <a class="nav-link" asp-action="Admin" asp-controller="Home" role="button" aria-haspopup="true"

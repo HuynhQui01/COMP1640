@@ -33,8 +33,7 @@ public class HomeController : Controller
     }
      public IActionResult Coordinator()
     {
-        return View();
-        // return Redirect("~/Home/Coordinator");    
+        return View();    
     }
     public IActionResult About()
     {

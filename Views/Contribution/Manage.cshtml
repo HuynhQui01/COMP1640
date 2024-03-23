@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "ManageContribution";
-    Layout = "~/Views/Shared/UserLO.cshtml";
+    Layout = "~/Views/Shared/CoordinatorLO.cshtml";
 }
 <style>
     tr>th {
@@ -27,8 +27,6 @@
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-danger text-center" style="font-size: 40px;">Table of Contributions
             </h6>
-        </div>
-        <div class="p-3"><a class="btn btn-primary" asp-controller="Contribution" asp-action="Create">Create New</a>
         </div>
         <div class="card-body" style="box-sizing: border-box;">
             <div class="table-responsive">
@@ -99,12 +97,6 @@
 
                             </tr>
                         }
-                        <tr>
-                            <td>Internet</td>
-                            <td>Internet</td>
-                            <td>8/3/2024</td>
-                            <td>View</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>

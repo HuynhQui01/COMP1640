@@ -26,6 +26,13 @@ namespace Comp1640.Controllers
                           Problem("Entity set 'Comp1640Context.AcademicYear'  is null.");
         }
 
+        public async Task<IActionResult> ViewA()
+        {
+              return _context.AcademicYears != null ? 
+                          View(await _context.AcademicYears.ToListAsync()) :
+                          Problem("Entity set 'Comp1640Context.AcademicYear'  is null.");
+        }
+
         // GET: AcademicYear/Details/5
         public async Task<IActionResult> Details(int? id)
         {
