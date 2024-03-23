@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Comp1640.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using System.IO.Compression;
 using Microsoft.AspNetCore.StaticFiles;
 
 namespace Comp1640.Controllers
@@ -94,6 +95,51 @@ namespace Comp1640.Controllers
 
             return PhysicalFile(filePath, contentType, contribution.Filepath);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DownloadApproved()
+        {
+            var approvedContributions = await _context.Contributions
+                .Where(c => c.Status == "Approved")
+                .ToListAsync();
+            var memoryStream = new MemoryStream();
+            try
+            {
+                using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, leaveOpen: true))
+                {
+                    foreach (var contribution in approvedContributions)
+                    {
+                        var fileDetails = await _context.Contributions
+                            .Where(fd => fd.ConId == contribution.ConId)
+                            .ToListAsync();
+
+                        foreach (var fileDetail in fileDetails)
+                        {
+                            var filePath = Path.Combine(_webHost.WebRootPath, "uploads", fileDetail.Filepath);
+
+                            if (System.IO.File.Exists(filePath))
+                            {
+                                var entry = archive.CreateEntry(Path.GetFileName(filePath));
+
+                                using (var entryStream = entry.Open())
+                                using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                                {
+                                    await fileStream.CopyToAsync(entryStream);
+                                }
+                            }
+                        }
+                    }
+                }
+                memoryStream.Position = 0;
+                return File(memoryStream, "application/zip", "ApprovedFiles.zip");
+            }
+            catch
+            {
+                memoryStream.Close();
+                throw;
+            }
+        }
+
         public async Task<IActionResult> ManageContribution()
         {
             if (User.Identity.IsAuthenticated)
