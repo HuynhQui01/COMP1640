@@ -97,7 +97,52 @@ namespace Comp1640.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> DownloadApproved()
+        public async Task<IActionResult> DownloadApproved(int fileId)
+        {
+            var contributions = await _context.Contributions.FindAsync(fileId);
+            var approvedContributions = await _context.Contributions
+                .Where(c => c.Status == "Approved" && c.ConId == fileId)
+                .ToListAsync();
+            var memoryStream = new MemoryStream();
+            try
+            {
+                using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, leaveOpen: true))
+                {
+                    foreach (var contribution in approvedContributions)
+                    {
+                        var fileDetails = await _context.Contributions
+                            .Where(fd => fd.ConId == contribution.ConId)
+                            .ToListAsync();
+
+                        foreach (var fileDetail in fileDetails)
+                        {
+                            var filePath = Path.Combine(_webHost.WebRootPath, "uploads", fileDetail.Filepath);
+
+                            if (System.IO.File.Exists(filePath))
+                            {
+                                var entry = archive.CreateEntry(Path.GetFileName(filePath));
+
+                                using (var entryStream = entry.Open())
+                                using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                                {
+                                    await fileStream.CopyToAsync(entryStream);
+                                }
+                            }
+                        }
+                    }
+                }
+                memoryStream.Position = 0;
+                return File(memoryStream, "application/zip", contributions.ConName + ".zip");
+            }
+            catch
+            {
+                memoryStream.Close();
+                throw;
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DownloadAllApproved()
         {
             var approvedContributions = await _context.Contributions
                 .Where(c => c.Status == "Approved")
@@ -131,7 +176,7 @@ namespace Comp1640.Controllers
                     }
                 }
                 memoryStream.Position = 0;
-                return File(memoryStream, "application/zip", "ApprovedFiles.zip");
+                return File(memoryStream, "application/zip", "Contributions.zip");
             }
             catch
             {

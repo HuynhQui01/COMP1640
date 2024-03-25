@@ -25,6 +25,12 @@ namespace Comp1640.Controllers
               return View(await comp1640Context.ToListAsync());
         }
 
+        public async Task<IActionResult> ViewF()
+        {
+            var comp1640Context = _context.Faculties.Include(f => f.Ay);
+              return View(await comp1640Context.ToListAsync());
+        }
+
         // GET: Faculty/Details/5
         public async Task<IActionResult> Details(int? id)
         {

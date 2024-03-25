@@ -20,13 +20,20 @@
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Full Name</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title of Contribution</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Faculty</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">File Submitted</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Upload Date</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Full
+                      Name</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title of
+                      Contribution</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Faculty
+                    </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">File
+                      Submitted</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Upload
+                      Date</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status
+                    </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -36,8 +43,8 @@
                       <td class="text-center">
                         <div class="d-flex px-2 py-1">
                           <div>
-                            <img src="~/uploads/@item.ImageFilePath"
-                              class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                            <img src="~/uploads/@item.ImageFilePath" class="avatar avatar-sm me-3 border-radius-lg"
+                              alt="user1">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">@Html.DisplayFor(modelItem => item.User.FullName)</h6>
@@ -65,10 +72,12 @@
                           data-original-title="Edit user">
                           View details
                         </a> |
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                          data-original-title="Edit user">
-                          Download
-                        </a>
+                        <a class="btn btn-primary" asp-action="DownloadApproved" asp-controller="Contribution"
+                          asp-route-fileId="@item.ConId">Download</a>
+
+                        @* <a class="btn btn-primary" asp-action="DownloadAllApproved" asp-controller="Contribution"
+                          asp-route-fileId="@item.ConId">Download All</a> *@
+                          <-- nút này là để tải hết mấy cái approved contributions, đừng có xóa nghe thằng 4 lù-->
                       </td>
                     </tr>
                   }
@@ -160,22 +169,22 @@
         </div>
       </div>
     </div>
-      <!--   Core JS Files   -->
-      <script src="../assets/js/core/popper.min.js"></script>
-      <script src="../assets/js/core/bootstrap.min.js"></script>
-      <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-      <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-      <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-          var options = {
-            damping: '0.5'
-          }
-          Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script>
+      var win = navigator.platform.indexOf('Win') > -1;
+      if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+          damping: '0.5'
         }
-      </script>
-      <!-- Github buttons -->
-      <script async defer src="https://buttons.github.io/buttons.js"></script>
-      <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-      <script src="../assets/js/material-dashboard.min.js?v=3.0.0"></script>
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+      }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/material-dashboard.min.js?v=3.0.0"></script>
 </body>
