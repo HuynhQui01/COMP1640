@@ -111,5 +111,26 @@ namespace Comp1640.Controllers
                 return View();
             }
         }
+
+        public async Task<IActionResult> ViewChart()
+        {
+            var contributions = await _context.Contributions.ToListAsync();
+            var publishedCount = contributions.Count(c => c.Buplic == "Publicized");
+            var unpublishedCount = contributions.Count(c => c.Buplic == "Non-publicized");
+
+            var columnChartData = new Dictionary<string, int>
+            {
+                { "Publicized", publishedCount },
+                { "Non-publicized", unpublishedCount }
+            };
+
+            var columnChartLabels = columnChartData.Keys.ToArray();
+            var columnChartValues = columnChartData.Values.ToArray();
+
+            ViewBag.ColumnChartLabels = columnChartLabels;
+            ViewBag.ColumnChartValues = columnChartValues;
+
+            return View();
+        }
     }
 }

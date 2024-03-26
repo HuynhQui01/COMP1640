@@ -273,6 +273,8 @@ namespace Comp1640.Controllers
             return View("CreateUser", model);
         }
 
+        
+
         private IUserEmailStore<CustomUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)

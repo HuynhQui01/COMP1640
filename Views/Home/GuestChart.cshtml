@@ -1,0 +1,48 @@
+@{
+    Layout = "~/Views/Shared/UserLO.cshtml";
+
+}
+<style>
+    #contributionChart{
+        width: 800px !important;
+        height: 800px !important;
+    }
+    #div{
+        display: flex;
+        justify-content: center;
+    }
+</style>
+<h2>Contribution Chart</h2>
+<div id="div">
+
+<canvas id="contributionChart" width="500" height="500"></canvas>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('contributionChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: @Html.Raw(Json.Serialize(ViewBag.ChartLabels)),
+                datasets: [{
+                    data: @Html.Raw(Json.Serialize(ViewBag.ChartValues)),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                    ]
+                }]
+            },
+            options: {
+                legend: {
+                    display: true,
+                    labels: {
+                        fontSize: 60, 
+                    }
+                }
+            }
+        });
+    </script>
+}
+</div>

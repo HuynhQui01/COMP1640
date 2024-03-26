@@ -1,0 +1,52 @@
+@{
+    Layout = "~/Views/Shared/UserLO.cshtml";
+
+}
+<style>
+    #contributionColumnChart{
+        width: 800px !important;
+        height: 800px !important;
+    }
+    #div{
+        display: flex;
+        justify-content: center;
+    }
+</style>
+<h2>Contribution Chart</h2>
+<div id="div">
+
+<canvas id="contributionColumnChart" width="500" height="500"></canvas>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx2 = document.getElementById('contributionColumnChart').getContext('2d');
+        var columnChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(Json.Serialize(ViewBag.ColumnChartLabels)),
+                datasets: [{
+                    label: 'Contribution Status',
+                    data: @Html.Raw(Json.Serialize(ViewBag.ColumnChartValues)),
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(255, 159, 64, 0.5)',
+                    ]
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+}
+</div>
