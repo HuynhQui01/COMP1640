@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
@@ -33,13 +34,15 @@ namespace Comp1640.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<CustomUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly Comp1640Context _context;
 
         public RegisterModel(
             UserManager<CustomUser> userManager,
             IUserStore<CustomUser> userStore,
             SignInManager<CustomUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            Comp1640Context context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -47,6 +50,7 @@ namespace Comp1640.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         /// <summary>
@@ -111,11 +115,24 @@ namespace Comp1640.Areas.Identity.Pages.Account
             [ForeignKey("FacId")]
             [InverseProperty("Users")]
             public virtual Faculty Fac { get; set; } = null!;
+
+            [Display(Name = "Faculty")]
+                public string? FacName { get; set; }
         }
 
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            var faculties = _context.Faculties.ToList();
+
+            if (faculties != null && faculties.Any())
+            {
+                ViewData["FacName"] = new SelectList(faculties, "FacName", "FacName");
+            }
+            else
+            {
+                ViewData["FacName"] = new SelectList(new List<Faculty>(), "Facname", "FacName");
+            }
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -127,11 +144,13 @@ namespace Comp1640.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new CustomUser
-        {
-            UserName = Input.Email,
-            Email = Input.Email,
-            FullName = Input.FullName // Gán giá trị FullName từ InputModel
-        };
+                {
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    FullName = Input.FullName, // Gán giá trị FullName từ InputModel
+                    FacName = Input.FacName
+                };
+                
                 // user.FacId = 0;
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
