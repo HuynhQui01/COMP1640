@@ -24,6 +24,7 @@ public partial class Contribution
     [StringLength(50)]
     [Unicode(false)]
     public string Status { get; set; } = null!;
+    public string Buplic { get; set; } = null!;
 
     [StringLength(450)]
     public string? Filepath { get; set; }

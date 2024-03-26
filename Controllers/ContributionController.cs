@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.IO.Compression;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Comp1640.Controllers
 {
@@ -39,7 +40,7 @@ namespace Comp1640.Controllers
                 {
                     var userContributions = await _context.Contributions
                         .Where(c => c.UserId == user.Id)
-                        .Include(f => f.Fac) // Bổ sung Include để load thông tin về khoa (faculty)
+                        .Include(f => f.Fac)
                         .ToListAsync();
 
                     return View(userContributions);
@@ -205,6 +206,96 @@ namespace Comp1640.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> DownloadPublicized(int fileId)
+        {
+            var contributions = await _context.Contributions.FindAsync(fileId);
+            var approvedContributions = await _context.Contributions
+                .Where(c => c.Buplic == "Publicized" && c.ConId == fileId)
+                .ToListAsync();
+            var memoryStream = new MemoryStream();
+            try
+            {
+                using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, leaveOpen: true))
+                {
+                    foreach (var contribution in approvedContributions)
+                    {
+                        var fileDetails = await _context.Contributions
+                            .Where(fd => fd.ConId == contribution.ConId)
+                            .ToListAsync();
+
+                        foreach (var fileDetail in fileDetails)
+                        {
+                            var filePath = Path.Combine(_webHost.WebRootPath, "uploads", fileDetail.Filepath);
+
+                            if (System.IO.File.Exists(filePath))
+                            {
+                                var entry = archive.CreateEntry(Path.GetFileName(filePath));
+
+                                using (var entryStream = entry.Open())
+                                using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                                {
+                                    await fileStream.CopyToAsync(entryStream);
+                                }
+                            }
+                        }
+                    }
+                }
+                memoryStream.Position = 0;
+                return File(memoryStream, "application/zip", contributions.ConName + ".zip");
+            }
+            catch
+            {
+                memoryStream.Close();
+                throw;
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DownloadAllPublicized()
+        {
+            var approvedContributions = await _context.Contributions
+                .Where(c => c.Buplic == "Publicized")
+                .ToListAsync();
+            var memoryStream = new MemoryStream();
+            try
+            {
+                using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, leaveOpen: true))
+                {
+                    foreach (var contribution in approvedContributions)
+                    {
+                        var fileDetails = await _context.Contributions
+                            .Where(fd => fd.ConId == contribution.ConId)
+                            .ToListAsync();
+
+                        foreach (var fileDetail in fileDetails)
+                        {
+                            var filePath = Path.Combine(_webHost.WebRootPath, "uploads", fileDetail.Filepath);
+
+                            if (System.IO.File.Exists(filePath))
+                            {
+                                var entry = archive.CreateEntry(Path.GetFileName(filePath));
+
+                                using (var entryStream = entry.Open())
+                                using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                                {
+                                    await fileStream.CopyToAsync(entryStream);
+                                }
+                            }
+                        }
+                    }
+                }
+                memoryStream.Position = 0;
+                return File(memoryStream, "application/zip", "Contributions.zip");
+            }
+            catch
+            {
+                memoryStream.Close();
+                throw;
+            }
+        }
+
+
         public async Task<IActionResult> Manage()
         {
             if (User.Identity.IsAuthenticated)
@@ -217,6 +308,32 @@ namespace Comp1640.Controllers
                 }
             }
             return Redirect("/");
+        }
+
+        public async Task<IActionResult> Public()
+        {
+            var contributions = _context.Contributions.Where(c => c.Buplic == "Publicized").ToList();
+            return View(contributions);
+        }
+
+        public async Task<IActionResult> Buplic(int fileId, string buplic)
+        {
+            var contribution = await _context.Contributions.FindAsync(fileId);
+            if (contribution == null)
+            {
+                return NotFound();
+            }
+            else{
+                if (contribution.Buplic == "Non-publicized")
+                {
+                    contribution.Buplic = "Publicized";
+                }              
+            }
+            _context.Update(contribution);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Public");
+
         }
 
         public async Task<IActionResult> UpdateStatus(int fileId, string status)
@@ -242,7 +359,7 @@ namespace Comp1640.Controllers
             _context.Update(contribution);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Manage));
+            return RedirectToAction("Manage");
 
         }
         // GET: Contribution/Details/5
@@ -279,7 +396,7 @@ namespace Comp1640.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(IFormFile imageFile, IFormFile file, [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,FacId")] Contribution contribution)
+        public async Task<IActionResult> Create(IFormFile imageFile, IFormFile file, [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,FacId,Buplic")] Contribution contribution)
         {
             if (file == null || file.Length == 0)
             {
@@ -328,6 +445,7 @@ namespace Comp1640.Controllers
                     contribution.Filepath = filepath;
                     contribution.ImageFilePath = imageFilePath;
                     contribution.Status = "Pending";
+                    contribution.Buplic = "Non-publicized";
                     contribution.SubmitDate = DateTime.Now;
 
                     _context.Add(contribution);
@@ -385,7 +503,7 @@ namespace Comp1640.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, IFormFile file, [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,FacId")] Contribution newCon)
+        public async Task<IActionResult> Edit(int id, IFormFile file, [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,FacId, Buplic")] Contribution newCon)
         {
             var existingContribution = await _context.Contributions.FindAsync(id);
             if (file != null && file.Length > 0 && IsFileValid(file))

@@ -32,6 +32,8 @@
                       Date</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status
                     </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Public Status
+                    </th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action
                     </th>
                   </tr>
@@ -67,17 +69,27 @@
                       <td class="align-middle text-center text-sm">
                         <span class="badge badge-sm bg-gradient-success">@item.Status</span>
                       </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="badge badge-sm bg-gradient-success">@item.Buplic</span>
+                      </td>
                       <td class="align-middle text-center">
                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
                           data-original-title="Edit user">
                           View details
                         </a> |
                         <a class="btn btn-primary" asp-action="DownloadApproved" asp-controller="Contribution"
-                          asp-route-fileId="@item.ConId">Download</a>
-
+                          asp-route-fileId="@item.ConId">Download</a> |
+                        @if(item.Buplic == "Non-publicized")
+                        {
+                          <a class="btn btn-primary" asp-action="Buplic" method = "post" asp-controller="Contribution"
+                          asp-route-fileId="@item.ConId">Public</a>
+                        }
+                        else{
+                        }
+                      
                         @* <a class="btn btn-primary" asp-action="DownloadAllApproved" asp-controller="Contribution"
                           asp-route-fileId="@item.ConId">Download All</a> *@
-                          <-- nút này là để tải hết mấy cái approved contributions, đừng có xóa nghe thằng 4 lù-->
+                          @* nút này là để tải hết mấy cái approved contributions, đừng có xóa nghe 4 lù *@
                       </td>
                     </tr>
                   }
