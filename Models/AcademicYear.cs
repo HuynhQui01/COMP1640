@@ -12,6 +12,8 @@ public partial class AcademicYear
     [Key]
     [Column("AYId")]
     public int Ayid { get; set; }
+    public string Name { get; set; }
+
 
     [Column(TypeName = "date")]
     public DateTime? CloseDate { get; set; }

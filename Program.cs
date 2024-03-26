@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Comp1640.Models;
-using COMP1640.Service;
+using Comp1640.Service;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,7 +26,7 @@ builder.Services.AddSingleton(emailConfig);
 #pragma warning restore CS8634 // The type cannot be used as type parameter in the generic type or method. Nullability of type argument doesn't match 'class' constraint.
 
 builder.Services.AddScoped<IEmailSender, EmailSender>();
-builder.Services.AddScoped<COMP1640.Service.EmailSender>();
+builder.Services.AddScoped<Comp1640.Service.EmailSender>();
 
 var app = builder.Build();
 

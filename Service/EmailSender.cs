@@ -7,7 +7,7 @@ using MailKit.Net.Smtp;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using MimeKit;
 
-namespace COMP1640.Service
+namespace Comp1640.Service
 {
     public class EmailSender : IEmailSender
     {

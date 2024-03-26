@@ -1,10 +1,10 @@
 @model Comp1640.Models.Contribution
 
 @{
-    Layout="~/Views/Shared/UserLO.cshtml";
+    Layout = "~/Views/Shared/UserLO.cshtml";
 }
 <style>
-    #row{
+    #row {
         width: 80%;
         min-height: 600px;
         display: flex;
@@ -15,43 +15,111 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
 </head>
 
 <body>
-<h4 class="text-center mt-3 fs-1">Contribution</h4>
-<hr style="width: 75%; height: 1px; margin: 15px auto;">
-<div class="row" id="row">
-    <div class="col-md-4">
-        <form asp-action="Create" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group mt-2">
-                <label asp-for="ConName" class="control-label" style="font-weight: 1000;">Title</label>
-                <input asp-for="ConName" class="form-control rounded-3" required/>
-            </div>
-            <div class="form-group mt-2">
-                <label asp-for="FacId" class="control-label" style="font-weight: 1000;">Faculty</label>
-                <select asp-for="FacId" class="form-control rounded-3" asp-items="ViewBag.FacId"></select>
-            </div>
-            <div class="form-group mt-2">
-                <label asp-for="Filepath" class="control-label" style="font-weight: 1000;">Choose a file for Contribution</label>
-                <input type="file" name="file" class="form-control-file rounded-3" required/>
-            </div>
-            <div class="form-group mt-2">
-                <label asp-for="ImageFilePath" class="control-label" style="font-weight: 1000;">Choose Image File</label>
-                <input type="file" name="imageFile" class="form-control-file rounded-3" required/>
-            </div>
-            <div class="form-group col-md-12 form-group">
-                <button class="btn btn-primary my-4 rounded-3 w-100" type="submit">Submit file</button>
-            </div>
-        </form>
+    <h4 class="text-center mt-3 fs-1">Contribution</h4>
+    <hr style="width: 75%; height: 1px; margin: 15px auto;">
+    <div class="row" id="row">
+        <div class="col-md-4">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group mt-2">
+                    <label asp-for="ConName" class="control-label" style="font-weight: 1000;">Title</label>
+                    <input asp-for="ConName" class="form-control rounded-3" required />
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="FacId" class="control-label" style="font-weight: 1000;">Faculty</label>
+                    <select asp-for="FacId" class="form-control rounded-3" asp-items="ViewBag.FacId"></select>
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="Filepath" class="control-label" style="font-weight: 1000;">Choose a file for
+                        Contribution</label>
+                    <input type="file" name="file" class="form-control-file rounded-3" required />
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="ImageFilePath" class="control-label" style="font-weight: 1000;">Choose Image
+                        File</label>
+                    <input type="file" name="imageFile" class="form-control-file rounded-3" required />
+                </div>
+                <div class="form-group mt-2">
+                    <label class="control-label" style="font-weight: 1000;">Terms and Conditions</label>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                        <label class="form-check-label" for="agreeTerms">I agree to the terms and conditions</label>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#termsModal">
+                    View Terms and Conditions
+                </button>
+                <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Add your terms and conditions here -->
+                                <!-- Example terms and conditions -->
+                                <p>By submitting your contribution, you agree to the terms and conditions outlined
+                                    below:</p>
+                                <p>Introduction: document governs website use; consent to website document: implied;
+                                    cookie consent.
+                                    Copyright notice: UCC copyright notice; ownership of rights in website.
+                                    Permission to use website: licence to use website; no downloading; website use:
+                                    permitted purposes; no modification of website content; limitations on licence to
+                                    use website (no redistributable content); suspension or restriction of access to
+                                    website.
+                                    Misuse of website: acceptable use: prohibitions; using contact details prohibited;
+                                    veracity of information supplied.
+                                    Limited warranties: no warranties for information; right to discontinue website
+                                    publication; no implied warranties or representations relating to website.
+                                    Limitations and exclusions of liability: caveats to limits of liability;
+                                    interpretation of limits of liability; no liability for free information or
+                                    services; no liability for force majeure; no liability for business losses; no
+                                    liability for loss of data or software; no liability for consequential loss; no
+                                    personal liability.
+                                    Breaches of these terms and conditions: consequences of breach (no accounts); non
+                                    circumvention of measures upon breach (no accounts).
+                                    Third party websites: third party websites: hyperlinks not recommendations; third
+                                    party websites: no control or liability.
+                                    Variation: document may be revised; variation of website document: unregistered
+                                    users.
+                                    Assignment: assignment by first party; assignment by second party.
+                                    Severability: severability of whole; severability of parts.
+                                    Third party rights: third party rights: benefit; third party rights: exercise of
+                                    rights.
+                                    Entire agreement: entire agreement - use of website.
+                                    Law and jurisdiction: governing law; jurisdiction.
+                                    About our school: school legal status; charitable status; non-commercial address;
+                                    contacting the website operator (non-commercial).</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12 form-group">
+                    <button class="btn btn-primary my-4 rounded-3 w-100" type="submit">Submit file</button>
+                </div>
+
+            </form>
             <div class="col-md-12">
-                <a asp-controller="Contribution" asp-action="Index" class="btn btn-dark my-1 rounded-3 w-100">Back to list</a>
+                <a asp-controller="Contribution" asp-action="Index" class="btn btn-dark my-1 rounded-3 w-100">Back to
+                    list</a>
             </div>
+        </div>
     </div>
-</div>
 
 </body>
+
 </html>

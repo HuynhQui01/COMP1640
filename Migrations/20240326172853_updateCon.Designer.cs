@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Comp1640.Migrations
 {
     [DbContext(typeof(Comp1640Context))]
-    [Migration("20240326134925_Buplic")]
-    partial class Buplic
+    [Migration("20240326172853_updateCon")]
+    partial class updateCon
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

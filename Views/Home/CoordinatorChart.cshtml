@@ -1,0 +1,216 @@
+@model List<dynamic>
+@{
+    Layout = "~/Views/Shared/UserLO.cshtml";
+
+}
+
+<style>
+    #wchart {
+        border-radius: 20px;
+        box-shadow: 5px 8px #d9d9d9;
+    }
+
+    #mchart {
+        border-radius: 20px;
+        box-shadow: 5px 8px #d9d9d9;
+    }
+
+    #contain {
+        display: flex;
+        justify-content: center;
+        width: 80%;
+        margin-left: 10%;
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<body>
+
+    <div class="row mt-4" id="contain">
+        <div class="col-lg-4 col-md-6 mt-4 mb-4" style="border-radius: 20px; margin-right: 5%">
+            <div class="card z-index-2 " style="border-radius: 20px; box-shadow: 5px 8px #d9d9d9;">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                    <div class="border-radius-lg py-3 pe-1" style="background-color: #d6ccc2;" id="wchart">
+                        <div class="chart">
+                            @* <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
+                            *@
+                            <canvas id="weeklyChart" width="800" height="400" style="width: auto; height:auto"></canvas>
+
+                            <script>
+                                var weeklyData = @Html.Raw(Json.Serialize(ViewBag.weeklyData));
+
+                                var labels = weeklyData.map(function (item) {
+                                    return 'Week ' + item.week;
+                                });
+
+                                var data = weeklyData.map(function (item) {
+                                    return item.count;
+                                });
+
+                                var ctx = document.getElementById('weeklyChart').getContext('2d');
+                                var chart = new Chart(ctx, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: labels,
+                                        datasets: [{
+                                            label: 'Contributions per Week',
+                                            data: data,
+                                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                            borderColor: 'rgba(54, 162, 235, 1)',
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                        }
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h6 class="mb-0 ">Login Frequency</h6>
+                    <p class="text-sm ">Last Campaign Performance</p>
+                    <hr class="dark horizontal">
+                    <div class="d-flex ">
+                        <i class="material-icons text-sm my-auto me-1">schedule</i>
+                        <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt-4 mb-4" style="margin-left: 5%;">
+            <div class="card z-index-2  " style="border-radius: 20px; box-shadow: 5px 8px #d9d9d9;">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                    <div class=" shadow-success border-radius-lg py-3 pe-1 " style="background-color: #fefae0;"
+                        id="mchart">
+                        <div class="chart">
+                            <canvas id="monthlyChart" width="800" height="400"></canvas>
+
+                            <script>
+                                var monthlyData = @Html.Raw(Json.Serialize(ViewBag.monthlyData));
+
+                                var labels = monthlyData.map(function (item) {
+                                    return item.month;
+                                });
+
+                                var data = monthlyData.map(function (item) {
+                                    return item.count;
+                                });
+
+                                var ctx = document.getElementById('monthlyChart').getContext('2d');
+                                var chart = new Chart(ctx, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: labels,
+                                        datasets: [{
+                                            label: 'Contributions per Month',
+                                            data: data,
+                                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                            borderColor: 'rgba(255, 99, 132, 1)',
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                        }
+                                    }
+                                });
+                            </script>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h6 class="mb-0 "> Daily Sales </h6>
+                    <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today sales. </p>
+                    <hr class="dark horizontal">
+                    <div class="d-flex ">
+                        <i class="material-icons text-sm my-auto me-1">schedule</i>
+                        <p class="mb-0 text-sm"> updated 4 min ago </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt-4" id="contain">
+        <div class="col-lg-4 col-md-6 mt-4 mb-4" style="border-radius: 20px; margin-right: 5%">
+            <div class="card z-index-2 " style="border-radius: 20px; box-shadow: 5px 8px #d9d9d9;">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                    <div class="border-radius-lg py-3 pe-1" style="background-color: #edf2f4;" id="wchart">
+                        <div class="chart">
+                            @* <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
+                            *@
+                            <canvas id="approvalChart" width="800" height="400"></canvas>
+
+                            <script>
+                                var approvalData = @Html.Raw(Json.Serialize(ViewBag.approvalData));
+
+                                var labels = approvalData.map(function (item) {
+                                    return item.label;
+                                });
+
+                                var data = approvalData.map(function (item) {
+                                    return item.count;
+                                });
+
+                                var ctx = document.getElementById('approvalChart').getContext('2d');
+                                var chart = new Chart(ctx, {
+                                    type: 'pie',
+                                    data: {
+                                        labels: labels,
+                                        datasets: [{
+                                            data: data,
+                                            backgroundColor: [
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(255, 99, 132, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(75, 192, 192, 1)',
+                                                'rgba(255, 99, 132, 1)'
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                        }
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h6 class="mb-0 ">Login Frequency</h6>
+                    <p class="text-sm ">Last Campaign Performance</p>
+                    <hr class="dark horizontal">
+                    <div class="d-flex ">
+                        <i class="material-icons text-sm my-auto me-1">schedule</i>
+                        <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

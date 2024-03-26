@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
-using COMP1640.Service;
+using Comp1640.Service;
 
 
 namespace Comp1640.Controllers

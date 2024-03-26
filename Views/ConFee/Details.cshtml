@@ -1,0 +1,89 @@
+@model Comp1640.Models.ContributionFeedbackView
+@{
+    Layout = "~/Views/Shared/UserLO.cshtml";
+
+}
+
+<!DOCTYPE html>
+
+<style>
+    #div {
+        display: flex;
+        justify-content: center;
+    }
+
+    dl {
+        width: 750px;
+
+    }
+
+    .dt {
+
+    @*border-right:1pxsolidrgb(61,61,61);border-bottom:1pxsolidrgb(61,61,61);*@margin-bottom: 10px;
+    }
+</style>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+
+<body>
+
+    <div>
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-danger text-center" style="font-size: 40px;">View Feedback
+            </h6>
+        </div>
+        <h4>Contribution</h4>
+        <hr />
+        <div id="div">
+
+            <dl class="row">
+                <dt class="col-sm-2 dt">
+                    Contribution Name
+                </dt>
+                <dd class="col-sm-10 dt">
+                    @Html.DisplayFor(model => model.contribution.ConName)
+                </dd>
+                <dt class="col-sm-2 dt">
+                    File Name
+                </dt>
+                <dd class="col-sm-10 dt">
+                    @Model.contribution.Filepath
+                </dd>
+                <dt class="col-sm-2 dt">
+                    Status
+                </dt>
+                <dd class="col-sm-10 dt">
+                    @Model.contribution.Status
+                </dd>
+                <dt class="col-sm-2 dt">
+                    Feedbacks
+                </dt>
+                @foreach (var item in ViewBag.feedback)
+                {
+                    <dd class="col-sm-10">
+                        @item.Comment by @item.User.Email
+                    </dd>
+                    <dt class="col-sm-2 dt"> </dt>
+                }
+                <form method="post" asp-controller="ConFee" asp-action="Create">
+                    <div class="form-group">
+                        <label asp-for="@Model.contribution.ConId" class="control-label" hidden></label>
+                        <input asp-for="@Model.contribution.ConId" name="id" value="@Model.contribution.ConId"
+                            class="form-control" type="hidden">
+                    </div>
+                    <dt class="col-sm-2">Comment</dt>
+                    <dl class="col-sm-10">
+                        <input asp-for="@Model.feedback.Comment" placeholder="Input your comment">
+                    </dl>
+                    <button type="submit" class="btn btn-primary">Send Feedback</button>
+                </form>
+            </dl>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System.IO.Compression;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Comp1640.Service;
 
 namespace Comp1640.Controllers
 {
@@ -20,14 +21,16 @@ namespace Comp1640.Controllers
 
         private readonly IWebHostEnvironment _webHost;
         private readonly UserManager<CustomUser> _userManager;
+        private readonly EmailSender _emailSender;
 
 
 
-        public ContributionController(IWebHostEnvironment webHost, Comp1640Context context, UserManager<CustomUser> userManager)
+        public ContributionController(IWebHostEnvironment webHost, Comp1640Context context, UserManager<CustomUser> userManager, EmailSender emailSender)
         {
             _webHost = webHost;
             _context = context;
             _userManager = userManager;
+            _emailSender = emailSender;
         }
 
         // GET: Contribution
@@ -450,6 +453,14 @@ namespace Comp1640.Controllers
 
                     _context.Add(contribution);
                     await _context.SaveChangesAsync();
+                    ViewBag.Message = $"{Path.GetFileName(fileName)} uploaded successfully!";
+                     var user = await _userManager.FindByIdAsync(userID);
+                    string fromUser = user.UserName;
+                    string content = "The new contribution of " + fromUser + ". You must view and give the feedback to him/her in 14 days.";
+                    List<string> emails = new List<string>();
+                    emails.Add("quihvgcc210153@fpt.edu.vn");
+                    var message = new Message(emails, "Noification", content);
+                    await _emailSender.SendEmailAsync(message);
 
                     ViewBag.Message = $"{Path.GetFileName(fileName)} uploaded successfully!";
                 }

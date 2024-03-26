@@ -7,39 +7,46 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Edit</title>
 </head>
+
 <body>
 
-<h2 class="text-danger">Academic Year</h2>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Ayid" />
-            <div class="form-group">
-                <label asp-for="CloseDate" class="control-label"></label>
-                <input asp-for="CloseDate" class="form-control" />
-                <span asp-validation-for="CloseDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FinalCloseDate" class="control-label"></label>
-                <input asp-for="FinalCloseDate" class="form-control" />
-                <span asp-validation-for="FinalCloseDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary mt-2" />
-            </div>
-        </form>
+    <h2 class="text-danger">Academic Year</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Ayid" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label" style="font-weight: 1000;">Name</label>
+                    <input asp-for="Name" class="form-control rounded-3" required />
+                </div>
+                <div class="form-group">
+                    <label asp-for="CloseDate" class="control-label"></label>
+                    <input asp-for="CloseDate" class="form-control" />
+                    <span asp-validation-for="CloseDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FinalCloseDate" class="control-label"></label>
+                    <input asp-for="FinalCloseDate" class="form-control" />
+                    <span asp-validation-for="FinalCloseDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary mt-2" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a class="btn btn-dark" asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a class="btn btn-dark" asp-action="Index">Back to List</a>
+    </div>
 
 </body>
+
 </html>

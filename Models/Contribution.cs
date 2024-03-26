@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 namespace Comp1640.Models;
 
 [Index("FacId", Name = "IX_Contributions_FacId")]
-[Index("FeedbackId", Name = "IX_Contributions_FeedbackId")]
 [Index("UserId", Name = "IX_Contributions_UserID")]
 public partial class Contribution
 {
@@ -24,7 +23,7 @@ public partial class Contribution
     [StringLength(50)]
     [Unicode(false)]
     public string Status { get; set; } = null!;
-    public string Buplic { get; set; } = null!;
+    public string? Buplic { get; set; } = null!;
 
     [StringLength(450)]
     public string? Filepath { get; set; }
@@ -32,7 +31,6 @@ public partial class Contribution
     [StringLength(450)]
     public string? ImageFilePath { get; set; }
 
-    public int? FeedbackId { get; set; }
 
     [Column(TypeName = "datetime")]
     public DateTime SubmitDate { get; set; }

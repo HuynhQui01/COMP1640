@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Comp1640.Migrations
 {
     /// <inheritdoc />
-    public partial class Buplic : Migration
+    public partial class updateCon : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
