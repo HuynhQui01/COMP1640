@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "HafqFejPrjmYYWvnsv5Bp2GKvt5LJxgV/YmcsXLcr2U=",
+  "Hash": "F/Q0YpRipxiN/n8gdY1H72RILtI4RcCNNFAHX3/jSz4=",
   "Source": "Comp1640",
   "BasePath": "_content/Comp1640",
   "Mode": "Default",
@@ -45203,6 +45203,23 @@
       "OriginalItemSpec": "wwwroot\\uploads\\Postcard.png"
     },
     {
+      "Identity": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\wwwroot\\uploads\\POSTER_UP_FACEBOOK.png",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "uploads/POSTER_UP_FACEBOOK.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\POSTER_UP_FACEBOOK.png"
+    },
+    {
       "Identity": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\wwwroot\\uploads\\Unit 10.Assignment brief 1 - Frontsheet (2021 - 2022)_253f.docx",
       "SourceId": "Comp1640",
       "SourceType": "Discovered",
@@ -45218,6 +45235,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\Unit 10.Assignment brief 1 - Frontsheet (2021 - 2022)_253f.docx"
+    },
+    {
+      "Identity": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\wwwroot\\uploads\\Unit 10.Assignment brief 1 - Frontsheet (2021 - 2022)_638471091009330275.docx",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "uploads/Unit 10.Assignment brief 1 - Frontsheet (2021 - 2022)_638471091009330275.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Unit 10.Assignment brief 1 - Frontsheet (2021 - 2022)_638471091009330275.docx"
     },
     {
       "Identity": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\wwwroot\\uploads\\Unit 10.Assignment brief 1 - Frontsheet (2021 - 2022).docx",

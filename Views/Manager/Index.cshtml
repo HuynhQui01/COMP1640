@@ -47,7 +47,7 @@
                       <a class="btn btn-primary" asp-action="DownloadAllApproved" asp-controller="Contribution">Download All</a>
                     }
                   </div>
-                  @foreach (var item in Model)
+                  @foreach (var item in Model.Where(c => c.Status == "Approved"))
                   {
                     <tr>
                       <td class="text-center">
@@ -95,9 +95,6 @@
                         else
                         {
                         }
-
-
-                        @* nút này là để tải hết mấy cái approved contributions, đừng có xóa nghe 4 lù *@
                       </td>
                     </tr>
                   }
