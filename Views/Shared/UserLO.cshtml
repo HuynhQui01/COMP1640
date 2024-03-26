@@ -81,7 +81,7 @@
                 }
                 @if (User.Identity.IsAuthenticated && User.IsInRole("Coordinator"))
                 {
-                    <a asp-controller="Home" asp-action="Coordinator" class="nav-item nav-link">Coordinator</a>
+                    <a asp-controller="Contribution" asp-action="Manage" class="nav-item nav-link">Coordinator</a>
                 }
                 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                 {

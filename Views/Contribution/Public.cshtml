@@ -53,6 +53,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <div style="margin-left: 15px;">
+                                        @if (Model.Any())
+                                        {
+                                            <!-- Kiểm tra xem có bài nào không -->
+                                            <a class="btn btn-primary" asp-action="DownloadAllApproved"
+                                                asp-controller="Contribution">Download All</a>
+                                        }
+                                    </div>
                                     @foreach (var item in Model)
                                     {
                                         <tr>
@@ -102,7 +110,7 @@
                                             asp-controller="Contribution"
                                             asp-route-fileId="@item.ConId">Download All</a> *@
                                                 @* nút này là để tải hết mấy cái publicized contributions, đừng có xóa nghe
-                                             4 lù *@
+                                            4 lù *@
                                             </td>
                                         </tr>
                                     }
