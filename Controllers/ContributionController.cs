@@ -70,30 +70,50 @@ namespace Comp1640.Controllers
 
             return View("Approve", contributions);
         }
+
         [HttpGet]
         public async Task<IActionResult> Download(int fileId)
         {
-            var contribution = await _context.Contributions.FindAsync(fileId);
-
-            if (contribution == null)
+            var contributions = await _context.Contributions.FindAsync(fileId);
+            var approvedContributions = await _context.Contributions
+                .Where(c => c.ConId == fileId)
+                .ToListAsync();
+            var memoryStream = new MemoryStream();
+            try
             {
-                return NotFound();
+                using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, leaveOpen: true))
+                {
+                    foreach (var contribution in approvedContributions)
+                    {
+                        var fileDetails = await _context.Contributions
+                            .Where(fd => fd.ConId == contribution.ConId)
+                            .ToListAsync();
+
+                        foreach (var fileDetail in fileDetails)
+                        {
+                            var filePath = Path.Combine(_webHost.WebRootPath, "uploads", fileDetail.Filepath);
+
+                            if (System.IO.File.Exists(filePath))
+                            {
+                                var entry = archive.CreateEntry(Path.GetFileName(filePath));
+
+                                using (var entryStream = entry.Open())
+                                using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                                {
+                                    await fileStream.CopyToAsync(entryStream);
+                                }
+                            }
+                        }
+                    }
+                }
+                memoryStream.Position = 0;
+                return File(memoryStream, "application/zip", contributions.ConName + ".zip");
             }
-
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", contribution.Filepath);
-
-            if (!System.IO.File.Exists(filePath))
+            catch
             {
-                return NotFound();
+                memoryStream.Close();
+                throw;
             }
-
-            var provider = new FileExtensionContentTypeProvider();
-            if (!provider.TryGetContentType(filePath, out var contentType))
-            {
-                contentType = "application/octet-stream";
-            }
-
-            return PhysicalFile(filePath, contentType, contribution.ConName);
         }
 
         [HttpGet]
