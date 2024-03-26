@@ -11072,11 +11072,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\UoG\\Enterprise Web Software Development (COMP1640)\\New folder\\COMP1640\\Comp1640.csproj",
+      "projectUniqueName": "D:\\UoG\\Enterprise Web Software Development (COMP1640)\\COMP1640\\Comp1640.csproj",
       "projectName": "Comp1640",
-      "projectPath": "D:\\UoG\\Enterprise Web Software Development (COMP1640)\\New folder\\COMP1640\\Comp1640.csproj",
+      "projectPath": "D:\\UoG\\Enterprise Web Software Development (COMP1640)\\COMP1640\\Comp1640.csproj",
       "packagesPath": "C:\\Users\\kirit\\.nuget\\packages\\",
-      "outputPath": "D:\\UoG\\Enterprise Web Software Development (COMP1640)\\New folder\\COMP1640\\obj\\",
+      "outputPath": "D:\\UoG\\Enterprise Web Software Development (COMP1640)\\COMP1640\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kirit\\AppData\\Roaming\\NuGet\\NuGet.Config"

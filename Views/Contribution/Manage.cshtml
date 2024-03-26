@@ -59,41 +59,21 @@
                                 <td>@item.SubmitDate</td>
                                 <td>@item.Status</td>
                                 <td>
-                                    <form asp-controller="Contribution" asp-action="UpdateStatus" method="post">
-                                        <input type="hidden" name="id" value="@item.ConId" />
-                                        <input type="hidden" name="status" value="Approved"/>
-                                        <button type="submit" class="btn btn-success">Approve</button>
-                                    </form>
+                                    <a class="btn btn-primary" asp-action="Download" asp-controller="Contribution"
+                                        asp-route-fileId="@item.ConId">Download</a>
+                                    @if (item.Status == "Pending")
+                                    {
+                                        <a class="btn btn-success" asp-controller="Contribution" asp-action="UpdateStatus"
+                                            method="post" asp-route-fileId="@item.ConId" asp-route-status="Approve">Approve</a>
+                                        <a class="btn btn-danger" asp-controller="Contribution" asp-action="UpdateStatus"
+                                            method="post" asp-route-fileId="@item.ConId" asp-route-status="Reject">Reject</a>
+                                    }
+                                    else
+                                    {
+                                        
+                                    }
 
-                                    <form asp-controller="Contribution" asp-action="UpdateStatus" method="post">
-                                        <input type="hidden" name="id" value="@item.ConId" />
-                                        <input type="hidden" name="status" value="Rejected" />
-                                        <button type="submit" class="btn btn-danger">Reject</button>
-                                    </form>
                                 </td>
-
-
-                                @* <a class="btn btn-primary"asp-asp-controller="ContributionController"
-                            asp-action="UpdateStatus" asp-route-id="@item.ConId" asp-route-status="Approved"
-                            method="post">Approved</a> |
-                            <a class="btn btn-danger" asp-asp-controller="ContributionController"
-                            asp-action="UpdateStatus" asp-route-id="@item.ConId"
-                            asp-route-status="Rejected"method="post">Rejected</a>
-                            *@
-                                @* <td>
-                            <form asp-controller="ControbutionController" asp-action="UpdateStatus"
-                            asp-route-id="@item.ConId"
-                            method="post">
-                            <button class="btn btn-primary" type="submit" name="status"
-                            asp-route-status="Approved">Approve</button>
-                            </form>
-                            <form asp-controller="ControbutionController" asp-action="UpdateStatus"
-                            asp-route-id="@item.ConId"
-                            method="post">
-                            <button class="btn btn-danger" type="submit" name="status"
-                            asp-route-status="Rejected">Reject</button>
-                            </form>
-                            </td> *@
 
                             </tr>
                         }

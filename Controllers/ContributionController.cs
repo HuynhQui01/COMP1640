@@ -93,7 +93,7 @@ namespace Comp1640.Controllers
                 contentType = "application/octet-stream";
             }
 
-            return PhysicalFile(filePath, contentType, contribution.Filepath);
+            return PhysicalFile(filePath, contentType, contribution.ConName);
         }
 
         [HttpGet]
@@ -198,22 +198,20 @@ namespace Comp1640.Controllers
             }
             return Redirect("/");
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateStatus(int id, string status)
+
+        public async Task<IActionResult> UpdateStatus(int fileId, string status)
         {
-            var contribution = await _context.Contributions.FindAsync(id);
+            var contribution = await _context.Contributions.FindAsync(fileId);
             if (contribution == null)
             {
                 return NotFound();
             }
-
             switch (status)
             {
-                case "Rejected":
+                case "Reject":
                     contribution.Status = "Rejected";
                     break;
-                case "Approved":
+                case "Approve":
                     contribution.Status = "Approved";
                     break;
                 default:
