@@ -26,15 +26,15 @@
     <hr style="width: 75%; height: 1px; margin: 15px auto;">
     <div class="row" id="row">
         <div class="col-md-4">
-            <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <form id="SubmitForm" asp-action="Create" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group mt-2">
                     <label asp-for="ConName" class="control-label" style="font-weight: 1000;">Title</label>
                     <input asp-for="ConName" class="form-control rounded-3" required />
                 </div>
                 @* <div class="form-group mt-2">
-                    <label class="control-label" style="font-weight: 1000;">Faculty</label>
-                    <input value="@ViewBag.FacId.Facname" readonly>
+                <label class="control-label" style="font-weight: 1000;">Faculty</label>
+                <input value="@ViewBag.FacId.Facname" readonly>
                 </div> *@
                 <div class="form-group mt-2">
                     <label asp-for="Ayid" class="control-label" style="font-weight: 1000;">Academic Year</label>
@@ -57,7 +57,8 @@
                         <label class="form-check-label" for="agreeTerms">I agree to the terms and conditions</label>
                     </div>
                 </div>
-                <button type="button" class="btn btn-warning rounded-3 w-100 mb-2" data-bs-toggle="modal" data-bs-target="#termsModal">
+                <button type="button" class="btn btn-warning rounded-3 w-100 mb-2" data-bs-toggle="modal"
+                    data-bs-target="#termsModal">
                     View Terms and Conditions
                 </button>
                 <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel"
@@ -123,7 +124,15 @@
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <script>
+        $(document).ready(function () {
+            $('#SubmitForm').submit(function () {
+                $(this).find('button[type="submit"]').prop('disabled', true);
+            });
+        });
+    </script>
 </body>
 
 </html>

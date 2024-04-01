@@ -5059,3 +5059,7 @@ E:\1640\code\COMP1640\obj\Debug\net7.0\refint\Comp1640.dll
 E:\1640\code\COMP1640\obj\Debug\net7.0\Comp1640.pdb
 E:\1640\code\COMP1640\obj\Debug\net7.0\Comp1640.genruntimeconfig.cache
 E:\1640\code\COMP1640\obj\Debug\net7.0\ref\Comp1640.dll
+C:\Users\HP\Desktop\COMP1640\bin\Debug\net7.0\MailKit.dll
+C:\Users\HP\Desktop\COMP1640\bin\Debug\net7.0\MimeKit.dll
+C:\Users\HP\Desktop\COMP1640\bin\Debug\net7.0\NETCore.MailKit.dll
+C:\Users\HP\Desktop\COMP1640\bin\Debug\net7.0\BouncyCastle.Crypto.dll
