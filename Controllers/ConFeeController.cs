@@ -19,7 +19,7 @@ namespace Comp1640.Controllers
         private readonly ContributionFeedbackView _conFeeView;
         private readonly Comp1640Context _context;
         private readonly EmailSender _emailSender;
-        
+
 
         public ConFeeController(ContributionFeedbackView confeeView, Comp1640Context context, UserManager<CustomUser> userManager, EmailSender emailSender)
         {
@@ -46,34 +46,35 @@ namespace Comp1640.Controllers
             if (User.IsInRole("Student"))
             {
                 var userId = _userManager.GetUserId(User);
-                
+
                 feedback.Fbtime = DateTime.Now;
                 feedback.ConId = id;
                 feedback.UserId = userId;
                 _context.Add(feedback);
                 await _context.SaveChangesAsync();
-                string content = "Your feedback has been reply at contribution "; 
+                string content = "Your feedback has been reply at contribution ";
                 var message = new Message(new string[] { "quihvgcc210153@fpt.edu.vn" }, "Contribution feedback", content);
                 _emailSender.SendEmail(message);
-                                return RedirectToAction("Details");
+                return RedirectToAction("Details", new { id = id });
 
 
             }
             if (User.IsInRole("Coordinator"))
-            { 
+            {
                 var userId = _userManager.GetUserId(User);
                 var userName = _userManager.GetUserName(User);
                 var user = _userManager.FindByIdAsync(feedback.UserId);
-                
+
                 List<string> email = new List<string>();
                 email.Add(userName + "@gmail.com");
                 feedback.ConId = id;
                 feedback.UserId = _userManager.GetUserId(User);
                 _context.Add(feedback);
                 await _context.SaveChangesAsync();
-                string content = "Your contribution has been feedbacked at contribution "; 
+                string content = "Your contribution has been feedbacked at contribution ";
                 var message = new Message(email, "Contribution feedback", content);
-                return RedirectToAction("Details");
+                return RedirectToAction("Details", new { id = id });
+
             }
             return View("/Contribution/Index");
 
@@ -81,7 +82,7 @@ namespace Comp1640.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            ViewBag.feedback = _context.Feedbacks.Include(f => f.User).Where(f => f.ConId == id) ;
+            ViewBag.feedback = _context.Feedbacks.Include(f => f.User).Where(f => f.ConId == id);
 
             var fee = await _context.Feedbacks.Where(f => f.ConId == id).Include(c => c.Con).ToListAsync();
             var con = await _context.Contributions.FindAsync(id);
