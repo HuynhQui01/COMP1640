@@ -23,7 +23,9 @@ namespace Comp1640.Controllers
         // GET: Manager
         public async Task<ActionResult> Index()
         {
-            var contributions = _context.Contributions.Include(c => c.User).Include(c => c.Fac).ToList();
+            var contributions = _context.Contributions.Include(c => c.User)
+            // .Include(c => c.Fac)
+            .ToList();
             // return _context.Contributions != null ?
             //               View(await _context.Contributions.ToListAsync()) :
             //               Problem("Entity set 'Comp1640Context.Contributions'  is null.");

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Comp1640.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Comp1640.Controllers
 {
@@ -17,7 +18,9 @@ namespace Comp1640.Controllers
         {
             _roleManager = roleManager;
         }
+
         // GET: Roles
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             // if (User.Identity.IsAuthenticated)
@@ -32,6 +35,7 @@ namespace Comp1640.Controllers
         }
 
         // GET: Roles/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             // if (User.Identity.IsAuthenticated)
@@ -75,6 +79,7 @@ namespace Comp1640.Controllers
             // return Redirect("/");
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(string id)
         {
             // if (User.Identity.IsAuthenticated)

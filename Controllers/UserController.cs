@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using Comp1640.Service;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Comp1640.Controllers
@@ -43,19 +44,16 @@ namespace Comp1640.Controllers
             _logger = logger;
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
-            // if (User.Identity.IsAuthenticated)
-            // {
-            //     if (User.IsInRole("Student"))
-            //     {
-            var users = await _userManager.Users.ToListAsync();
+            
+            var users = await _userManager.Users.Include(u => u.Faculty).ToListAsync();
             return View(users);
-            //     }
-            // }
-            // return Redirect("Identity/Account/Login");
+            
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string id)
         {
             var user = _userManager.FindByIdAsync(id).Result;
@@ -80,6 +78,7 @@ namespace Comp1640.Controllers
             return View("Index");
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult ManageRoles(string id)
         {
             // if (User.Identity.IsAuthenticated)
@@ -100,6 +99,9 @@ namespace Comp1640.Controllers
             // }
             // return Redirect("/");
         }
+
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> RemoveRoles(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -126,16 +128,11 @@ namespace Comp1640.Controllers
         {
             var user = _userManager.FindByIdAsync(id).Result;
             var userRoles = _userManager.GetRolesAsync(user).Result;
-
-            // Xóa tất cả các vai trò hiện có của người dùng
             var removeResult = _userManager.RemoveFromRolesAsync(user, userRoles).Result;
             if (!removeResult.Succeeded)
             {
-                // Xử lý lỗi nếu cần thiết
                 return View("Error");
             }
-
-            // Thêm các vai trò mới cho người dùng
             var addResult = _userManager.AddToRolesAsync(user, Roles).Result;
             if (addResult.Succeeded)
             {
@@ -143,11 +140,11 @@ namespace Comp1640.Controllers
             }
             else
             {
-                // Xử lý lỗi nếu cần thiết
                 return View("Error");
             }
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult ManageFaculty(string id)
         {
             var user = _userManager.FindByIdAsync(id).Result;
@@ -157,7 +154,6 @@ namespace Comp1640.Controllers
                 User = user,
                 Faculties = fac
             });
-
         }
 
         [HttpPost]
@@ -165,48 +161,45 @@ namespace Comp1640.Controllers
         {
             var user = _userManager.FindByIdAsync(id).Result;
             var faculty = Faculties[0];
-            user.FacName = faculty;
+            // user.FacName = faculty;
             await _userManager.UpdateAsync(user);
             return RedirectToAction("Index");
         }
 
-        public IActionResult TestEmail()
-        {
-            var message = new Message(new string[] { "quihvgcc210153@fpt.edu.vn" }, "Test async email", "This is the content from our async email.");
-            _emailSender.SendEmail(message);
-            return RedirectToAction("Index");
-        }
+        // public IActionResult TestEmail()
+        // {
+        //     var message = new Message(new string[] { "quihvgcc210153@fpt.edu.vn" }, "Test async email", "This is the content from our async email.");
+        //     _emailSender.SendEmail(message);
+        //     return RedirectToAction("Index");
+        // }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateUser()
         {
             ViewBag.Roles = _roleManager.Roles.ToList();
             var faculties = _context.Faculties.ToList();
             if (faculties != null && faculties.Any())
             {
-                ViewData["FacId"] = new SelectList(_context
-                    .Faculties, "FacName", "FacName");
-                ViewData["role"] = new SelectList(_roleManager.Roles, "Id", "Name");
+                ViewBag.FacultyId = new SelectList(_context.Faculties, "FacId", "FacName");
             }
             else
             {
-                ViewBag.FacName = new SelectList(new List<Faculty>(), "FacName", "Name");
+                ViewBag.FacultyId = new SelectList(new List<Faculty>(), "FacId", "FacName");
             }
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateUser(CustomUser model, string password, string role)
+        public async Task<IActionResult> CreateUser(CustomUser model, string password, string role, string fullName, List<int> fac)
         {
-            // if (ModelState.IsValid)
-            // {
+            var facId = fac[0];
             var user = new CustomUser
             {
                 UserName = model.UserName,
-                // Email = model.Email,
-                FacName = model.FacName,
-                ProfileImagePath = model.ProfileImagePath
-
+                ProfileImagePath = model.ProfileImagePath,
+                FullName = fullName,
+                FacId = facId
             };
 
             await _userStore.SetUserNameAsync(user, model.Email, CancellationToken.None);

@@ -12,6 +12,7 @@ using System.IO.Compression;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Comp1640.Service;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Comp1640.Controllers
 {
@@ -36,20 +37,37 @@ namespace Comp1640.Controllers
         // GET: Contribution
         public async Task<IActionResult> Index()
         {
+            var user = await _userManager.GetUserAsync(User);
+            var fac = await _context.Faculties.FindAsync(user.FacId);
+
+
             if (User.Identity.IsAuthenticated && User.IsInRole("Student"))
             {
-                var user = await _userManager.GetUserAsync(User);
+                // var user = await _userManager.GetUserAsync(User);
                 if (user != null)
                 {
+                    ViewBag.Fac = user.Faculty.FacName;
                     var userContributions = await _context.Contributions
                         .Where(c => c.UserId == user.Id)
-                        .Include(f => f.Fac)
+                        // .Include(f => f.Fac)
                         .ToListAsync();
 
                     return View(userContributions);
                 }
             }
 
+            if (User.Identity.IsAuthenticated && User.IsInRole("Coordinator"))
+            {
+                if (user != null)
+                {
+                    ViewBag.Fac = user.Faculty.FacName;
+                    var userContributions = await _context.Contributions
+                        .Include(c => c.User.Faculty).Where(c => c.User.Faculty.FacName == fac.FacName)
+                        .ToListAsync();
+
+                    return View(userContributions);
+                }
+            }
             return Redirect("/");
         }
         public IActionResult Approve()
@@ -57,7 +75,7 @@ namespace Comp1640.Controllers
             var approvedContributions = _context.Contributions
                 .Where(c => c.Status == "Approved")
                 .Include(c => c.User)
-                .Include(c => c.Fac)
+                // .Include(c => c.Fac)
                 .ToList();
 
             return View(approvedContributions);
@@ -69,7 +87,7 @@ namespace Comp1640.Controllers
             var contributions = _context.Contributions
                 .Where(c => c.Status == "Approved" && c.ConName.Contains(searchString))
                 .Include(c => c.User)
-                .Include(c => c.Fac)
+                // .Include(c => c.Fac)
                 .ToList();
 
             return View("Approve", contributions);
@@ -298,19 +316,15 @@ namespace Comp1640.Controllers
             }
         }
 
+        [Authorize(Roles = "Coordinator")]
 
         public async Task<IActionResult> Manage()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (User.IsInRole("Coordinator"))
-                {
-                    return _context.Contributions != null ?
-                          View(await _context.Contributions.ToListAsync()) :
-                          Problem("Entity set 'Comp1640Context.Contributions'  is null.");
-                }
-            }
-            return Redirect("/");
+
+            return _context.Contributions != null ?
+                  View(await _context.Contributions.ToListAsync()) :
+                  Problem("Entity set 'Comp1640Context.Contributions'  is null.");
+
         }
 
         public async Task<IActionResult> Public()
@@ -326,11 +340,12 @@ namespace Comp1640.Controllers
             {
                 return NotFound();
             }
-            else{
+            else
+            {
                 if (contribution.Buplic == "Non-publicized")
                 {
                     contribution.Buplic = "Publicized";
-                }              
+                }
             }
             _context.Update(contribution);
             await _context.SaveChangesAsync();
@@ -384,96 +399,101 @@ namespace Comp1640.Controllers
         }
 
         // GET: Contribution/Create
+        [Authorize(Roles = "Student")]
+
         public IActionResult Create()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (User.IsInRole("Student"))
-                {
-                    ViewData["FacId"] = new SelectList(_context
-                    .Faculties, "FacId", "FacName");
-                    return View();
-                }
-            }
-            return Redirect("/");
+
+
+            // ViewBag.Facname =_userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            ViewData["AYId"] = new SelectList(_context
+            .AcademicYears, "Ayid", "Name");
+            return View();
+
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(IFormFile imageFile, IFormFile file, [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,FacId,Buplic")] Contribution contribution)
+        public async Task<IActionResult> Create(IFormFile imageFile, IFormFile file, [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,Buplic,Ayid")] Contribution contribution)
         {
-            if (file == null || file.Length == 0)
+            var curDate = DateTime.Now;
+            if (contribution.SubmitDate <= curDate)
             {
-                ViewBag.Message = "Error: No file selected or empty file.";
-                return View();
-            }
 
-            try
-            {
-                string uploadsFolder = Path.Combine(_webHost.WebRootPath, "uploads");
-
-                if (!Directory.Exists(uploadsFolder))
+                if (file == null || file.Length == 0)
                 {
-                    Directory.CreateDirectory(uploadsFolder);
+                    ViewBag.Message = "Error: No file selected or empty file.";
+                    return View();
                 }
 
-                string fileName = Path.GetFileName(file.FileName);
-                string imageFileName = Path.GetFileName(imageFile.FileName);
-
-                var filepath = fileName;
-                var imageFilePath = imageFileName;
-
-                fileName = Path.Combine(uploadsFolder, fileName);
-                imageFileName = Path.Combine(uploadsFolder, imageFileName);
-
-                if (System.IO.File.Exists(fileName))
+                try
                 {
-                    string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
-                    string fileExtension = Path.GetExtension(fileName);
-                    fileName = Path.Combine(uploadsFolder, $"{fileNameWithoutExtension}_{DateTime.Now.Ticks}{fileExtension}");
-                }
+                    string uploadsFolder = Path.Combine(_webHost.WebRootPath, "uploads");
 
-                if (file.Length > 0 && imageFile.Length > 0 && IsFileValid(file) && IsImageFileValid(imageFile))
-                {
-                    using (FileStream fileStream = new FileStream(fileName, FileMode.Create))
-                    using (FileStream imageFileStream = new FileStream(imageFileName, FileMode.Create))
+                    if (!Directory.Exists(uploadsFolder))
                     {
-                        await file.CopyToAsync(fileStream);
-                        await imageFile.CopyToAsync(imageFileStream);
+                        Directory.CreateDirectory(uploadsFolder);
                     }
 
-                    var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                    var count = await _context.Contributions.CountAsync();
+                    string fileName = Path.GetFileName(file.FileName);
+                    string imageFileName = Path.GetFileName(imageFile.FileName);
 
-                    contribution.UserId = userID;
-                    contribution.Filepath = filepath;
-                    contribution.ImageFilePath = imageFilePath;
-                    contribution.Status = "Pending";
-                    contribution.Buplic = "Non-publicized";
-                    contribution.SubmitDate = DateTime.Now;
+                    var filepath = fileName;
+                    var imageFilePath = imageFileName;
 
-                    _context.Add(contribution);
-                    await _context.SaveChangesAsync();
-                    ViewBag.Message = $"{Path.GetFileName(fileName)} uploaded successfully!";
-                     var user = await _userManager.FindByIdAsync(userID);
-                    string fromUser = user.UserName;
-                    string content = "The new contribution of " + fromUser + ". You must view and give the feedback to him/her in 14 days.";
-                    List<string> emails = new List<string>();
-                    emails.Add("quihvgcc210153@fpt.edu.vn");
-                    var message = new Message(emails, "Noification", content);
-                    await _emailSender.SendEmailAsync(message);
+                    fileName = Path.Combine(uploadsFolder, fileName);
+                    imageFileName = Path.Combine(uploadsFolder, imageFileName);
 
-                    ViewBag.Message = $"{Path.GetFileName(fileName)} uploaded successfully!";
+                    if (System.IO.File.Exists(fileName))
+                    {
+                        string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
+                        string fileExtension = Path.GetExtension(fileName);
+                        fileName = Path.Combine(uploadsFolder, $"{fileNameWithoutExtension}_{DateTime.Now.Ticks}{fileExtension}");
+                    }
+
+                    if (file.Length > 0 && imageFile.Length > 0 && IsFileValid(file) && IsImageFileValid(imageFile))
+                    {
+                        using (FileStream fileStream = new FileStream(fileName, FileMode.Create))
+                        using (FileStream imageFileStream = new FileStream(imageFileName, FileMode.Create))
+                        {
+                            await file.CopyToAsync(fileStream);
+                            await imageFile.CopyToAsync(imageFileStream);
+                        }
+
+                        var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                        var count = await _context.Contributions.CountAsync();
+
+                        contribution.UserId = userID;
+                        contribution.Filepath = filepath;
+                        contribution.ImageFilePath = imageFilePath;
+                        contribution.Status = "Pending";
+                        contribution.Buplic = "Non-publicized";
+                        contribution.SubmitDate = DateTime.Now;
+
+                        _context.Add(contribution);
+                        await _context.SaveChangesAsync();
+                        ViewBag.Message = $"{Path.GetFileName(fileName)} uploaded successfully!";
+                        var user = await _userManager.FindByIdAsync(userID);
+                        string fromUser = user.UserName;
+                        string content = "The new contribution of " + fromUser + ". You must view and give the feedback to him/her in 14 days.";
+                        List<string> emails = new List<string>();
+                        emails.Add("quihvgcc210153@fpt.edu.vn");
+                        var message = new Message(emails, "Noification", content);
+                        await _emailSender.SendEmailAsync(message);
+
+                        ViewBag.Message = $"{Path.GetFileName(fileName)} uploaded successfully!";
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Error: Invalid file.");
+                        Create();
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    ModelState.AddModelError(string.Empty, "Error: Invalid file.");
-                    Create();
+                    ViewBag.Message = $"Error: {ex.Message}";
                 }
             }
-            catch (Exception ex)
-            {
-                ViewBag.Message = $"Error: {ex.Message}";
-            }
+
 
             return RedirectToAction("Index");
         }

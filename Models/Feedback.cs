@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Comp1640.Models;
 
 [Index("ConId", Name = "IX_Feedbacks_ConId")]
+[Index("UserId", Name = "IX_Feedbacks_UserId")]
 public partial class Feedback
 {
     [Key]
@@ -19,7 +20,6 @@ public partial class Feedback
     [Column("FBTime", TypeName = "datetime")]
     public DateTime? Fbtime { get; set; }
 
-    [StringLength(450)]
     public string? UserId { get; set; }
 
     public int? ConId { get; set; }

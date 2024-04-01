@@ -110,14 +110,8 @@ namespace Comp1640.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            public int FacId { get; set; }
-
-            [ForeignKey("FacId")]
-            [InverseProperty("Users")]
-            public virtual Faculty Fac { get; set; } = null!;
-
             [Display(Name = "Faculty")]
-                public string? FacName { get; set; }
+                public int? FacId { get; set; }
         }
 
 
@@ -127,11 +121,11 @@ namespace Comp1640.Areas.Identity.Pages.Account
 
             if (faculties != null && faculties.Any())
             {
-                ViewData["FacName"] = new SelectList(faculties, "FacName", "FacName");
+                ViewData["FacName"] = new SelectList(faculties, "FacId", "FacName");
             }
             else
             {
-                ViewData["FacName"] = new SelectList(new List<Faculty>(), "Facname", "FacName");
+                ViewData["FacName"] = new SelectList(new List<Faculty>(), "FacId", "FacName");
             }
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -148,7 +142,7 @@ namespace Comp1640.Areas.Identity.Pages.Account
                     UserName = Input.Email,
                     Email = Input.Email,
                     FullName = Input.FullName, // Gán giá trị FullName từ InputModel
-                    FacName = Input.FacName
+                    FacId = Input.FacId
                 };
                 
                 // user.FacId = 0;

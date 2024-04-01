@@ -32,9 +32,13 @@
                     <label asp-for="ConName" class="control-label" style="font-weight: 1000;">Title</label>
                     <input asp-for="ConName" class="form-control rounded-3" required />
                 </div>
+                @* <div class="form-group mt-2">
+                    <label class="control-label" style="font-weight: 1000;">Faculty</label>
+                    <input value="@ViewBag.FacId.Facname" readonly>
+                </div> *@
                 <div class="form-group mt-2">
-                    <label asp-for="FacId" class="control-label" style="font-weight: 1000;">Faculty</label>
-                    <select asp-for="FacId" class="form-control rounded-3" asp-items="ViewBag.FacId"></select>
+                    <label asp-for="Ayid" class="control-label" style="font-weight: 1000;">Academic Year</label>
+                    <select asp-for="Ayid" class="form-control rounded-3" asp-items="ViewBag.AYId"></select>
                 </div>
                 <div class="form-group mt-2">
                     <label asp-for="Filepath" class="control-label" style="font-weight: 1000;">Choose a file for

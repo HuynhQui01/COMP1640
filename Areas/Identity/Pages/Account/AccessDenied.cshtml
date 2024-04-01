@@ -2,9 +2,24 @@
 @model AccessDeniedModel
 @{
     ViewData["Title"] = "Access denied";
+        Layout = "~/Views/Shared/UserLO.cshtml";
+
 }
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">You do not have access to this resource.</p>
-</header>
+<style>
+    body{
+        background-image: url("~/WarningImg/AccessDenied.jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+</style>
+
+<body>
+
+    <header>
+        <img src="~/Areas/Account/Manage/WarningImg/AccessDenied.jpg" alt="">
+        <h1 class="text-danger">@ViewData["Title"]</h1>
+        <p class="text-danger">You do not have access to this resource.</p>
+        <a asp-controller="Home" asp-action="Index">Back to Home</a>
+    </header>
+</body>

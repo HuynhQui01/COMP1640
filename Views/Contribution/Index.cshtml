@@ -24,7 +24,8 @@
 <body>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-danger text-center" style="font-size: 40px;">Table of Contributions</h6>
+            <h6 class="m-0 font-weight-bold text-danger text-center" style="font-size: 40px;">Table of Contributions
+            </h6>
         </div>
         <div class="p-3"><a class="btn btn-primary" asp-controller="Contribution" asp-action="Create">Create New</a>
         </div>
@@ -64,9 +65,9 @@
                         {
                             <tr>
                                 <td>@item.ConName</td>
-                                <td>@Html.DisplayFor(modelItem => item.Fac.FacName)</td>
+                                <td>@ViewBag.Fac</td>
                                 <td>@item.Filepath</td>
-                                <td><img src="~/uploads/@item.ImageFilePath" alt="" width="80px"/></td>
+                                <td><img src="~/uploads/@item.ImageFilePath" alt="" width="80px" /></td>
                                 <td>@item.SubmitDate</td>
                                 <td>@item.Status</td>
                                 <td>@item.Buplic</td>
@@ -89,13 +90,14 @@
                                         }
                                         if (User.IsInRole("Coordinator"))
                                         {
-                                            <a class="btn btn-primary" asp-controller="ConFee" asp-action="Create" asp-route-id="@item.ConId">Feedback</a>
-                                            
+                                            <a class="btn btn-primary" asp-controller="ConFee" asp-action="Create"
+                                                asp-route-id="@item.ConId">Feedback</a>
+
                                         }
                                     }
-                                            <a class="btn btn-danger" asp-controller="ConFee" asp-action="Details" asp-route-id="@item.ConId">View Feedback</a>
+                                    <a class="btn btn-danger" asp-controller="ConFee" asp-action="Details"
+                                        asp-route-id="@item.ConId">View Feedback</a>
 
-                                    }
                                 </td>
                             </tr>
                         }

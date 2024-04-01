@@ -4,6 +4,7 @@ using Comp1640.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Comp1640.Migrations
 {
     [DbContext(typeof(Comp1640Context))]
-    partial class Comp1640ContextModelSnapshot : ModelSnapshot
+    [Migration("20240329011959_Faculty")]
+    partial class Faculty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,6 +71,9 @@ namespace Comp1640.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int?>("FacId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Filepath")
                         .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
@@ -92,6 +98,8 @@ namespace Comp1640.Migrations
                     b.HasKey("ConId");
 
                     b.HasIndex("Ayid");
+
+                    b.HasIndex(new[] { "FacId" }, "IX_Contributions_FacId");
 
                     b.HasIndex(new[] { "UserId" }, "IX_Contributions_UserID");
 
@@ -369,6 +377,10 @@ namespace Comp1640.Migrations
                         .WithMany("Contributions")
                         .HasForeignKey("Ayid");
 
+                    b.HasOne("Comp1640.Models.Faculty", "Fac")
+                        .WithMany("Contributions")
+                        .HasForeignKey("FacId");
+
                     b.HasOne("Comp1640.Models.CustomUser", "User")
                         .WithMany("Contributions")
                         .HasForeignKey("UserId")
@@ -376,6 +388,8 @@ namespace Comp1640.Migrations
                         .HasConstraintName("FK__Contribut__UserI__571DF1D5");
 
                     b.Navigation("Ay");
+
+                    b.Navigation("Fac");
 
                     b.Navigation("User");
                 });
@@ -474,6 +488,8 @@ namespace Comp1640.Migrations
 
             modelBuilder.Entity("Comp1640.Models.Faculty", b =>
                 {
+                    b.Navigation("Contributions");
+
                     b.Navigation("CustomUser");
                 });
 #pragma warning restore 612, 618

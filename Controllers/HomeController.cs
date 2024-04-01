@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Comp1640.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Comp1640.Controllers;
 
@@ -30,6 +31,8 @@ public class HomeController : Controller
     {
         return View();
     }
+    
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Admin()
     {
         var users = await _userManager.Users.ToListAsync();
@@ -82,7 +85,7 @@ public class HomeController : Controller
     {
         var contributions = await _context.Contributions.ToListAsync();
 
-        
+
         var approvedCount = contributions.Count(c => c.Status == "approved");
         var rejectedCount = contributions.Count(c => c.Status == "rejected");
         var pendingCount = contributions.Count(c => c.Status == "pending");

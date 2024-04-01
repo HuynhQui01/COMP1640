@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Comp1640.Models;
 
-[Index("FacId", Name = "IX_Contributions_FacId")]
+// [Index("FacId", Name = "IX_Contributions_FacId")]
 [Index("UserId", Name = "IX_Contributions_UserID")]
 public partial class Contribution
 {
@@ -23,23 +23,29 @@ public partial class Contribution
     [StringLength(50)]
     [Unicode(false)]
     public string Status { get; set; } = null!;
-    public string? Buplic { get; set; } = null!;
 
     [StringLength(450)]
     public string? Filepath { get; set; }
-    
-    [StringLength(450)]
-    public string? ImageFilePath { get; set; }
 
+    public string? ImageFilePath { get; set; }
 
     [Column(TypeName = "datetime")]
     public DateTime SubmitDate { get; set; }
 
-    public int? FacId { get; set; }
+    // public int? FacId { get; set; }
 
-    [ForeignKey("FacId")]
+    public string? Buplic { get; set; }
+
+    [Column("AYId")]
+    public int? Ayid { get; set; }
+
+    [ForeignKey("Ayid")]
     [InverseProperty("Contributions")]
-    public virtual Faculty? Fac { get; set; }
+    public virtual AcademicYear? Ay { get; set; }
+
+    // [ForeignKey("FacId")]
+    // [InverseProperty("Contributions")]
+    // public virtual Faculty? Fac { get; set; }
 
     [InverseProperty("Con")]
     public virtual ICollection<Feedback> Feedbacks { get; } = new List<Feedback>();

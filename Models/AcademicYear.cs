@@ -12,8 +12,6 @@ public partial class AcademicYear
     [Key]
     [Column("AYId")]
     public int Ayid { get; set; }
-    public string Name { get; set; }
-
 
     [Column(TypeName = "date")]
     public DateTime? CloseDate { get; set; }
@@ -21,6 +19,9 @@ public partial class AcademicYear
     [Column(TypeName = "date")]
     public DateTime? FinalCloseDate { get; set; }
 
+    public string Name { get; set; } = null!;
+
     [InverseProperty("Ay")]
-    public virtual ICollection<Faculty> Faculties { get; } = new List<Faculty>();
+    public virtual ICollection<Contribution> Contributions { get; } = new List<Contribution>();
+
 }

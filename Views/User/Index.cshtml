@@ -46,7 +46,7 @@
                                     }
                                 }
                             </td>
-                            <td>@Html.DisplayFor(modelUser => user.FacName)</td>
+                            <td>@Html.DisplayFor(modelUser => user.Faculty.FacName)</td>
                             <td>
                                 <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@user.Id">Delete</a>
                                 <a class="btn btn-success btn-sm" asp-action="ManageRoles" asp-route-id="@user.Id">Manage Roles</a>

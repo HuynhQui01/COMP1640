@@ -55,7 +55,7 @@ namespace Comp1640.Controllers
                 string content = "Your feedback has been reply at contribution "; 
                 var message = new Message(new string[] { "quihvgcc210153@fpt.edu.vn" }, "Contribution feedback", content);
                 _emailSender.SendEmail(message);
-                return RedirectToAction("/Contribution");
+                                return RedirectToAction("Details");
 
 
             }

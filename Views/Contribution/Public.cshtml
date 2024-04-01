@@ -56,7 +56,7 @@
                                     <div style="margin-left: 15px;">
                                         @if (Model.Any())
                                         {
-                                            <!-- Kiểm tra xem có bài nào không -->
+                                            
                                             <a class="btn btn-primary" asp-action="DownloadAllApproved"
                                                 asp-controller="Contribution">Download All</a>
                                         }
@@ -82,8 +82,8 @@
                                                 <p class="text-xs font-weight-bold mb-0">@item.ConName</p>
                                             </td>
                                             <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">@Html.DisplayFor(modelItem =>
-                                                item.Fac.FacName)</p>
+                                                @* <p class="text-xs font-weight-bold mb-0">@Html.DisplayFor(modelItem =>
+                                                item.Fac.FacName)</p> *@
                                             </td>
                                             <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">@item.Filepath</p>
@@ -109,8 +109,7 @@
                                                 @* <a class="btn btn-primary" asp-action="DownloadAllPublicized"
                                             asp-controller="Contribution"
                                             asp-route-fileId="@item.ConId">Download All</a> *@
-                                                @* nút này là để tải hết mấy cái publicized contributions, đừng có xóa nghe
-                                            4 lù *@
+                                                
                                             </td>
                                         </tr>
                                     }

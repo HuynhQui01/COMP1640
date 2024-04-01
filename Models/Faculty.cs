@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Comp1640.Models;
 
-[Index("Ayid", Name = "IX_Faculties_AYId")]
+
 public partial class Faculty
 {
     [Key]
@@ -17,16 +17,9 @@ public partial class Faculty
     [Unicode(false)]
     public string? FacName { get; set; }
 
-    [Column("AYId")]
-    public int? Ayid { get; set; }
-
-    [ForeignKey("Ayid")]
-    [InverseProperty("Faculties")]
-    public virtual AcademicYear? Ay { get; set; }
-
-    [InverseProperty("Fac")]
-    public virtual ICollection<Contribution> Contributions { get; } = new List<Contribution>();
-
     // [InverseProperty("Fac")]
-    // public virtual ICollection<CustomUser> Users { get; } = new List<CustomUser>();
+    // public virtual ICollection<Contribution> Contributions { get; } = new List<Contribution>();
+
+    [InverseProperty("Faculty")]
+    public virtual ICollection<CustomUser> CustomUser { get; } = new List<CustomUser>();
 }

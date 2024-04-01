@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Comp1640.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Comp1640.Controllers
 {
@@ -19,16 +20,18 @@ namespace Comp1640.Controllers
         }
 
         // GET: Faculty
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
-            var comp1640Context = _context.Faculties.Include(f => f.Ay);
-              return View(await comp1640Context.ToListAsync());
+            var comp1640Context = _context.Faculties;
+            return View(await comp1640Context.ToListAsync());
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ViewF()
         {
-            var comp1640Context = _context.Faculties.Include(f => f.Ay);
-              return View(await comp1640Context.ToListAsync());
+            var comp1640Context = _context.Faculties;
+            return View(await comp1640Context.ToListAsync());
         }
 
         // GET: Faculty/Details/5
@@ -51,6 +54,8 @@ namespace Comp1640.Controllers
 
 
         // GET: Faculty/Create
+        [Authorize(Roles = "Admin")]
+
         public IActionResult Create()
         {
             ViewData["Ayid"] = new SelectList(_context.AcademicYears, "Ayid", "CloseDate");
@@ -62,7 +67,7 @@ namespace Comp1640.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FacId,FacName,Ayid")] Faculty faculty)
+        public async Task<IActionResult> Create([Bind("FacId,FacName")] Faculty faculty)
         {
             if (ModelState.IsValid)
             {
@@ -74,6 +79,8 @@ namespace Comp1640.Controllers
         }
 
         // GET: Faculty/Edit/5
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Faculties == null)
@@ -87,7 +94,7 @@ namespace Comp1640.Controllers
             {
                 return NotFound();
             }
-            ViewData["Ayid"] = new SelectList(_context.AcademicYears, "Ayid", "CloseDate", faculty.Ayid);
+            // ViewData["Ayid"] = new SelectList(_context.AcademicYears, "Ayid", "CloseDate", faculty.Ayid);
             return View(faculty);
         }
 
@@ -96,7 +103,7 @@ namespace Comp1640.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FacId,FacName,Ayid")] Faculty faculty)
+        public async Task<IActionResult> Edit(int id, [Bind("FacId,FacName")] Faculty faculty)
         {
             if (id != faculty.FacId)
             {
@@ -127,6 +134,7 @@ namespace Comp1640.Controllers
         }
 
         // GET: Faculty/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Faculties == null)
@@ -158,14 +166,14 @@ namespace Comp1640.Controllers
             {
                 _context.Faculties.Remove(faculty);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool FacultyExists(int id)
         {
-          return (_context.Faculties?.Any(e => e.FacId == id)).GetValueOrDefault();
+            return (_context.Faculties?.Any(e => e.FacId == id)).GetValueOrDefault();
         }
     }
 }

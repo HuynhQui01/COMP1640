@@ -23,6 +23,14 @@
         } *@
         <form asp-controller="User" asp-action="CreateUser" method="post">
             <div class="row mb-3">
+                <label asp-for="FullName" class="col-sm-3 col-form-label">
+                    Full Name
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" asp-for="FullName" name="fullName" placeholder="Enter you Full Name">
+                </div>
+            </div>
+            <div class="row mb-3">
                 <label asp-for="Email" class="col-sm-3 col-form-label">
                     Email
                 </label>
@@ -32,10 +40,9 @@
             </div>
 
             <div class="row mb-3">
-                <label asp-for="FacName" class="col-sm-3 col-form-label">Faculty</label>
+                <label asp-for="FacId" class="col-sm-3 col-form-label">Faculty</label>
                 <div class="col-sm-9">
-                    <select asp-for="FacName" asp-items="ViewBag.FacId" class="col-sm-9 form-control">
-                        <option disabled selected> -- Select a faculty -- </option>
+                    <select asp-for="FacId" asp-items="ViewBag.FacultyId" class="col-sm-9 form-control" name="fac">
                     </select>
                 </div>
             </div>

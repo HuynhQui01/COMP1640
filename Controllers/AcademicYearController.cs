@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Comp1640.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Comp1640.Controllers
 {
@@ -19,6 +20,7 @@ namespace Comp1640.Controllers
         }
 
         // GET: AcademicYear
+        [Authorize(Roles="Admin")]
         public async Task<IActionResult> Index()
         {
               return _context.AcademicYears != null ? 
@@ -34,6 +36,8 @@ namespace Comp1640.Controllers
         }
 
         // GET: AcademicYear/Details/5
+        [Authorize(Roles="Admin")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.AcademicYears == null)
@@ -52,6 +56,8 @@ namespace Comp1640.Controllers
         }
 
         // GET: AcademicYear/Create
+        [Authorize(Roles="Admin")]
+
         public IActionResult Create()
         {
             return View();
@@ -62,7 +68,7 @@ namespace Comp1640.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Ayid,CloseDate,FinalCloseDate")] AcademicYear academicYear)
+        public async Task<IActionResult> Create([Bind("Ayid,CloseDate,Name,FinalCloseDate")] AcademicYear academicYear)
         {
             if (ModelState.IsValid)
             {
@@ -127,6 +133,8 @@ namespace Comp1640.Controllers
         }
 
         // GET: AcademicYear/Delete/5
+        [Authorize(Roles="Admin")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.AcademicYears == null)
