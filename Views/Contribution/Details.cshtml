@@ -1,7 +1,12 @@
 @model Comp1640.Models.Contribution
 @inject Comp1640Context _context;
+@inject Comp1640Context _context;
 
 @{
+    Layout = "~/Views/Shared/AdminLO.cshtml";
+    var academicYear = await _context.AcademicYears.FindAsync(Model.Ayid);
+}
+
     Layout = "~/Views/Shared/AdminLO.cshtml";
     var academicYear = await _context.AcademicYears.FindAsync(Model.Ayid);
 }

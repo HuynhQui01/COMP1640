@@ -386,7 +386,7 @@ namespace Comp1640.Controllers
 
         }
         // GET: Contribution/Details/5
-       public async Task<IActionResult> Details(int fileId)
+        public async Task<IActionResult> Details(int? id)
         {
             if (fileId == null || _context.Contributions == null)
             {
