@@ -77,6 +77,8 @@ namespace Comp1640.Controllers
                     await _context.SaveChangesAsync();
                     string content = "Your contribution has been feedbacked at contribution ";
                     var message = new Message(email, "Contribution feedback", content);
+                    _emailSender.SendEmail(message);
+
                     return RedirectToAction("Details", new { id = id });
                 }
             }else{
