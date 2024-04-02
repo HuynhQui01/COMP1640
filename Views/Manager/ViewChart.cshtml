@@ -37,8 +37,6 @@
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                 <div class="border-radius-lg py-3 pe-1" style="background-color: #f0e0fd;" id="wchart">
                     <div class="chart">
-                        @* <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
-                        *@
                         <canvas id="contributionChart" width="800" height="400"></canvas>
 
                         <script>
@@ -193,3 +191,69 @@
             </div>
         </div>
     </div>
+
+    <div class="col-lg-4 col-md-6 mt-4 mb-4" style="border-radius: 20px; margin-right: 5%">
+        <div class="card z-index-2 " style="border-radius: 20px; box-shadow: 5px 8px #d9d9d9;">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                <div class="border-radius-lg py-3 pe-1" style="background-color: #d2ffd9;" id="wchart">
+                    <div class="chart">
+                        @* <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
+                        *@
+                        <canvas id="contributionPercentageChart" width="800" height="400"></canvas>
+                        <script>
+                            var contributionPercentages = @Html.Raw(Json.Serialize(ViewBag.ConFac));
+
+                            var labels = Object.keys(contributionPercentages);
+                            var data = Object.values(contributionPercentages);
+
+                            var ctx = document.getElementById('contributionPercentageChart').getContext('2d');
+                            var chart = new Chart(ctx, {
+                                type: 'pie',
+                                data: {
+                                    labels: labels,
+                                    datasets: [{
+                                        label: 'Contribution Percentage',
+                                        data: data,
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(54, 162, 235, 0.2)',
+                                            'rgba(255, 206, 86, 0.2)',
+                                            'rgba(75, 192, 192, 0.2)',
+                                            'rgba(153, 102, 255, 0.2)',
+                                            'rgba(255, 159, 64, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(54, 162, 235, 1)',
+                                            'rgba(255, 206, 86, 1)',
+                                            'rgba(75, 192, 192, 1)',
+                                            'rgba(153, 102, 255, 1)',
+                                            'rgba(255, 159, 64, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <h6 class="mb-0 ">Percentage of contributions by each Faculty for any academic year.</h6>
+                <p class="text-sm "></p>
+                <hr class="dark horizontal">
+                <form asp-action="ViewChart" asp-controller="Manager" method="get">
+                    <div>
+                        <label>Academic Year</label>
+                        <select  asp-items="ViewBag.AcademicYear" name="academicYearId"></select>
+                    </div>
+                    <button type="submit">Change Chart</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

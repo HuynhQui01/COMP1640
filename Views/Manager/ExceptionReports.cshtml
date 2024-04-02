@@ -1,0 +1,131 @@
+@model Dictionary<string, Dictionary<string, int>>
+@{
+    Layout = "~/Views/Shared/AdminLO.cshtml";
+
+}
+<style>
+    #div {
+        display: flex;
+        justify-content: center;
+    }
+
+
+    #wchart {
+        border-radius: 20px;
+        box-shadow: 5px 8px #d9d9d9;
+    }
+
+    #mchart {
+        border-radius: 20px;
+        box-shadow: 5px 8px #d9d9d9;
+    }
+
+    #contain {
+        display: flex;
+        justify-content: center;
+        width: 80%;
+        margin-left: 10%;
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<h2>Exception Reports</h2>
+
+<div class="row mt-4" id="contain">
+    <div class="col-lg-4 col-md-6 mt-4 mb-4" style="border-radius: 20px; margin-right: 5%">
+        <div class="card z-index-2 " style="border-radius: 20px; box-shadow: 5px 8px #d9d9d9;">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                <div class="border-radius-lg py-3 pe-1" style="background-color: #e8f8df;" id="wchart">
+                    <div class="chart">
+                        <canvas id="myChart" width="400" height="400"></canvas>
+
+                        <script>
+                            var ctx = document.getElementById('myChart').getContext('2d');
+                            var count = @ViewBag.ConNoComment;
+                            var myChart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: ['Contributions Without Comment'],
+                                    datasets: [{
+                                        label: 'Number of Contributions',
+                                        data: [count],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        </script>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <h6 class="mb-0 ">Number of contributions Without comment</h6>
+                <p class="text-sm "></p>
+                <hr class="dark horizontal">
+                <div class="d-flex ">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 mt-4 mb-4" style="border-radius: 20px; margin-right: 5%">
+        <div class="card z-index-2 " style="border-radius: 20px; box-shadow: 5px 8px #d9d9d9;">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                <div class="border-radius-lg py-3 pe-1" style="background-color: #c4fff0;" id="wchart">
+                    <div class="chart">
+                        <canvas id="contributionsWithoutCommentIn14DaysChart" width="400" height="400"></canvas>
+
+                        <script>
+                            var ctx = document.getElementById('contributionsWithoutCommentIn14DaysChart').getContext('2d');
+                            var count = @ViewBag.ConNoComment14;
+                            var myChart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: ['Contributions Without Comment After 14 Days'],
+                                    datasets: [{
+                                        label: 'Number of Contributions',
+                                        data: [count],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        </script>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <h6 class="mb-0 ">Number of contributions Without comment</h6>
+                <p class="text-sm "></p>
+                <hr class="dark horizontal">
+                <div class="d-flex ">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,6 +6,7 @@ using Comp1640.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Comp1640.Controllers
@@ -114,8 +115,11 @@ namespace Comp1640.Controllers
             }
         }
 
-        public async Task<IActionResult> ViewChart()
+        [HttpGet]
+        public async Task<IActionResult> ViewChart(int academicYearId)
         {
+            
+
             var contributions = await _context.Contributions.ToListAsync();
             var publishedCount = contributions.Count(c => c.Buplic == "Publicized");
             var unpublishedCount = contributions.Count(c => c.Buplic == "Non-publicized");
@@ -134,7 +138,7 @@ namespace Comp1640.Controllers
 
             var contributionCounts = _context.Contributions
             .GroupBy(c => c.User.Faculty.FacName)
-            .Select(g => new { FacultyName = g.Key, ContributionCount = g.Count()})
+            .Select(g => new { FacultyName = g.Key, ContributionCount = g.Count() })
             .ToDictionary(x => x.FacultyName, x => x.ContributionCount);
 
             ViewBag.Con = contributionCounts;
@@ -151,20 +155,56 @@ namespace Comp1640.Controllers
             })
             .ToList();
 
-        var result = new Dictionary<string, Dictionary<string, int>>();
+            var result = new Dictionary<string, Dictionary<string, int>>();
 
-        foreach (var item in contributionCountsAY)
-        {
-            if (!result.ContainsKey(item.AcademicYear))
+            foreach (var item in contributionCountsAY)
             {
-                result[item.AcademicYear] = new Dictionary<string, int>();
+                if (!result.ContainsKey(item.AcademicYear))
+                {
+                    result[item.AcademicYear] = new Dictionary<string, int>();
+                }
+
+                result[item.AcademicYear][item.FacultyName] = item.ContributionCount;
             }
 
-            result[item.AcademicYear][item.FacultyName] = item.ContributionCount;
+            ViewBag.ConAy = result;
+
+            if (academicYearId == 0)
+            {
+                academicYearId = 1;
+            }
+            var totalContributions = _context.Contributions
+                .Count(c => c.Ayid == academicYearId);
+
+            var contributionCountsByFaculty = _context.Contributions
+                .Where(c => c.Ayid == academicYearId)
+                .GroupBy(c => c.User.Faculty.FacName)
+                .Select(g => new
+                {
+                    FacultyName = g.Key,
+                    ContributionCount = g.Count()
+                })
+                .ToDictionary(x => x.FacultyName, x => (double)x.ContributionCount / totalContributions * 100);
+
+            ViewBag.ConFac = contributionCountsByFaculty;
+            ViewBag.AcademicYear = new SelectList(_context.AcademicYears, "Ayid", "Name");
+            
+    
+
+            return View();
         }
+        public async Task<IActionResult> ExceptionReports(){
+            ViewBag.ConNoComment = _context.Contributions.Count(c => string.IsNullOrEmpty(c.Feedbacks.FirstOrDefault().Comment));
 
-        ViewBag.ConAy = result;
+            DateTime cutoffDate = DateTime.Today.AddDays(-14);
 
+        // Query contributions submitted after the cutoff date and without feedback
+        var contributionsWithoutCommentAfter14DaysCount = _context.Contributions
+            .Count(c => c.SubmitDate <= cutoffDate && !c.Feedbacks.Any());
+
+            ViewBag.ConNoComment14 = contributionsWithoutCommentAfter14DaysCount;
+
+        // return View(contributionsWithoutCommentAfter14DaysCount);
             return View();
         }
     }
