@@ -93,16 +93,15 @@
                                                     class="text-secondary text-xs font-weight-bold">@item.SubmitDate</span>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <span class="badge badge-sm bg-gradient-success">@item.Status</span>
+<span class="badge badge-sm bg-gradient-success">@item.Status</span>
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <span class="badge badge-sm bg-gradient-success">@item.Buplic</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                    data-toggle="tooltip" data-original-title="Edit user">
-                                                    View details
-                                                </a> |
+                                                <a class="btn btn-primary" asp-action="Details"
+                                                    asp-controller="Contribution"
+                                                    asp-route-fileId="@item.ConId">View Details</a> |
                                                 <a class="btn btn-primary" asp-action="DownloadPublicized"
                                                     asp-controller="Contribution"
                                                     asp-route-fileId="@item.ConId">Download</a> |

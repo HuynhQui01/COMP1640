@@ -39,11 +39,10 @@
                     </th>
                   </tr>
                 </thead>
-                <tbody>
+              <tbody>
                   <div style="margin-left: 15px;">
                     @if (Model.Any())
                     {
-                      <!-- Kiểm tra xem có bài nào không -->
                       <a class="btn btn-primary" asp-action="DownloadAllApproved" asp-controller="Contribution">Download All</a>
                     }
                   </div>
@@ -81,10 +80,8 @@
                         <span class="badge badge-sm bg-gradient-success">@item.Buplic</span>
                       </td>
                       <td class="align-middle text-center">
-                        <a class="btn btn-primary" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                          data-original-title="Edit user">
-                          View details
-                        </a> |
+                        <a class="btn btn-primary" asp-action="Details" asp-controller="Contribution"
+                          asp-route-fileId="@item.ConId">View Details</a> |
                         <a class="btn btn-primary" asp-action="DownloadApproved" asp-controller="Contribution"
                           asp-route-fileId="@item.ConId">Download</a> |
                         @if (item.Buplic == "Non-publicized")
@@ -95,7 +92,7 @@
                         else
                         {
                         }
-                      </td>
+</td>
                     </tr>
                   }
                 </tbody>

@@ -386,15 +386,13 @@ namespace Comp1640.Controllers
 
         }
         // GET: Contribution/Details/5
-        public async Task<IActionResult> Details(int? id)
+       public async Task<IActionResult> Details(int fileId)
         {
-            if (id == null || _context.Contributions == null)
+            if (fileId == null || _context.Contributions == null)
             {
                 return NotFound();
             }
-
-            var contribution = await _context.Contributions
-                .FirstOrDefaultAsync(m => m.ConId == id);
+            var contribution = await _context.Contributions.FindAsync(fileId);
             if (contribution == null)
             {
                 return NotFound();
@@ -402,7 +400,6 @@ namespace Comp1640.Controllers
 
             return View(contribution);
         }
-
         // GET: Contribution/Create
         [Authorize(Roles = "Student")]
 
