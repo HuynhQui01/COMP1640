@@ -1,52 +1,195 @@
+@model Dictionary<string, Dictionary<string, int>>
 @{
-    Layout = "~/Views/Shared/UserLO.cshtml";
+    Layout = "~/Views/Shared/AdminLO.cshtml";
 
 }
 <style>
-    #contributionColumnChart{
-        width: 800px !important;
-        height: 800px !important;
-    }
-    #div{
+    #div {
         display: flex;
         justify-content: center;
     }
+
+
+    #wchart {
+        border-radius: 20px;
+        box-shadow: 5px 8px #d9d9d9;
+    }
+
+    #mchart {
+        border-radius: 20px;
+        box-shadow: 5px 8px #d9d9d9;
+    }
+
+    #contain {
+        display: flex;
+        justify-content: center;
+        width: 80%;
+        margin-left: 10%;
+    }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <h2>Contribution Chart</h2>
-<div id="div">
 
-<canvas id="contributionColumnChart" width="500" height="500"></canvas>
+<div class="row mt-4" id="contain">
+    <div class="col-lg-4 col-md-6 mt-4 mb-4" style="border-radius: 20px; margin-right: 5%">
+        <div class="card z-index-2 " style="border-radius: 20px; box-shadow: 5px 8px #d9d9d9;">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                <div class="border-radius-lg py-3 pe-1" style="background-color: #f0e0fd;" id="wchart">
+                    <div class="chart">
+                        @* <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
+                        *@
+                        <canvas id="contributionChart" width="800" height="400"></canvas>
 
-@section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        var ctx2 = document.getElementById('contributionColumnChart').getContext('2d');
-        var columnChart = new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: @Html.Raw(Json.Serialize(ViewBag.ColumnChartLabels)),
-                datasets: [{
-                    label: 'Contribution Status',
-                    data: @Html.Raw(Json.Serialize(ViewBag.ColumnChartValues)),
-                    backgroundColor: [
-                        'rgba(75, 192, 192, 0.5)',
-                        'rgba(255, 159, 64, 0.5)',
-                    ]
-                }]
-            },
-            options: {
-                legend: {
-                    display: false
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-    </script>
-}
-</div>
+                        <script>
+                            var contributionCounts = @Html.Raw(Json.Serialize(ViewBag.Con));
+
+                            var facultyNames = Object.keys(contributionCounts);
+                            var contributionValues = Object.values(contributionCounts);
+
+                            var ctx = document.getElementById('contributionChart').getContext('2d');
+                            var chart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: facultyNames,
+                                    datasets: [{
+                                        label: 'Contribution Count',
+                                        data: contributionValues,
+                                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                        borderColor: 'rgba(75, 192, 192, 1)',
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <h6 class="mb-0 ">Number of contributions per Faculty</h6>
+                <p class="text-sm "></p>
+                <hr class="dark horizontal">
+                <div class="d-flex ">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 mt-4 mb-4" style="border-radius: 20px; margin-right: 5%">
+        <div class="card z-index-2 " style="border-radius: 20px; box-shadow: 5px 8px #d9d9d9;">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                <div class="border-radius-lg py-3 pe-1" style="background-color: #fbffca;" id="wchart">
+                    <div class="chart">
+                        @* <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
+                        *@
+                        <canvas id="contributionChartAY" width="800" height="400"></canvas>
+
+                        <script>
+                            var contributionCounts = @Html.Raw(Json.Serialize(ViewBag.ConAy));
+
+                            var academicYears = Object.keys(contributionCounts);
+                            var facultyNames = Object.keys(contributionCounts[academicYears[0]]);
+                            var data = [];
+
+                            academicYears.forEach(function (academicYear) {
+                                var counts = [];
+                                facultyNames.forEach(function (facultyName) {
+                                    counts.push(contributionCounts[academicYear][facultyName]);
+                                });
+                                data.push({ academicYear: academicYear, counts: counts });
+                            });
+
+                            var ctx = document.getElementById('contributionChartAY').getContext('2d');
+                            var chart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: facultyNames,
+                                    datasets: data.map(function (item) {
+                                        return {
+                                            label: item.academicYear,
+                                            data: item.counts,
+                                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                            borderColor: 'rgba(75, 192, 192, 1)',
+                                            borderWidth: 1
+                                        };
+                                    })
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <h6 class="mb-0 ">Number of contributions were Publicized and Non-publicized </h6>
+                <p class="text-sm "></p>
+                <hr class="dark horizontal">
+                <div class="d-flex ">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 mt-4 mb-4" style="border-radius: 20px; margin-right: 5%">
+        <div class="card z-index-2 " style="border-radius: 20px; box-shadow: 5px 8px #d9d9d9;">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                <div class="border-radius-lg py-3 pe-1" style="background-color: #d2ffd9;" id="wchart">
+                    <div class="chart">
+                        @* <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
+                        *@
+                        <canvas id="contributionColumnChart" width="500" height="500"
+                            style="width: 500px; height: 600px"></canvas>
+                        <script>
+                            var ctx2 = document.getElementById('contributionColumnChart').getContext('2d');
+                            var columnChart = new Chart(ctx2, {
+                                type: 'bar',
+                                data: {
+                                    labels: @Html.Raw(Json.Serialize(ViewBag.ColumnChartLabels)),
+                                    datasets: [{
+                                        label: 'Contribution Status',
+                                        data: @Html.Raw(Json.Serialize(ViewBag.ColumnChartValues)),
+                                        backgroundColor: [
+                                            'rgba(75, 192, 192, 0.5)',
+                                            'rgba(255, 159, 64, 0.5)',
+                                        ]
+                                    }]
+                                },
+                                options: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <h6 class="mb-0 ">Number of contributions were Publicized and Non-publicized </h6>
+                <p class="text-sm "></p>
+                <hr class="dark horizontal">
+                <div class="d-flex ">
+                </div>
+            </div>
+        </div>
+    </div>

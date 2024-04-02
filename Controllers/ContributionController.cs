@@ -320,10 +320,15 @@ namespace Comp1640.Controllers
 
         public async Task<IActionResult> Manage()
         {
+            var user = await _userManager.GetUserAsync(User);
+            var fac = await _context.Faculties.FindAsync(user.FacId);
 
-            return _context.Contributions != null ?
-                  View(await _context.Contributions.ToListAsync()) :
-                  Problem("Entity set 'Comp1640Context.Contributions'  is null.");
+            ViewBag.Fac = user.Faculty.FacName;
+            var userContributions = await _context.Contributions
+                        .Include(c => c.User.Faculty).Where(c => c.User.Faculty.FacName == fac.FacName)
+                        .ToListAsync();
+
+            return View(userContributions);
 
         }
 

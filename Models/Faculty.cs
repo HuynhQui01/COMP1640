@@ -17,9 +17,6 @@ public partial class Faculty
     [Unicode(false)]
     public string? FacName { get; set; }
 
-    // [InverseProperty("Fac")]
-    // public virtual ICollection<Contribution> Contributions { get; } = new List<Contribution>();
-
     [InverseProperty("Faculty")]
     public virtual ICollection<CustomUser> CustomUser { get; } = new List<CustomUser>();
 }

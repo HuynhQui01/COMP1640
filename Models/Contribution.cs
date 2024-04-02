@@ -5,8 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace Comp1640.Models;
-
-// [Index("FacId", Name = "IX_Contributions_FacId")]
 [Index("UserId", Name = "IX_Contributions_UserID")]
 public partial class Contribution
 {
@@ -32,8 +30,6 @@ public partial class Contribution
     [Column(TypeName = "datetime")]
     public DateTime SubmitDate { get; set; }
 
-    // public int? FacId { get; set; }
-
     public string? Buplic { get; set; }
 
     [Column("AYId")]
@@ -42,10 +38,6 @@ public partial class Contribution
     [ForeignKey("Ayid")]
     [InverseProperty("Contributions")]
     public virtual AcademicYear? Ay { get; set; }
-
-    // [ForeignKey("FacId")]
-    // [InverseProperty("Contributions")]
-    // public virtual Faculty? Fac { get; set; }
 
     [InverseProperty("Con")]
     public virtual ICollection<Feedback> Feedbacks { get; } = new List<Feedback>();

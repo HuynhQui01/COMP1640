@@ -37,6 +37,9 @@
                                 Contribution's Name
                             </th>
                             <th scope="col">
+                                Faculty
+                            </th>
+                            <th scope="col">
                                 File Submitted
                             </th>
                             <th scope="col">
@@ -55,6 +58,7 @@
                         {
                             <tr>
                                 <td>@item.ConName</td>
+                                <td>@ViewBag.Fac</td>
                                 <td>@item.Filepath</td>
                                 <td>@item.SubmitDate</td>
                                 <td>@item.Status</td>
@@ -70,8 +74,12 @@
                                     }
                                     else
                                     {
-                                        
+
                                     }
+
+                                    <a class="btn btn-info" asp-controller="ConFee" asp-action="Details"
+                                        asp-route-id="@item.ConId">Feed back</a>
+
 
                                 </td>
 

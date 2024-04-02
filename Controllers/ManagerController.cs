@@ -132,6 +132,39 @@ namespace Comp1640.Controllers
             ViewBag.ColumnChartLabels = columnChartLabels;
             ViewBag.ColumnChartValues = columnChartValues;
 
+            var contributionCounts = _context.Contributions
+            .GroupBy(c => c.User.Faculty.FacName)
+            .Select(g => new { FacultyName = g.Key, ContributionCount = g.Count()})
+            .ToDictionary(x => x.FacultyName, x => x.ContributionCount);
+
+            ViewBag.Con = contributionCounts;
+
+            var contributionCountsAY = _context.Contributions
+            .Include(c => c.Ay)
+            .Include(c => c.User)
+            .GroupBy(c => new { c.Ay.Name, c.User.Faculty.FacName })
+            .Select(g => new
+            {
+                AcademicYear = g.Key.Name,
+                FacultyName = g.Key.FacName,
+                ContributionCount = g.Count()
+            })
+            .ToList();
+
+        var result = new Dictionary<string, Dictionary<string, int>>();
+
+        foreach (var item in contributionCountsAY)
+        {
+            if (!result.ContainsKey(item.AcademicYear))
+            {
+                result[item.AcademicYear] = new Dictionary<string, int>();
+            }
+
+            result[item.AcademicYear][item.FacultyName] = item.ContributionCount;
+        }
+
+        ViewBag.ConAy = result;
+
             return View();
         }
     }
