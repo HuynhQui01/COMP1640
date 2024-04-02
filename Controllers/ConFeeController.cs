@@ -70,7 +70,7 @@ namespace Comp1640.Controllers
                     var user = _userManager.FindByIdAsync(feedback.UserId);
 
                     List<string> email = new List<string>();
-                    email.Add(userName + "@gmail.com");
+                    email.Add(userName);
                     feedback.ConId = id;
                     feedback.UserId = _userManager.GetUserId(User);
                     _context.Add(feedback);
