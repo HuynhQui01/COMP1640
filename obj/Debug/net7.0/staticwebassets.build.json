@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "aaRG7KuJD5o7gop6T5V91l2dvY/fJzJCEWIDkRHHebg=",
+  "Hash": "Pad42jx/9+Yo7uOpwviSRr95Wsm3IbgTKEIIk0FkQoo=",
   "Source": "Comp1640",
   "BasePath": "_content/Comp1640",
   "Mode": "Default",
@@ -43433,6 +43433,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\course-3.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\img\\LogoImg.png",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "img/LogoImg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\LogoImg.png"
     },
     {
       "Identity": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\img\\team-1.jpg",

@@ -69,7 +69,7 @@
                     </dd>
                     <dt class="col-sm-2 dt"> </dt>
                 }
-                <form method="post" asp-controller="ConFee" asp-action="Create">
+                <form method="post" id="commentForm" asp-controller="ConFee" asp-action="Create">
                     <div class="form-group">
                         <label asp-for="@Model.contribution.ConId" class="control-label" hidden></label>
                         <input asp-for="@Model.contribution.ConId" name="id" value="@Model.contribution.ConId"
@@ -79,10 +79,21 @@
                     <dl class="col-sm-10">
                         <input asp-for="@Model.feedback.Comment" placeholder="Input your comment">
                     </dl>
-                    <button type="submit" class="btn btn-primary">Send Feedback</button>
+                    <button type="submit" id="commentButton" class="btn btn-primary">Send Feedback</button>
                 </form>
             </dl>
         </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#commentForm').submit(function () {
+                $('#commentButton').prop('disabled', true);
+            });
+        });
+    </script>
+    </dl>
+    </div>
     </div>
 </body>
 

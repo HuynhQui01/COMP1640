@@ -9933,6 +9933,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\img\\LogoImg.png",
+      "PackagePath": "staticwebassets\\img\\LogoImg.png"
+    },
+    {
       "Id": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\img\\about.jpg",
       "PackagePath": "staticwebassets\\img\\about.jpg"
     },
