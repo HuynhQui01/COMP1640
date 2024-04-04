@@ -486,8 +486,8 @@ namespace Comp1640.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Error: Invalid file.");
-                        Create();
+                        TempData["ErrorSwal"] = "Invalid file";
+                        return RedirectToAction("Create");
                     }
                 }
                 catch (Exception ex)
@@ -495,8 +495,6 @@ namespace Comp1640.Controllers
                     ViewBag.Message = $"Error: {ex.Message}";
                 }
             }
-
-
             return RedirectToAction("Index");
         }
 

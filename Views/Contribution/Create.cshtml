@@ -133,6 +133,20 @@
             });
         });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // Kiểm tra xem có thông báo lỗi từ TempData không
+        var errorSwal = '@TempData["ErrorSwal"]';
+        if (errorSwal) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Invalid file...please choose again!"
+            });
+        }
+    </script>
 </body>
 
 </html>

@@ -154,7 +154,6 @@ namespace Comp1640.Areas.Identity.Pages.Account.Manage
 
             // Cập nhật thông tin người dùng trong cơ sở dữ liệu
             await _userManager.UpdateAsync(user);
-
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

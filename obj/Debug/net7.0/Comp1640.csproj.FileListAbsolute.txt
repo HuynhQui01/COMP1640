@@ -5347,3 +5347,7 @@ C:\Users\huynh\Documents\COMP1640\Project\COMP1640-ff\obj\Debug\net7.0\refint\Co
 C:\Users\huynh\Documents\COMP1640\Project\COMP1640-ff\obj\Debug\net7.0\Comp1640.pdb
 C:\Users\huynh\Documents\COMP1640\Project\COMP1640-ff\obj\Debug\net7.0\Comp1640.genruntimeconfig.cache
 C:\Users\huynh\Documents\COMP1640\Project\COMP1640-ff\obj\Debug\net7.0\ref\Comp1640.dll
+C:\Users\ADMIN\Desktop\test\COMP1640\bin\Debug\net7.0\MailKit.dll
+C:\Users\ADMIN\Desktop\test\COMP1640\bin\Debug\net7.0\MimeKit.dll
+C:\Users\ADMIN\Desktop\test\COMP1640\bin\Debug\net7.0\NETCore.MailKit.dll
+C:\Users\ADMIN\Desktop\test\COMP1640\bin\Debug\net7.0\BouncyCastle.Crypto.dll

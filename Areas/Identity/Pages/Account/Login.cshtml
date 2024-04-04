@@ -123,16 +123,22 @@
                                 style="margin: 0 auto;" type="submit">Back to homepage</button>
                         </div>
                     </form>
-                    @* <div class="social-login">
-                    <span class="social-label">Or login with</span>
-                    <ul class="socials">
-                    <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
-                    <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
-                    <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
-                    </ul>
-                    </div> *@
                 </div>
             </div>
         </div>
     </section>
 </div>
+
+<script>
+    // Kiểm tra xem có thông báo lỗi từ TempData không
+    var errorSwal = '@TempData["ErrorSwal"]';
+    if (errorSwal) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "The email or password entered is not valid!"
+        });
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
