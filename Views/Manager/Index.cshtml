@@ -14,13 +14,13 @@
             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
               <h6 class="text-white text-capitalize ps-3">Contributions Table</h6>
             </div>
-            <div style="display: flex;"> 
-              <a asp-controller="Manager" asp-action="Index" asp-route-id="0"
-                  class="btn btn-info" style="margin: 10px 30px; padding: 10px 20px;">View all</a>
+            <div style="display: flex;">
+              <a asp-controller="Manager" asp-action="Index" asp-route-id="0" class="btn btn-info"
+                style="margin: 10px 30px; padding: 10px 20px;">View all</a>
               @foreach (var item in ViewBag.Faculty)
               {
-                <a asp-controller="Manager" asp-action="Index" asp-route-id="@item.FacId"
-                  class="btn btn-info" style="margin: 10px 30px; padding: 10px 20px;">@item.FacName</a>
+                <a asp-controller="Manager" asp-action="Index" asp-route-id="@item.FacId" class="btn btn-info"
+                  style="margin: 10px 30px; padding: 10px 20px;">@item.FacName</a>
               }
             </div>
           </div>
@@ -58,53 +58,53 @@
                   </div>
                   @foreach (var item in Model)
                   {
-                    <tr>
-                      <td class="text-center">
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="~/uploads/@item.ImageFilePath" class="avatar avatar-sm me-3 border-radius-lg"
-                              alt="user1">
+                    @if (item.Status == "Approved")
+                    {
+                      <tr>
+                        <td class="text-center">
+                          <div class="d-flex px-2 py-1">
+                            <div>
+                              <img src="~/uploads/@item.ImageFilePath" class="avatar avatar-sm me-3 border-radius-lg"
+                                alt="user1">
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                              <h6 class="mb-0 text-sm">@Html.DisplayFor(modelItem => item.User.FullName)</h6>
+                              <p class="text-xs text-secondary mb-0">@Html.DisplayFor(modelItem => item.User.Email)</p>
+                            </div>
                           </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">@Html.DisplayFor(modelItem => item.User.FullName)</h6>
-                            <p class="text-xs text-secondary mb-0">@Html.DisplayFor(modelItem => item.User.Email)</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">@item.ConName</p>
-                      </td>
-                      <td class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">@Html.DisplayFor(modelItem => item.User.Faculty.FacName)
-                        </p>
-                      </td>
-                      <td class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">@item.Filepath</p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">@item.SubmitDate</span>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">@item.Status</span>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">@item.Buplic</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <a class="btn btn-primary" asp-action="Details" asp-controller="Contribution"
-                          asp-route-fileId="@item.ConId">View Details</a> |
-                        <a class="btn btn-primary" asp-action="DownloadApproved" asp-controller="Contribution"
-                          asp-route-fileId="@item.ConId">Download</a> |
-                        @if (item.Buplic == "Non-publicized")
-                        {
-                          <a class="btn btn-primary" asp-action="Buplic" method="post" asp-controller="Contribution"
-                            asp-route-fileId="@item.ConId">Publicize</a>
-                        }
-                        else
-                        {
-                        }
-                      </td>
-                    </tr>
+                        </td>
+                        <td class="text-center">
+                          <p class="text-xs font-weight-bold mb-0">@item.ConName</p>
+                        </td>
+                        <td class="text-center">
+                          <p class="text-xs font-weight-bold mb-0">@Html.DisplayFor(modelItem => item.User.Faculty.FacName)
+                          </p>
+                        </td>
+                        <td class="text-center">
+                          <p class="text-xs font-weight-bold mb-0">@item.Filepath</p>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">@item.SubmitDate</span>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span class="badge badge-sm bg-gradient-success">@item.Status</span>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span class="badge badge-sm bg-gradient-success">@item.Buplic</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <a class="btn btn-primary" asp-action="Details" asp-controller="Contribution"
+                            asp-route-fileId="@item.ConId">View Details</a> |
+                          <a class="btn btn-primary" asp-action="DownloadApproved" asp-controller="Contribution"
+                            asp-route-fileId="@item.ConId">Download</a> |
+                          @if (item.Buplic == "Non-publicized")
+                          {
+                            <a class="btn btn-primary" asp-action="Buplic" method="post" asp-controller="Contribution"
+                              asp-route-fileId="@item.ConId">Publicize</a>
+                          }
+                        </td>
+                      </tr>
+                    }
                   }
                 </tbody>
               </table>
