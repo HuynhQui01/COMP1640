@@ -29,6 +29,7 @@ builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<Comp1640.Service.EmailSender>();
 builder.Services.AddScoped<Comp1640.Models.ContributionFeedbackView>();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

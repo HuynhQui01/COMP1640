@@ -24,7 +24,7 @@ namespace Comp1640.Controllers
         // GET: Manager
         public async Task<ActionResult> Index()
         {
-            var contributions = _context.Contributions.Include(c => c.User)
+            var contributions = _context.Contributions.Include(c => c.User).Include(c => c.User.Faculty)
             // .Include(c => c.Fac)
             .ToList();
             // return _context.Contributions != null ?

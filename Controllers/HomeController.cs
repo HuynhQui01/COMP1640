@@ -24,8 +24,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var user = await _userManager.GetUserAsync(User);
-        return View(user);
+        return View();
     }
 
     public IActionResult Privacy()

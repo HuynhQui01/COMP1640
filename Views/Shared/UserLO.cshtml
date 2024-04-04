@@ -1,4 +1,5 @@
-@model Comp1640.Models.CustomUser
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<Comp1640.Models.CustomUser> _manager;
 <!DOCTYPE html>
 <html lang="en">
 
@@ -107,12 +108,11 @@
                 </div>
                 @if (@User.Identity?.Name != null)
                 {
-
-
+                    var user = await _manager.GetUserAsync(User);
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                             aria-haspopup="true" aria-expanded="false">@User.Identity?.Name
-                            <img src="~/avatar/@Model.ProfileImagePath" class="img-fluid" alt=""
+                            <img src="~/avatar/@user.ProfileImagePath" class="img-fluid" alt=""
                                 style="border-radius: 50%; width: 48px;height: 50px;" />
                         </a>
 
@@ -125,11 +125,7 @@
                 }
                 else
                 {
-                    <div class="nav-item dropdown">
-                        <a asp-area="Identity" asp-page="/Account/Login"
-                            class="btn btn-primary py-4 px-lg-5 d-none d-lg-block nav-link">Login<i
-                                class="fa fa-arrow-right ms-3"></i></a>
-                    </div>
+                    <a  asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary nav-link" style="margin-top: 13px; height: 100%; padding: 25px 30px;">Login</a> 
                 }
                 <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
             </div>
