@@ -22,9 +22,10 @@ public class HomeController : Controller
         _context = context;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var user = await _userManager.GetUserAsync(User);
+        return View(user);
     }
 
     public IActionResult Privacy()
