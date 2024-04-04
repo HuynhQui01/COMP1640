@@ -5,42 +5,81 @@
     Layout = "~/Views/Shared/AdminLO.cshtml";
 }
 
-<div class="container">
-    <div class="row justify-content-center my-3">
-        <div class="col-md-6">
-            <form asp-action="Search" method="post">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="searchString" placeholder="Enter search term">
-                </div>
-                <button type="submit" class="btn btn-primary">Search</button>
-            </form>
-        </div>
-    </div>
-    @foreach (var contribution in Model)
-    {
-        <section class="mx-auto my-3 px-3 border border-dark" style="max-width: 600px;">
-            <div class="container py-400 px-250">
-                @if (contribution.Status == "Approved")
-                {
-                    <article class="postcard dark red mx-250">
-                        <div class="postcard__text">
-                            <h1 class="postcard__title red"><a href="#">Contribution: @contribution.ConName</a></h1>
-                            <div class="postcard__subtitle small">
-                                @contribution.SubmitDate
-                            </div>
-                            <div class="postcard__bar"></div>
-                            <div class="postcard__preview-txt">This Contribution belong to : <a>@contribution.User.UserName</a>
-                            </div>
-                            <ul class="postcard__tagbox">
-                                <li class="tag__item play red">
-                                    @* <a href="#">Faculty : <i class="fas fa-play mr-2"></i>@contribution.Fac.FacName</a> *@
-                                </li>
-                            </ul>
-                        </div>
-                    </article>
-                }
-            </div>
-        </section>
+<style>
+    tr>th {
+        color: red;
     }
 
-    <script src="path/to/your/js/scripts.js"></script>
+    tr>td {
+        border-bottom: black solid 1px !important;
+    }
+</style>
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+
+<body>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-danger text-center" style="font-size: 40px;">Manage Contributions
+            </h6>
+        </div>
+        <div class="card-body" style="box-sizing: border-box;">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="datatables" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                Contribution's Name
+                            </th>
+                            <th scope="col">
+                                Faculty
+                            </th>
+                            <th scope="col">
+                                File Submitted
+                            </th>
+                            <th scope="col">
+                                Upload Date
+                            </th>
+                            <th scope="col">
+                                Status
+                            </th>
+                            <th scope="col">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            @if (item.Status == "Approved")
+                            {
+                                <tr>
+                                    <td>@item.ConName</td>
+                                    <td>@ViewBag.Fac</td>
+                                    <td>@item.Filepath</td>
+                                    <td>@item.SubmitDate</td>
+                                    <td>@item.Status</td>
+                                    <td>
+                                        <a class="btn btn-primary" asp-action="Download" asp-controller="Contribution"
+                                            asp-route-fileId="@item.ConId">Download</a>
+                                        <a class="btn btn-info" asp-controller="ConFee" asp-action="Details"
+                                            asp-route-id="@item.ConId">Feed back</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

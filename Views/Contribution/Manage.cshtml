@@ -56,6 +56,8 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
+                            @if (item.Status == "Pending")
+                            {
                             <tr>
                                 <td>@item.ConName</td>
                                 <td>@ViewBag.Fac</td>
@@ -79,11 +81,9 @@
 
                                     <a class="btn btn-info" asp-controller="ConFee" asp-action="Details"
                                         asp-route-id="@item.ConId">Feed back</a>
-
-
                                 </td>
-
                             </tr>
+                            }
                         }
                     </tbody>
                 </table>
