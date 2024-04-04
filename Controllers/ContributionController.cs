@@ -332,10 +332,20 @@ namespace Comp1640.Controllers
 
         }
 
-        public async Task<IActionResult> Public()
+        public async Task<IActionResult> Public(int id)
         {
-            var contributions = _context.Contributions.Where(c => c.Buplic == "Publicized").ToList();
-            return View(contributions);
+            ViewBag.Faculty = await _context.Faculties.ToListAsync();
+            if (id == 0)
+            {
+                var contributions = await _context.Contributions.Where(c => c.Buplic == "Publicized").Include(c => c.User.Faculty).ToListAsync();
+                return View(contributions);
+            }
+            else{
+                var contributions = await _context.Contributions.Where(c => c.Buplic == "Publicized").Include(c => c.User).Include(c => c.User.Faculty)
+                .Where(c => c.User.Faculty.FacId == id).ToListAsync();
+                return View(contributions);
+            }
+
         }
 
         public async Task<IActionResult> Buplic(int fileId, string buplic)

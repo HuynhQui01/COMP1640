@@ -22,15 +22,20 @@ namespace Comp1640.Controllers
             _userManager = userManager;
         }
         // GET: Manager
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int id)
         {
-            var contributions = _context.Contributions.Include(c => c.User).Include(c => c.User.Faculty)
-            // .Include(c => c.Fac)
-            .ToList();
-            // return _context.Contributions != null ?
-            //               View(await _context.Contributions.ToListAsync()) :
-            //               Problem("Entity set 'Comp1640Context.Contributions'  is null.");
-            return View(contributions);
+                ViewBag.Faculty = await _context.Faculties.ToListAsync();
+            if (id == 0)
+            {
+                var contributions = _context.Contributions.Include(c => c.User).Include(c => c.User.Faculty)
+                .ToList();
+                return View(contributions);
+            }
+            else{
+                var contributions = _context.Contributions.Include(c => c.User).Include(c => c.User.Faculty)
+                .Where(c => c.User.Faculty.FacId == id).ToList();
+                return View(contributions);
+            }
         }
 
         // GET: Manager/Details/5
@@ -118,7 +123,7 @@ namespace Comp1640.Controllers
         [HttpGet]
         public async Task<IActionResult> ViewChart(int academicYearId)
         {
-            
+
 
             var contributions = await _context.Contributions.ToListAsync();
             var publishedCount = contributions.Count(c => c.Buplic == "Publicized");
@@ -188,23 +193,24 @@ namespace Comp1640.Controllers
 
             ViewBag.ConFac = contributionCountsByFaculty;
             ViewBag.AcademicYear = new SelectList(_context.AcademicYears, "Ayid", "Name");
-            
-    
+
+
 
             return View();
         }
-        public async Task<IActionResult> ExceptionReports(){
+        public async Task<IActionResult> ExceptionReports()
+        {
             ViewBag.ConNoComment = _context.Contributions.Count(c => string.IsNullOrEmpty(c.Feedbacks.FirstOrDefault().Comment));
 
             DateTime cutoffDate = DateTime.Today.AddDays(-14);
 
-        // Query contributions submitted after the cutoff date and without feedback
-        var contributionsWithoutCommentAfter14DaysCount = _context.Contributions
-            .Count(c => c.SubmitDate <= cutoffDate && !c.Feedbacks.Any());
+            // Query contributions submitted after the cutoff date and without feedback
+            var contributionsWithoutCommentAfter14DaysCount = _context.Contributions
+                .Count(c => c.SubmitDate <= cutoffDate && !c.Feedbacks.Any());
 
             ViewBag.ConNoComment14 = contributionsWithoutCommentAfter14DaysCount;
 
-        // return View(contributionsWithoutCommentAfter14DaysCount);
+            // return View(contributionsWithoutCommentAfter14DaysCount);
             return View();
         }
     }

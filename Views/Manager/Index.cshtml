@@ -14,6 +14,15 @@
             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
               <h6 class="text-white text-capitalize ps-3">Contributions Table</h6>
             </div>
+            <div style="display: flex;"> 
+              <a asp-controller="Manager" asp-action="Index" asp-route-id="0"
+                  class="btn btn-info" style="margin: 10px 30px; padding: 10px 20px;">View all</a>
+              @foreach (var item in ViewBag.Faculty)
+              {
+                <a asp-controller="Manager" asp-action="Index" asp-route-id="@item.FacId"
+                  class="btn btn-info" style="margin: 10px 30px; padding: 10px 20px;">@item.FacName</a>
+              }
+            </div>
           </div>
           <div class="card-body px-0 pb-2">
             <div class="table-responsive p-0">
@@ -39,11 +48,12 @@
                     </th>
                   </tr>
                 </thead>
-              <tbody>
+                <tbody>
                   <div style="margin-left: 15px;">
                     @if (Model.Any())
                     {
-                      <a class="btn btn-primary" asp-action="DownloadAllApproved" asp-controller="Contribution">Download All</a>
+                      <a class="btn btn-primary" asp-action="DownloadAllApproved" asp-controller="Contribution">Download
+                        All</a>
                     }
                   </div>
                   @foreach (var item in Model)
@@ -65,7 +75,8 @@
                         <p class="text-xs font-weight-bold mb-0">@item.ConName</p>
                       </td>
                       <td class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">@Html.DisplayFor(modelItem => item.User.Faculty.FacName)</p>
+                        <p class="text-xs font-weight-bold mb-0">@Html.DisplayFor(modelItem => item.User.Faculty.FacName)
+                        </p>
                       </td>
                       <td class="text-center">
                         <p class="text-xs font-weight-bold mb-0">@item.Filepath</p>
@@ -92,7 +103,7 @@
                         else
                         {
                         }
-</td>
+                      </td>
                     </tr>
                   }
                 </tbody>

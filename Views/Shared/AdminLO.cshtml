@@ -123,7 +123,7 @@
         @if (User.Identity.IsAuthenticated && User.IsInRole("Manager"))
         {
           <li class="nav-item">
-            <a class="nav-link text-white " asp-action="Index" asp-controller="Manager">
+            <a class="nav-link text-white " asp-action="Index" asp-controller="Manager" asp-route-id="0">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">table_view</i>
               </div>
@@ -135,7 +135,7 @@
         @if (User.Identity.IsAuthenticated && User.IsInRole("Manager"))
         {
           <li class="nav-item">
-            <a class="nav-link text-white " asp-action="Public" asp-controller="Contribution">
+            <a class="nav-link text-white " asp-action="Public" asp-controller="Contribution" asp-route-id="0"> 
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">table_view</i>
               </div>

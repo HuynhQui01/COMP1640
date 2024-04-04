@@ -12,6 +12,15 @@
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                             <h6 class="text-white text-capitalize ps-3">Contributions Table</h6>
                         </div>
+                        <div style="display: flex;"> 
+                            <a asp-controller="Contribution" asp-action="Public" asp-route-id="0"
+                                class="btn btn-info" style="margin: 10px 30px; padding: 10px 20px;">View all</a>
+                            @foreach (var item in ViewBag.Faculty)
+                            {
+                                <a asp-controller="Contribution" asp-action="Public" asp-route-id="@item.FacId"
+                                    class="btn btn-info" style="margin: 10px 30px; padding: 10px 20px;">@item.FacName</a>
+                            }
+                        </div>
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="table-responsive p-0">
@@ -82,8 +91,8 @@
                                                 <p class="text-xs font-weight-bold mb-0">@item.ConName</p>
                                             </td>
                                             <td class="text-center">
-                                                @* <p class="text-xs font-weight-bold mb-0">@Html.DisplayFor(modelItem =>
-                                                item.Fac.FacName)</p> *@
+                                                <p class="text-xs font-weight-bold mb-0">@Html.DisplayFor(modelItem =>
+                                                item.User.Faculty.FacName)</p>
                                             </td>
                                             <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">@item.Filepath</p>
