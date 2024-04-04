@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Q4DydGQq2EMtyrswJwCpXce5V3DoP/AvLYlsPtiwRKs=",
+  "Hash": "FL7S/Dme1WVoZbxaqTFTP300xYBbViYeiyJKZ55gUFw=",
   "Source": "Comp1640",
   "BasePath": "_content/Comp1640",
   "Mode": "Default",
@@ -41497,6 +41497,23 @@
       "OriginalItemSpec": "wwwroot\\avatar\\7138f984-6700-4cd2-966d-85e48d5b1269_Best series ever_.jpg"
     },
     {
+      "Identity": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\avatar\\d0fd1d69-0acb-4c09-8aef-13cf753437b0_z4735684183695_263a51da8f6a83ae669a10f14bd8367a.png",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "avatar/d0fd1d69-0acb-4c09-8aef-13cf753437b0_z4735684183695_263a51da8f6a83ae669a10f14bd8367a.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\avatar\\d0fd1d69-0acb-4c09-8aef-13cf753437b0_z4735684183695_263a51da8f6a83ae669a10f14bd8367a.png"
+    },
+    {
       "Identity": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\css\\bootstrap.min.css",
       "SourceId": "Comp1640",
       "SourceType": "Discovered",
@@ -44982,6 +44999,23 @@
       "OriginalItemSpec": "wwwroot\\uploads\\329898380_718169453302048_4330086234355252459_n.jpg"
     },
     {
+      "Identity": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\uploads\\805714.png",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "uploads/805714.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\805714.png"
+    },
+    {
       "Identity": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\uploads\\aa90da9097135cb4eb894e82e43287fa.jpg",
       "SourceId": "Comp1640",
       "SourceType": "Discovered",
@@ -44999,6 +45033,23 @@
       "OriginalItemSpec": "wwwroot\\uploads\\aa90da9097135cb4eb894e82e43287fa.jpg"
     },
     {
+      "Identity": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\uploads\\Report 1625-Huynh Van Qui - GCC210153_638478674894084701.docx",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "uploads/Report 1625-Huynh Van Qui - GCC210153_638478674894084701.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Report 1625-Huynh Van Qui - GCC210153_638478674894084701.docx"
+    },
+    {
       "Identity": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\uploads\\Report 1625-Huynh Van Qui - GCC210153_76f4.docx",
       "SourceId": "Comp1640",
       "SourceType": "Discovered",
@@ -45014,6 +45065,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\Report 1625-Huynh Van Qui - GCC210153_76f4.docx"
+    },
+    {
+      "Identity": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\uploads\\Report 1625-Huynh Van Qui - GCC210153.docx",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "uploads/Report 1625-Huynh Van Qui - GCC210153.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Report 1625-Huynh Van Qui - GCC210153.docx"
     },
     {
       "Identity": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\uploads\\Screenshot (5).png",
@@ -45099,6 +45167,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\use case.docx"
+    },
+    {
+      "Identity": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\uploads\\Wallpaper.jpg",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "uploads/Wallpaper.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Wallpaper.jpg"
     },
     {
       "Identity": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\user\\css\\about.css",

@@ -9517,6 +9517,10 @@
       "PackagePath": "staticwebassets\\avatar\\7138f984-6700-4cd2-966d-85e48d5b1269_Best series ever_.jpg"
     },
     {
+      "Id": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\avatar\\d0fd1d69-0acb-4c09-8aef-13cf753437b0_z4735684183695_263a51da8f6a83ae669a10f14bd8367a.png",
+      "PackagePath": "staticwebassets\\avatar\\d0fd1d69-0acb-4c09-8aef-13cf753437b0_z4735684183695_263a51da8f6a83ae669a10f14bd8367a.png"
+    },
+    {
       "Id": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
     },
@@ -10337,6 +10341,18 @@
       "PackagePath": "staticwebassets\\uploads\\329898380_718169453302048_4330086234355252459_n.jpg"
     },
     {
+      "Id": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\uploads\\805714.png",
+      "PackagePath": "staticwebassets\\uploads\\805714.png"
+    },
+    {
+      "Id": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\uploads\\Report 1625-Huynh Van Qui - GCC210153.docx",
+      "PackagePath": "staticwebassets\\uploads\\Report 1625-Huynh Van Qui - GCC210153.docx"
+    },
+    {
+      "Id": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\uploads\\Report 1625-Huynh Van Qui - GCC210153_638478674894084701.docx",
+      "PackagePath": "staticwebassets\\uploads\\Report 1625-Huynh Van Qui - GCC210153_638478674894084701.docx"
+    },
+    {
       "Id": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\uploads\\Report 1625-Huynh Van Qui - GCC210153_76f4.docx",
       "PackagePath": "staticwebassets\\uploads\\Report 1625-Huynh Van Qui - GCC210153_76f4.docx"
     },
@@ -10355,6 +10371,10 @@
     {
       "Id": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\uploads\\Unity Trainnig_638478654585277172.docx",
       "PackagePath": "staticwebassets\\uploads\\Unity Trainnig_638478654585277172.docx"
+    },
+    {
+      "Id": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\uploads\\Wallpaper.jpg",
+      "PackagePath": "staticwebassets\\uploads\\Wallpaper.jpg"
     },
     {
       "Id": "C:\\Users\\huynh\\Documents\\COMP1640\\Project\\COMP1640\\wwwroot\\uploads\\aa90da9097135cb4eb894e82e43287fa.jpg",

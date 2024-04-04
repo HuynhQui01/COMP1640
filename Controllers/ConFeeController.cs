@@ -46,7 +46,7 @@ namespace Comp1640.Controllers
             var con = await _context.Contributions.FindAsync(id);
             var conTime = con.SubmitDate;
             var curTime = DateTime.Now;
-            var checkTime = (curTime - conTime).TotalDays;
+            var checkTime = (conTime - curTime).TotalDays;
             if (checkTime <= 14)
             {
                 if (User.IsInRole("Student"))
@@ -84,7 +84,7 @@ namespace Comp1640.Controllers
             }else{
                 TempData["ErrorMessage"] = "You can only provide feedback within 14 days after submission.";
             }
-            return View("/Contribution/Index");
+            return RedirectToAction("Create");
         }
 
         public async Task<IActionResult> Details(int id)
