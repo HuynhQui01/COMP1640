@@ -502,6 +502,7 @@ namespace Comp1640.Controllers
             return View(contribution);
         }
 
+
         // GET: Contribution/Create
         [Authorize(Roles = "Student")]
         public IActionResult Create()

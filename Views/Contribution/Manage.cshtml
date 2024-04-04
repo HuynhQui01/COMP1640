@@ -37,7 +37,7 @@
                                 Contribution's Name
                             </th>
                             <th scope="col">
-                                Faculty
+                                Contributor
                             </th>
                             <th scope="col">
                                 File Submitted
@@ -56,11 +56,10 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            @if (item.Status == "Pending")
-                            {
+
                             <tr>
                                 <td>@item.ConName</td>
-                                <td>@ViewBag.Fac</td>
+                                <td>@item.User.FullName</td>
                                 <td>@item.Filepath</td>
                                 <td>@item.SubmitDate</td>
                                 <td>@item.Status</td>
@@ -83,7 +82,7 @@
                                         asp-route-id="@item.ConId">Feed back</a>
                                 </td>
                             </tr>
-                            }
+                            
                         }
                     </tbody>
                 </table>
