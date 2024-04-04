@@ -92,6 +92,18 @@
             });
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Kiểm tra xem có thông báo lỗi từ TempData không
+        var errorSwal = '@TempData["ErrorMessage"]';
+        if (errorSwal) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Out of timne to feedback!"
+            });
+        }
+    </script>
     </dl>
     </div>
     </div>

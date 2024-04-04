@@ -84,7 +84,7 @@ namespace Comp1640.Controllers
             }else{
                 TempData["ErrorMessage"] = "You can only provide feedback within 14 days after submission.";
             }
-            return RedirectToAction("Create");
+            return Redirect("/Contribution/Index");
         }
 
         public async Task<IActionResult> Details(int id)

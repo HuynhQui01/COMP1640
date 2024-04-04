@@ -87,13 +87,10 @@ namespace Comp1640.Controllers
             //     {
             var user = _userManager.FindByIdAsync(id).Result;
             var roles = _roleManager.Roles.Select(r => r.Name).ToList();
-            var fac = _context.Faculties.Select(f => f.FacName).ToList();
             return View(model: new UserRoleViewModel
             {
                 User = user,
-                Roles = roles,
-                Faculties = fac
-
+                Roles = roles
             });
             //     }
             // }
@@ -149,19 +146,20 @@ namespace Comp1640.Controllers
         {
             var user = _userManager.FindByIdAsync(id).Result;
             var fac = _context.Faculties.Select(f => f.FacName).ToList();
+            ViewBag.FacNum = new SelectList(_context.Faculties, "FacId" , "FacName") ;
             return View(model: new UserRoleViewModel
             {
                 User = user,
-                Faculties = fac
+                Faculties = 0
             });
         }
 
         [HttpPost]
-        public async Task<IActionResult> SetFaculty(string id, List<string> Faculties)
+        public async Task<IActionResult> SetFaculty(string id, int facId)
         {
             var user = _userManager.FindByIdAsync(id).Result;
-            var faculty = Faculties[0];
-            // user.FacName = faculty;
+            // var faculty = facId[0];
+            user.FacId = facId;
             await _userManager.UpdateAsync(user);
             return RedirectToAction("Index");
         }
