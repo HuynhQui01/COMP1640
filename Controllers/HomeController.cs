@@ -118,6 +118,12 @@ public class HomeController : Controller
         ViewBag.FacultyNames = facultyNames;
         ViewBag.ContributionCounts = contributionCounts;
 
+        var contributionCount = await _context.Contributions
+            .Where(c => c.Buplic == "Publicized").GroupBy(c => c.User.Faculty.FacName)
+            .CountAsync();
+
+        ViewBag.ContributionCountP = contributionCount;
+
         return View();
     }
 

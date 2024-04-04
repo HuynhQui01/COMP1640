@@ -90,6 +90,11 @@
                     <a class="nav-link" asp-action="Admin" asp-controller="Home" role="button" aria-haspopup="true"
                         aria-expanded="false">Admin</a>
                 }
+                @if(User.IsInRole("Guest"))
+                {
+                    <a class="nav-link" asp-action="GuestChart" asp-controller="Home" role="button" aria-haspopup="true"
+                        aria-expanded="false">Guest</a>
+                }
 
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
