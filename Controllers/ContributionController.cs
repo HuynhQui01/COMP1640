@@ -524,7 +524,7 @@ namespace Comp1640.Controllers
         public async Task<IActionResult> Create(
             IFormFile imageFile,
             IFormFile file,
-            [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,Buplic,Ayid")]
+            [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,Buplic,Ayid,ImageFilePath")]
                 Contribution contribution
         )
         {
@@ -666,7 +666,7 @@ namespace Comp1640.Controllers
         public async Task<IActionResult> Edit(
             int id,
             IFormFile file,
-            [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,FacId, Buplic")]
+            [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,FacId, Buplic,ImageFilePath")]
                 Contribution newCon
         )
         {

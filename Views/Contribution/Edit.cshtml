@@ -3,6 +3,15 @@
 @{
     Layout = "~/Views/Shared/UserLO.cshtml";
 }
+<style>
+    #row {
+        width: 80%;
+        min-height: 600px;
+        display: flex;
+        justify-content: center;
+        margin-left: 10%;
+    }
+</style>
 
 <!DOCTYPE html>
 
@@ -16,7 +25,7 @@
 <body>
     <h6 class="mt-4 font-weight-bold text-danger text-center" style="font-size: 40px;">Edit Contribution</h6>
     <hr />
-    <div class="row">
+    <div class="row" id="row">
         <div class="col-md-4">
             <form asp-action="Edit" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -27,9 +36,14 @@
                     @* <span asp-validation-for="ConName" class="text-danger"></span> *@
                 </div>
                 <div class="form-group mt-2">
-                    <label asp-for="Filepath" class="control-label" style="font-weight: 1000;">Choose a file for Contribution</label>
-                    <input type="file" name="file" class="form-control-file" required />
-                    @* <span asp-validation-for="Filepath" class="text-danger"></span> *@
+                    <label asp-for="Filepath" class="control-label" style="font-weight: 1000;">Choose a file for
+                        Contribution</label>
+                    <input type="file" name="file" class="form-control-file rounded-3" required />
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="ImageFilePath" class="control-label" style="font-weight: 1000;">Choose Image
+                        File</label>
+                    <input type="file" name="imageFile" class="form-control-file rounded-3" required />
                 </div>
                 <div class="form-group col-md-12 form-group">
                     <button class="btn btn-primary my-4 rounded-3 w-100" type="submit">Save Changes</button>
