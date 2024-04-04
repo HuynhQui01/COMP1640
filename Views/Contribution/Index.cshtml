@@ -24,8 +24,7 @@
 <body>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-danger text-center" style="font-size: 40px;">Table of Contributions
-            </h6>
+            <h6 class="m-0 font-weight-bold text-danger text-center" style="font-size: 40px;">Table of Contributions</h6>
         </div>
         @if(User.Identity.IsAuthenticated && User.IsInRole("Student")){
             <div class="p-3"><a class="btn btn-primary" asp-controller="Contribution" asp-action="Create">Create New</a></div>

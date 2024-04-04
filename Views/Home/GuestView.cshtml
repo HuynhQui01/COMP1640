@@ -1,10 +1,31 @@
 @model List<Comp1640.Models.Contribution>
 @{
-  ViewData["Title"] = "Index";
-  Layout = "~/Views/Shared/UserLO.cshtml";
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/UserLO.cshtml";
 }
 
-<h2>Guest View</h2>
+<h6 class="my-4 font-weight-bold text-danger text-center" style="font-size: 40px;">Guest View</h6>
+
+<style>
+    thead {
+        text-align: center;
+    }
+
+    tbody {
+        text-align: center;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid black;
+    }
+
+    th{
+        text-transform: uppercase;
+        font-weight: ;
+    }
+</style>
 
 @if (Model.Any())
 {
@@ -12,9 +33,9 @@
         <thead>
             <tr>
                 <th>Title</th>
+                <th>Contributor</th>
                 <th>Status</th>
                 <th>Submit Date</th>
-                <th>Faculty</th>
             </tr>
         </thead>
         <tbody>
@@ -22,9 +43,9 @@
             {
                 <tr>
                     <td>@contribution.ConName</td>
+                    <td>@contribution.User.FullName</td>
                     <td>@contribution.Status</td>
                     <td>@contribution.SubmitDate</td>
-                    <td>@contribution.User.Faculty.FacName</td>
                 </tr>
             }
         </tbody>

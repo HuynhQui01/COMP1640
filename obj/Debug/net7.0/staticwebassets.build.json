@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RdDLKPqknLS6PM4p3iC6J68m+9U9Xv1oN3fLRS7Lec4=",
+  "Hash": "1x01mvzEHNWHZeVoBclegCr0Z4vD1Q0ETn2rXIganlM=",
   "Source": "Comp1640",
   "BasePath": "_content/Comp1640",
   "Mode": "Default",
@@ -45118,6 +45118,23 @@
       "OriginalItemSpec": "wwwroot\\uploads\\aa90da9097135cb4eb894e82e43287fa.jpg"
     },
     {
+      "Identity": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\wwwroot\\uploads\\anh em giang hồ.jpg",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "uploads/anh em giang hồ.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\anh em giang hồ.jpg"
+    },
+    {
       "Identity": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\wwwroot\\uploads\\ASM1_1690.docx",
       "SourceId": "Comp1640",
       "SourceType": "Discovered",
@@ -45167,6 +45184,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\cam-lan-suc-linda-cam-qua-dua-nem-3df333f8a317833bce11bcaa0a9ef8e2.jpg"
+    },
+    {
+      "Identity": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\wwwroot\\uploads\\DS CLB.docx",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "uploads/DS CLB.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\DS CLB.docx"
     },
     {
       "Identity": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\wwwroot\\uploads\\Report 1625-Huynh Van Qui - GCC210153_638478674894084701.docx",
