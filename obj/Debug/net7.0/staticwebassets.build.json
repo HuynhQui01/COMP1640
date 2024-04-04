@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "22DDwu5WWjTOZE8k90G6jlAbhpe2HhWCD3YkUiVSoV8=",
+  "Hash": "RdDLKPqknLS6PM4p3iC6J68m+9U9Xv1oN3fLRS7Lec4=",
   "Source": "Comp1640",
   "BasePath": "_content/Comp1640",
   "Mode": "Default",
@@ -45116,6 +45116,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\aa90da9097135cb4eb894e82e43287fa.jpg"
+    },
+    {
+      "Identity": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\wwwroot\\uploads\\ASM1_1690.docx",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "uploads/ASM1_1690.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\ASM1_1690.docx"
+    },
+    {
+      "Identity": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\wwwroot\\uploads\\background.jpg",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "uploads/background.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\background.jpg"
     },
     {
       "Identity": "D:\\University\\TopUp\\COMP1640\\Code\\Test\\COMP1640\\wwwroot\\uploads\\cam-lan-suc-linda-cam-qua-dua-nem-3df333f8a317833bce11bcaa0a9ef8e2.jpg",

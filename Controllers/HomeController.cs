@@ -31,7 +31,7 @@ public class HomeController : Controller
     {
         return View();
     }
-    
+
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Admin()
     {
@@ -127,5 +127,20 @@ public class HomeController : Controller
         return View();
     }
 
+    public async Task<IActionResult> GuestView()
+    {
+        var curUser = await _userManager.GetUserAsync(User);
+        var facId = curUser.FacId;
+        var faculty = await _context.Faculties.FindAsync(facId);
+        var facName = faculty.FacName;
+
+        // Lấy tất cả các Contribution của Faculty mà tài khoản Guest đang được xét
+        var contributions = await _context.Contributions
+            .Include(c => c.User)
+            .Where(c => c.User.Faculty.FacName == facName)
+            .ToListAsync();
+
+        return View(contributions);
+    }
 
 }

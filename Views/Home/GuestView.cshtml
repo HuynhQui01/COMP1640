@@ -1,0 +1,36 @@
+@model List<Comp1640.Models.Contribution>
+@{
+  ViewData["Title"] = "Index";
+  Layout = "~/Views/Shared/UserLO.cshtml";
+}
+
+<h2>Guest View</h2>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Submit Date</th>
+                <th>Faculty</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var contribution in Model)
+            {
+                <tr>
+                    <td>@contribution.ConName</td>
+                    <td>@contribution.Status</td>
+                    <td>@contribution.SubmitDate</td>
+                    <td>@contribution.User.Faculty.FacName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No contributions found.</p>
+}
