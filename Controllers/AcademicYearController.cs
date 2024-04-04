@@ -102,7 +102,7 @@ namespace Comp1640.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Ayid,CloseDate,FinalCloseDate")] AcademicYear academicYear)
+        public async Task<IActionResult> Edit(int id, [Bind("Ayid,CloseDate,FinalCloseDate,Name")] AcademicYear academicYear)
         {
             if (id != academicYear.Ayid)
             {

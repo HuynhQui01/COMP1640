@@ -81,45 +81,6 @@ public class HomeController : Controller
         return View();
     }
 
-    public async Task<IActionResult> GuestChart()
-    {
-        var contributions = await _context.Contributions.ToListAsync();
-
-
-        var approvedCount = contributions.Count(c => c.Status == "approved");
-        var rejectedCount = contributions.Count(c => c.Status == "rejected");
-        var pendingCount = contributions.Count(c => c.Status == "pending");
-
-        var publishedCount = contributions.Count(c => c.Buplic == "publish");
-        var unpublishedCount = contributions.Count(c => c.Buplic == "unpublish");
-
-        var pieChartData = new Dictionary<string, int>
-    {
-        { "Approved", approvedCount },
-        { "Rejected", rejectedCount },
-        { "Pending", pendingCount }
-    };
-
-        var columnChartData = new Dictionary<string, int>
-    {
-        { "Published", publishedCount },
-        { "Unpublished", unpublishedCount }
-    };
-
-        var pieChartLabels = pieChartData.Keys.ToArray();
-        var pieChartValues = pieChartData.Values.ToArray();
-
-        var columnChartLabels = columnChartData.Keys.ToArray();
-        var columnChartValues = columnChartData.Values.ToArray();
-
-        ViewBag.PieChartLabels = pieChartLabels;
-        ViewBag.PieChartValues = pieChartValues;
-
-        ViewBag.ColumnChartLabels = columnChartLabels;
-        ViewBag.ColumnChartValues = columnChartValues;
-
-        return View();
-    }
     public IActionResult About()
     {
         return View();
@@ -130,6 +91,34 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    public async Task<IActionResult> GuestChart()
+    {
+        var curUser = await _userManager.GetUserAsync(User);
+        var facId = curUser.FacId;
+        var faculty = await _context.Faculties.FindAsync(facId);
+        var facName = faculty.FacName;
+
+
+        var contributionsByFaculty = await _context.Contributions.Where(c => c.User.Faculty.FacName == facName)
+       .GroupBy(c => c.User.Faculty.FacName)
+       .Select(group => new { Faculty = group.Key, Count = group.Count() })
+       .ToListAsync();
+
+        List<string> facultyNames = new List<string>();
+        List<int> contributionCounts = new List<int>();
+
+        foreach (var item in contributionsByFaculty)
+        {
+            facultyNames.Add(item.Faculty);
+            contributionCounts.Add(item.Count);
+        }
+
+        ViewBag.FacultyNames = facultyNames;
+        ViewBag.ContributionCounts = contributionCounts;
+
+        return View();
     }
 
 
