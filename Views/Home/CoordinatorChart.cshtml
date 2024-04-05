@@ -82,8 +82,8 @@
                     @* <p class="text-sm ">Last Campaign Performance</p> *@
                     <hr class="dark horizontal">
                     @* <div class="d-flex ">
-                        <i class="material-icons text-sm my-auto me-1">schedule</i>
-                        <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
+                    <i class="material-icons text-sm my-auto me-1">schedule</i>
+                    <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
                     </div> *@
                 </div>
             </div>
@@ -140,8 +140,8 @@
                     @* <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today sales. </p>
                     <hr class="dark horizontal">
                     <div class="d-flex ">
-                        <i class="material-icons text-sm my-auto me-1">schedule</i>
-                        <p class="mb-0 text-sm"> updated 4 min ago </p>
+                    <i class="material-icons text-sm my-auto me-1">schedule</i>
+                    <p class="mb-0 text-sm"> updated 4 min ago </p>
                     </div> *@
                 </div>
             </div>
@@ -207,9 +207,69 @@
                     @* <p class="text-sm ">Last Campaign Performance</p>
                     <hr class="dark horizontal">
                     <div class="d-flex ">
+                    <i class="material-icons text-sm my-auto me-1">schedule</i>
+                    <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
+                    </div> *@
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4" id="contain">
+            <div class="col-lg-4 col-md-6 mt-4 mb-4" style="border-radius: 20px; margin-right: 5%">
+                <div class="card z-index-2 " style="border-radius: 20px; box-shadow: 5px 8px #d9d9d9;">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                        <div class="border-radius-lg py-3 pe-1" style="background-color: #edf2f4;" id="wchart">
+                            <div class="chart">
+                                <script
+                                    src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+                                <!-- Create canvas element for chart -->
+                                <canvas id="userContributionsChart" width="400" height="200"></canvas>
+
+                                <script>
+                                    // Get chart data from model
+                                    var labels = @Html.Raw(Json.Serialize(ViewBag.UserContributionsChart.Labels));
+                                    var userCounts = @Html.Raw(Json.Serialize(ViewBag.UserContributionsChart.UserCounts));
+
+                                    // Prepare data for Chart.js
+                                    var data = {
+                                        labels: labels,
+                                        datasets: [{
+                                            label: 'Number of Users',
+                                            data: userCounts,
+                                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                            borderColor: 'rgba(255, 99, 132, 1)',
+                                            borderWidth: 1
+                                        }]
+                                    };
+
+                                    // Create Chart.js chart
+                                    var ctx = document.getElementById('userContributionsChart').getContext('2d');
+                                    var chart = new Chart(ctx, {
+                                        type: 'bar',
+                                        data: data,
+                                        options: {
+                                            scales: {
+                                                y: {
+                                                    beginAtZero: true,
+                                                    stepSize: 1
+                                                }
+                                            }
+                                        }
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="mb-0 ">Number of user has submited contribution in the faculty</h6>
+                        @* <p class="text-sm ">Last Campaign Performance</p>
+                        <hr class="dark horizontal">
+                        <div class="d-flex ">
                         <i class="material-icons text-sm my-auto me-1">schedule</i>
                         <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
-                    </div> *@
+                        </div> *@
+                    </div>
                 </div>
             </div>
         </div>

@@ -78,6 +78,24 @@ public class HomeController : Controller
         new { Label = "Approved", Count = approvedContributions },
         new { Label = "Rejected", Count = rejectedContributions }
     };
+
+        var curUser = await _userManager.GetUserAsync(User);
+        var facId = curUser.FacId;
+        var faculty = await _context.Faculties.FindAsync(facId);
+        var facName = faculty.FacName;
+
+            var userContributionsCount = _context.Contributions.Where(u => u.User.Faculty.FacName == facName)
+                .Select(c => c.UserId)
+                .Distinct()
+                .Count();
+
+        var chartData1 = new
+        {
+            Labels = new[] { "User Contributions" },
+            UserCounts = new[] { userContributionsCount }
+        };
+
+        ViewBag.UserContributionsChart = chartData1;
         return View();
     }
 
@@ -133,8 +151,6 @@ public class HomeController : Controller
         var facId = curUser.FacId;
         var faculty = await _context.Faculties.FindAsync(facId);
         var facName = faculty.FacName;
-
-        // Lấy tất cả các Contribution của Faculty mà tài khoản Guest đang được xét
         var contributions = await _context.Contributions
             .Include(c => c.User)
             .Where(c => c.User.Faculty.FacName == facName)

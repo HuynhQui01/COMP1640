@@ -24,10 +24,13 @@
 <body>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-danger text-center" style="font-size: 40px;">Table of Contributions</h6>
+            <h6 class="m-0 font-weight-bold text-danger text-center" style="font-size: 40px;">Table of Contributions
+            </h6>
         </div>
-        @if(User.Identity.IsAuthenticated && User.IsInRole("Student")){
-            <div class="p-3"><a class="btn btn-primary" asp-controller="Contribution" asp-action="Create">Create New</a></div>
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Student"))
+        {
+            <div class="p-3"><a class="btn btn-primary" asp-controller="Contribution" asp-action="Create">Create New</a>
+            </div>
         }
         <div class="card-body" style="box-sizing: border-box;">
             <div class="table-responsive">
@@ -85,7 +88,10 @@
                                     {
                                         if (User.IsInRole("Student"))
                                         {
-                                            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ConId">Edit</a>
+                                            if (@item.SubmitDate < DateTime.Now)
+                                            {
+                                                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ConId">Edit</a>
+                                            }
                                             <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ConId">Delete</a>
                                         }
                                         if (User.IsInRole("Coordinator"))
@@ -110,15 +116,15 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-        
-        var errorSwal = '@TempData["ErrorMessage"]';
-        if (errorSwal) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: "Out of timne to feedback!"
-            });
-        }
-    </script>
+
+    var errorSwal = '@TempData["ErrorMessage"]';
+    if (errorSwal) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "Out of time to feedback!"
+        });
+    }
+</script>
 
 </html>

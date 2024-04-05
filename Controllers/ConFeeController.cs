@@ -46,7 +46,7 @@ namespace Comp1640.Controllers
             var con = await _context.Contributions.FindAsync(id);
             var conTime = con.SubmitDate;
             var curTime = DateTime.Now;
-            var checkTime = (conTime - curTime).TotalDays;
+            var checkTime = (curTime - conTime).TotalDays;
             if (checkTime <= 14)
             {
                 if (User.IsInRole("Student"))

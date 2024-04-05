@@ -5,7 +5,7 @@ namespace Comp1640.Models;
 
 public class CustomUser : IdentityUser
 {
-    // public int FacId { get; set; }
+    
     public int? FacId { get; set; }
     [InverseProperty("User")]
     public virtual ICollection<Contribution> Contributions { get; } = new List<Contribution>();
@@ -20,10 +20,5 @@ public class CustomUser : IdentityUser
     [InverseProperty("CustomUser")]
     public virtual Faculty? Faculty { get; set; }
 
-
-
-    // [ForeignKey("FacId")]
-    // [InverseProperty("Users")]
-    // public virtual Faculty Fac { get; set; } = null!;
 }
 

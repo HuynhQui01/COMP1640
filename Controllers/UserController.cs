@@ -81,10 +81,6 @@ namespace Comp1640.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult ManageRoles(string id)
         {
-            // if (User.Identity.IsAuthenticated)
-            // {
-            //     if (User.IsInRole("Admin"))
-            //     {
             var user = _userManager.FindByIdAsync(id).Result;
             var roles = _roleManager.Roles.Select(r => r.Name).ToList();
             return View(model: new UserRoleViewModel
@@ -92,9 +88,6 @@ namespace Comp1640.Controllers
                 User = user,
                 Roles = roles
             });
-            //     }
-            // }
-            // return Redirect("/");
         }
 
         [Authorize(Roles = "Admin")]
