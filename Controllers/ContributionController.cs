@@ -729,7 +729,7 @@ namespace Comp1640.Controllers
         }
 
         // POST: Contribution/Delete/5
-        [HttpPost, ActionName("Delete")]
+       [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
@@ -740,14 +740,24 @@ namespace Comp1640.Controllers
             var contribution = await _context.Contributions.FindAsync(id);
             if (contribution != null)
             {
+                _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Feedbacks NOCHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
+                _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Contributions NOCHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
+
+                // _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Contributions NOCHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
+
                 _context.Contributions.Remove(contribution);
+
+                await _context.SaveChangesAsync();
+                _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Feedbacks WITH CHECK CHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
+                _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Contributions WITH CHECK CHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
+
+                // _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Contributions WITH CHECK CHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
+
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool ContributionExists(int id)
+        }      
+         private bool ContributionExists(int id)
         {
             return (_context.Contributions?.Any(e => e.ConId == id)).GetValueOrDefault();
         }

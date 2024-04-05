@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Comp1640.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -38,12 +39,14 @@ namespace Comp1640.Controllers
             }
         }
 
+        [Authorize(Roles = "Manager")]
         // GET: Manager/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
+        [Authorize(Roles = "Manager")]
         // GET: Manager/Create
         public ActionResult Create()
         {
@@ -67,6 +70,7 @@ namespace Comp1640.Controllers
             }
         }
 
+        [Authorize(Roles = "Manager")]
         // GET: Manager/Edit/5
         public ActionResult Edit(int id)
         {
@@ -90,6 +94,7 @@ namespace Comp1640.Controllers
             }
         }
 
+        [Authorize(Roles = "Manager")]
         public async Task<ActionResult> studentmanage()
         {
             var users = _userManager.Users.ToList();
@@ -120,6 +125,7 @@ namespace Comp1640.Controllers
             }
         }
 
+        [Authorize(Roles = "Manager")]
         [HttpGet]
         public async Task<IActionResult> ViewChart(int academicYearId)
         {
@@ -198,6 +204,8 @@ namespace Comp1640.Controllers
 
             return View();
         }
+
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> ExceptionReports()
         {
             ViewBag.ConNoComment = _context.Contributions.Count(c => string.IsNullOrEmpty(c.Feedbacks.FirstOrDefault().Comment));
