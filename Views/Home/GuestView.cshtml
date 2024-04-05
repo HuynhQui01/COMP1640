@@ -41,12 +41,14 @@
         <tbody>
             @foreach (var contribution in Model)
             {
+                @if(contribution.Buplic == "Publicized"){
                 <tr>
                     <td>@contribution.ConName</td>
                     <td>@contribution.User.FullName</td>
-                    <td>@contribution.Status</td>
+                    <td>@contribution.Buplic</td>
                     <td>@contribution.SubmitDate</td>
                 </tr>
+                }
             }
         </tbody>
     </table>
