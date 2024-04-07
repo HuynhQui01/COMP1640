@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Comp1640.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Comp1640.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Comp1640.Controllers
 {
@@ -42,8 +42,7 @@ namespace Comp1640.Controllers
                 return NotFound();
             }
 
-            var faculty = await _context.Faculties
-                .FirstOrDefaultAsync(m => m.FacId == id);
+            var faculty = await _context.Faculties.FirstOrDefaultAsync(m => m.FacId == id);
             if (faculty == null)
             {
                 return NotFound();
@@ -52,10 +51,8 @@ namespace Comp1640.Controllers
             return View(faculty);
         }
 
-
         // GET: Faculty/Create
         [Authorize(Roles = "Admin")]
-
         public IActionResult Create()
         {
             ViewData["Ayid"] = new SelectList(_context.AcademicYears, "Ayid", "CloseDate");
@@ -80,7 +77,6 @@ namespace Comp1640.Controllers
 
         // GET: Faculty/Edit/5
         [Authorize(Roles = "Admin")]
-
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Faculties == null)
@@ -142,8 +138,7 @@ namespace Comp1640.Controllers
                 return NotFound();
             }
 
-            var faculty = await _context.Faculties
-                .FirstOrDefaultAsync(m => m.FacId == id);
+            var faculty = await _context.Faculties.FirstOrDefaultAsync(m => m.FacId == id);
             if (faculty == null)
             {
                 return NotFound();
@@ -157,17 +152,40 @@ namespace Comp1640.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Faculties == null)
+            var faculty = await _context
+                .Faculties.Include(f => f.CustomUser)
+                .ThenInclude(u => u.Contributions)
+                .ThenInclude(c => c.Feedbacks)
+                .FirstOrDefaultAsync(m => m.FacId == id);
+
+            if (faculty == null)
             {
-                return Problem("Entity set 'Comp1640Context.Faculties'  is null.");
-            }
-            var faculty = await _context.Faculties.FindAsync(id);
-            if (faculty != null)
-            {
-                _context.Faculties.Remove(faculty);
+                return NotFound();
             }
 
+            // Xóa tất cả các Feedback của các Contribution của tất cả các User thuộc Faculty
+            foreach (var user in faculty.CustomUser)
+            {
+                foreach (var contribution in user.Contributions)
+                {
+                    _context.Feedbacks.RemoveRange(contribution.Feedbacks);
+                }
+            }
+
+            // Xóa tất cả các Contribution của tất cả các User thuộc Faculty
+            foreach (var user in faculty.CustomUser)
+            {
+                _context.Contributions.RemoveRange(user.Contributions);
+            }
+
+            // Xóa tất cả các User thuộc Faculty
+            _context.Users.RemoveRange(faculty.CustomUser);
+
+            // Xóa Faculty
+            _context.Faculties.Remove(faculty);
+
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 

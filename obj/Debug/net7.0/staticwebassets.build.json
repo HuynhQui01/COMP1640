@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "98nZeoTl4tFHtjkrFb8DojdpWBQvo4apPrUmrdDeYhQ=",
+  "Hash": "8AMxh9jBr5YRNtJ3CdSlQ5o2VZkGj7uCsuD54WxUbmw=",
   "Source": "Comp1640",
   "BasePath": "_content/Comp1640",
   "Mode": "Default",
@@ -45390,6 +45390,23 @@
       "OriginalItemSpec": "wwwroot\\uploads\\DS CLB.docx"
     },
     {
+      "Identity": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\uploads\\Reject_638480990854463455.docx",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "uploads/Reject_638480990854463455.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Reject_638480990854463455.docx"
+    },
+    {
       "Identity": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\uploads\\Reject_b8f1.docx",
       "SourceId": "Comp1640",
       "SourceType": "Discovered",
@@ -45662,6 +45679,40 @@
       "OriginalItemSpec": "wwwroot\\uploads\\Voluntary - Copy_638480979697936564.docx"
     },
     {
+      "Identity": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\uploads\\Voluntary - Copy_638480987099471253.docx",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "uploads/Voluntary - Copy_638480987099471253.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Voluntary - Copy_638480987099471253.docx"
+    },
+    {
+      "Identity": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\uploads\\Voluntary - Copy_638480996374114825.docx",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "uploads/Voluntary - Copy_638480996374114825.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Voluntary - Copy_638480996374114825.docx"
+    },
+    {
       "Identity": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\uploads\\Voluntary - Copy.docx",
       "SourceId": "Comp1640",
       "SourceType": "Discovered",
@@ -45677,6 +45728,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\Voluntary - Copy.docx"
+    },
+    {
+      "Identity": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\uploads\\Voluntary.docx",
+      "SourceId": "Comp1640",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\",
+      "BasePath": "_content/Comp1640",
+      "RelativePath": "uploads/Voluntary.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Voluntary.docx"
     },
     {
       "Identity": "C:\\Users\\HP\\Desktop\\COMP1640\\wwwroot\\uploads\\Voluntary.jpg",
