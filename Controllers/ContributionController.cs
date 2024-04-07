@@ -502,7 +502,6 @@ namespace Comp1640.Controllers
             return View(contribution);
         }
 
-
         // GET: Contribution/Create
         [Authorize(Roles = "Student")]
         public IActionResult Create()
@@ -525,7 +524,9 @@ namespace Comp1640.Controllers
         public async Task<IActionResult> Create(
             IFormFile imageFile,
             IFormFile file,
-            [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,Buplic,Ayid,ImageFilePath")]
+            [Bind(
+                "ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,Buplic,Ayid,ImageFilePath"
+            )]
                 Contribution contribution
         )
         {
@@ -667,7 +668,9 @@ namespace Comp1640.Controllers
         public async Task<IActionResult> Edit(
             int id,
             IFormFile file,
-            [Bind("ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,FacId, Buplic,ImageFilePath")]
+            [Bind(
+                "ConID,ConName,UserId,Status,Filepath,FeedbackId,SubmitDate,FacId, Buplic,ImageFilePath"
+            )]
                 Contribution newCon
         )
         {
@@ -729,35 +732,52 @@ namespace Comp1640.Controllers
         }
 
         // POST: Contribution/Delete/5
-       [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Contributions == null)
+            // if (_context.Contributions == null)
+            // {
+            //     return Problem("Entity set 'Comp1640Context.Contributions'  is null.");
+            // }
+            // var contribution = await _context.Contributions.FindAsync(id);
+            // if (contribution != null)
+            // {
+            //     _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Feedbacks NOCHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
+            //     _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Contributions NOCHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
+
+            //     // _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Contributions NOCHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
+
+            //     _context.Contributions.Remove(contribution);
+
+            //     await _context.SaveChangesAsync();
+            //     _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Feedbacks WITH CHECK CHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
+            //     _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Contributions WITH CHECK CHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
+
+            //     // _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Contributions WITH CHECK CHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
+
+            // }
+
+            // return RedirectToAction(nameof(Index));
+
+            var contribution = await _context
+                .Contributions.Include(c => c.Feedbacks)
+                .FirstOrDefaultAsync(c => c.ConId == id);
+
+            if (contribution == null)
             {
-                return Problem("Entity set 'Comp1640Context.Contributions'  is null.");
+                return NotFound();
             }
-            var contribution = await _context.Contributions.FindAsync(id);
-            if (contribution != null)
-            {
-                _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Feedbacks NOCHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
-                _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Contributions NOCHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
+            _context.Feedbacks.RemoveRange(contribution.Feedbacks);
 
-                // _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Contributions NOCHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
+            _context.Contributions.Remove(contribution);
 
-                _context.Contributions.Remove(contribution);
-
-                await _context.SaveChangesAsync();
-                _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Feedbacks WITH CHECK CHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
-                _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Contributions WITH CHECK CHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
-
-                // _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Contributions WITH CHECK CHECK CONSTRAINT FK_Feedbacks_Contributions_ConId");
-
-            }
+            await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
-        }      
-         private bool ContributionExists(int id)
+        }
+
+        private bool ContributionExists(int id)
         {
             return (_context.Contributions?.Any(e => e.ConId == id)).GetValueOrDefault();
         }
