@@ -53,31 +53,50 @@ namespace Comp1640.Controllers
             
         }
 
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Delete(string id)
+        [Authorize(Roles = "Admin")]public async Task<IActionResult> Delete(string id)
+{
+    var user = await _userManager.FindByIdAsync(id);
+    if (user == null)
+    {
+        return NotFound();
+    }
+
+    try
+    {
+        // Xóa tất cả các Feedback của User
+        var userFeedbacks = _context.Feedbacks.Where(f => f.UserId == id).ToList();
+        foreach (var feedback in userFeedbacks)
         {
-            var user = _userManager.FindByIdAsync(id).Result;
-            try
-            {
-                _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Contributions NOCHECK CONSTRAINT FK__Contribut__UserI__571DF1D5");
-
-                var result = await _userManager.DeleteAsync(user);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index");
-                }
-                _context.Database.ExecuteSqlRaw("ALTER TABLE dbo.Contributions WITH CHECK CHECK CONSTRAINT FK__Contribut__UserI__571DF1D5");
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch (DbUpdateException)
-            {
-                // Handle exception or display error message
-                // return RedirectToAction(nameof(Error));
-            }
-            return View("Index");
+            _context.Feedbacks.Remove(feedback);
         }
+        await _context.SaveChangesAsync();
 
+        // Xóa tất cả các Contribution của User
+        var userContributions = _context.Contributions.Where(c => c.UserId == id).ToList();
+        foreach (var contribution in userContributions)
+        {
+            _context.Contributions.Remove(contribution);
+        }
+        await _context.SaveChangesAsync();
+
+        // Sau khi đã xóa Feedback và Contribution, xóa User
+        var result = await _userManager.DeleteAsync(user);
+        if (result.Succeeded)
+        {
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            // Xử lý lỗi khi không xóa được User
+            return RedirectToAction(nameof(Index));
+        }
+    }
+    catch (DbUpdateException)
+    {
+        // Xử lý lỗi khi thực hiện cập nhật cơ sở dữ liệu
+        return RedirectToAction(nameof(Index));
+    }
+}
         [Authorize(Roles = "Admin")]
         public IActionResult ManageRoles(string id)
         {
