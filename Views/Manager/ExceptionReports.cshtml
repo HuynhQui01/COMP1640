@@ -1,6 +1,7 @@
 @model dynamic
 @{
     Layout = "~/Views/Shared/AdminLO.cshtml";
+    var facultyData = ViewBag.FacultyData;
 
 }
 <style>
@@ -134,50 +135,82 @@
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                 <div class="border-radius-lg py-3 pe-1" style="background-color: #fadeff;" id="wchart">
                     <div class="chart">
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-                        <canvas id="contributionsChart" width="400" height="200"></canvas>
+                        
+                        <canvas id="contributionsChart" width="400" height="400"></canvas>
 
                         <script>
-                            // Get chart data from model
-                            var labels = @Html.Raw(Json.Serialize(Model.Labels));
-                            var datasets = @Html.Raw(Json.Serialize(Model.DataSets));
+                            var data = @Html.Raw(Json.Serialize(ViewBag.DataChart));
 
-                            // Prepare data for Chart.js
-                            var data = {
-                                labels: labels,
-                                datasets: datasets.map(function (dataset) {
-                                    return {
-                                        label: dataset.Label,
-                                        data: dataset.Data,
-                                        backgroundColor: getRandomColor(), // Function to generate random colors
-                                        borderWidth: 1
-                                    };
-                                })
-                            };
+                            var academicYears = [];
+                            var faculties = [];
+                            var contributorsCounts = [];
 
-                            // Create Chart.js chart
+                            data.forEach(function (item) {
+                                if (!academicYears.includes(item.academicYear)) {
+                                    academicYears.push(item.academicYear);
+                                }
+                                if (!faculties.includes(item.faculty)) {
+                                    faculties.push(item.faculty);
+                                }
+                                contributorsCounts.push({
+                                    academicYear: item.academicYear,
+                                    faculty: item.faculty,
+                                    contributorsCount: item.contributorsCount
+                                });
+                            });
+
+                            var datasets = [];
+                            var backgroundColors = [];
+
+                            faculties.forEach(function (faculty, index) {
+                                backgroundColors.push(getBackgroundColor(index)); // Gán màu cho từng faculty
+                                var facultyData = contributorsCounts.filter(function (item) {
+                                    return item.faculty === faculty;
+                                });
+                                var facultyContributorsCounts = academicYears.map(function (year) {
+                                    var data = facultyData.find(function (item) {
+                                        return item.academicYear === year;
+                                    });
+                                    return data ? data.contributorsCount : 0;
+                                });
+                                datasets.push({
+                                    label: faculty,
+                                    data: facultyContributorsCounts,
+                                    backgroundColor: backgroundColors[index], // Sử dụng màu tương ứng
+                                    borderColor: 'rgba(255, 99, 132, 1)',
+                                    borderWidth: 1
+                                });
+                            });
+
+                            function getBackgroundColor(index) {
+                                var colors = ['#FF5733', '#FFC300', '#33FF57', '#5733FF', '#57FF33', '#3357FF', '#F033FF'];
+                                return colors[index % colors.length]; // Sử dụng toán tử modulo để lặp lại mảng màu
+                            }
+
                             var ctx = document.getElementById('contributionsChart').getContext('2d');
-                            var chart = new Chart(ctx, {
+                            var myChart = new Chart(ctx, {
                                 type: 'bar',
-                                data: data,
+                                data: {
+                                    labels: academicYears,
+                                    datasets: datasets
+                                },
                                 options: {
                                     scales: {
-                                        y: {
-                                            beginAtZero: true
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }]
+                                    },
+                                    legend: {
+                                        display: true,
+                                        position: 'top',
+                                        labels: {
+                                            fontColor: 'black'
                                         }
                                     }
                                 }
                             });
-
-                            // Function to generate random colors
-                            function getRandomColor() {
-                                var letters = '0123456789ABCDEF';
-                                var color = '#';
-                                for (var i = 0; i < 6; i++) {
-                                    color += letters[Math.floor(Math.random() * 16)];
-                                }
-                                return color;
-                            }
                         </script>
                     </div>
                 </div>
@@ -199,46 +232,70 @@
                     <div class="chart">
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
-                        <!-- Create canvas element for chart -->
-                        <canvas id="userContributionsChart" width="400" height="200"></canvas>
+                        
+                        <canvas id="myChart123" width="400" height="400"></canvas>
 
                         <script>
-                            // Get chart data from model
-                            var labels = @Html.Raw(Json.Serialize(ViewBag.ChartData1.Labels));
-                            var userCounts = @Html.Raw(Json.Serialize(ViewBag.ChartData1.UserCounts));
+                            var ctx = document.getElementById('myChart123').getContext('2d');
 
-                            // Prepare data for Chart.js
-                            var data = {
-                                labels: labels,
-                                datasets: [{
-                                    label: 'Number of Users',
-                                    data: userCounts,
-                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                    borderColor: 'rgba(54, 162, 235, 1)',
+                            var data = @Html.Raw(Json.Serialize(ViewBag.FacultyData));
+
+                            var labels = Object.keys(data[Object.keys(data)[0]]);
+                            var datasets = [];
+
+                            Object.keys(data).forEach(function (faculty) {
+                                var facultyData = data[faculty];
+                                var facultyDataset = {
+                                    label: faculty,
+                                    data: [],
+                                    backgroundColor: getRandomColor(),
+                                    borderColor: getRandomColor(),
                                     borderWidth: 1
-                                }]
-                            };
+                                };
 
-                            // Create Chart.js chart
-                            var ctx = document.getElementById('userContributionsChart').getContext('2d');
-                            var chart = new Chart(ctx, {
+                                labels.forEach(function (academicYear) {
+                                    if (facultyData.hasOwnProperty(academicYear)) {
+                                        facultyDataset.data.push(facultyData[academicYear]);
+                                    } else {
+                                        facultyDataset.data.push(0);
+                                    }
+                                });
+
+                                datasets.push(facultyDataset);
+                            });
+
+                            var myChart = new Chart(ctx, {
                                 type: 'bar',
-                                data: data,
+                                data: {
+                                    labels: labels,
+                                    datasets: datasets
+                                },
                                 options: {
                                     scales: {
-                                        y: {
-                                            beginAtZero: true,
-                                            stepSize: 1
-                                        }
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero: true,
+                                                stepSize: 1
+                                            }
+                                        }]
                                     }
                                 }
                             });
+
+                            function getRandomColor() {
+                                var letters = '0123456789ABCDEF';
+                                var color = '#';
+                                for (var i = 0; i < 6; i++) {
+                                    color += letters[Math.floor(Math.random() * 16)];
+                                }
+                                return color;
+                            }
                         </script>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <h6 class="mb-0 ">Number of contributions Without comment</h6>
+                <h6 class="mb-0 ">Number student submit</h6>
                 <p class="text-sm "></p>
                 <hr class="dark horizontal">
                 <div class="d-flex ">

@@ -217,66 +217,54 @@ namespace Comp1640.Controllers
 
             ViewBag.ConNoComment14 = contributionsWithoutCommentAfter14DaysCount;
 
-            var contributionsByFacultyAndYear = await _context.Contributions
-        .Include(c => c.Ay)
-        .Include(c => c.User)
+           
+
+            var data = await _context.Contributions
+            .Include(c => c.Ay)
+            .Include(c => c.User)
             .ThenInclude(u => u.Faculty)
-        .GroupBy(c => new { c.Ay.Name, c.User.Faculty.FacName })
-        .Select(group => new
+            .GroupBy(c => new { c.Ay.Name, c.User.Faculty.FacName })
+            .Select(g => new
+            {
+                AcademicYear = g.Key.Name,
+                Faculty = g.Key.FacName,
+                ContributorsCount = g.Count() 
+            })
+            .ToListAsync();
+
+            ViewBag.DataChart = data;
+
+
+        var academicYears = _context.AcademicYears.Select(ay => ay.Name).Distinct().ToList();
+
+    var facultyData = _userManager.Users
+        .Include(u => u.Faculty)
+        .Include(u => u.Contributions)
+        .Where(u => u.Contributions.Any())
+        .GroupBy(u => new { u.Faculty.FacName, u.Contributions.FirstOrDefault().Ay.Name })
+        .Select(g => new { FacultyName = g.Key.FacName, AcademicYear = g.Key.Name, Count = g.Count() })
+        .ToList();
+
+    var chartData = new Dictionary<string, Dictionary<string, int>>();
+
+    foreach (var facultyYear in facultyData)
+    {
+        if (!chartData.ContainsKey(facultyYear.FacultyName))
+            chartData[facultyYear.FacultyName] = new Dictionary<string, int>();
+
+        foreach (var academicYear in academicYears)
         {
-            AcademicYear = group.Key.Name,
-            Faculty = group.Key.FacName,
-            ContributionCount = group.Count()
-        })
-        .ToListAsync();
+            if (!chartData[facultyYear.FacultyName].ContainsKey(academicYear))
+                chartData[facultyYear.FacultyName][academicYear] = 0;
+        }
 
-            // Prepare data for chart rendering
-            var academicYears = contributionsByFacultyAndYear.Select(c => c.AcademicYear).Distinct().ToList();
-            var faculties = contributionsByFacultyAndYear.Select(c => c.Faculty).Distinct().ToList();
-            var chartData = new
-            {
-                Labels = academicYears,
-                DataSets = faculties.Select(faculty =>
-                    new
-                    {
-                        Label = faculty,
-                        Data = contributionsByFacultyAndYear
-                                .Where(c => c.Faculty == faculty)
-                                .Select(c => c.ContributionCount)
-                                .ToList()
-                    })
-            };
+        chartData[facultyYear.FacultyName][facultyYear.AcademicYear] = facultyYear.Count;
+    }
 
-            ViewBag.ChartData = chartData;
 
-            // a
-            var usersByAcademicYear = _context.Contributions
-       .Include(c => c.Ay)
-       .Select(c => new { AcademicYear = c.Ay.Name, UserId = c.UserId })
-       .Distinct()
-       .GroupBy(c => new { c.AcademicYear })
-       .Select(group => new
-       {
-           AcademicYear = group.Key.AcademicYear,
-           UserCount = group.Count()
-       })
-       .ToList();
+    ViewBag.FacultyData = chartData;
 
-            // Prepare data for chart rendering
-            var academicYears1 = usersByAcademicYear.Select(c => c.AcademicYear).ToList();
-            var userCounts = usersByAcademicYear.Select(c => c.UserCount).ToList();
-
-            var chartData1 = new
-            {
-                Labels = academicYears,
-                UserCounts = userCounts
-            };
-
-            ViewBag.ChartData1 = chartData1;
-
-            
-            return View(chartData);
-
+            return View();
 
         }
     }
