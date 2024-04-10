@@ -88,7 +88,7 @@
                                     {
                                         if (User.IsInRole("Student"))
                                         {
-                                            if (@item.SubmitDate < DateTime.Now)
+                                            if (@item.Ay.FinalCloseDate > DateTime.Now)
                                             {
                                                 <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ConId">Edit</a>
                                             }

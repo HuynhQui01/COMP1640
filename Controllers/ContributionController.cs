@@ -50,7 +50,7 @@ namespace Comp1640.Controllers
                 {
                     ViewBag.Fac = user.Faculty.FacName;
                     var userContributions = await _context
-                        .Contributions.Where(c => c.UserId == user.Id)
+                        .Contributions.Where(c => c.UserId == user.Id).Include(c => c.Ay)
                         // .Include(f => f.Fac)
                         .ToListAsync();
 
@@ -65,7 +65,7 @@ namespace Comp1640.Controllers
                     ViewBag.Fac = user.Faculty.FacName;
                     var userContributions = await _context
                         .Contributions.Include(c => c.User.Faculty)
-                        .Where(c => c.User.Faculty.FacName == fac.FacName)
+                        .Where(c => c.User.Faculty.FacName == fac.FacName).Include(c => c.Ay)
                         .ToListAsync();
 
                     return View(userContributions);
