@@ -235,37 +235,100 @@ namespace Comp1640.Controllers
             ViewBag.DataChart = data;
 
 
-        var academicYears = _context.AcademicYears.Select(ay => ay.Name).Distinct().ToList();
+    //     var academicYears = _context.AcademicYears.Select(ay => ay.Name).Distinct().ToList();
 
-    var facultyData = _userManager.Users
-        .Include(u => u.Faculty)
-        .Include(u => u.Contributions)
-        .Where(u => u.Contributions.Any())
-        .GroupBy(u => new { u.Faculty.FacName, u.Contributions.FirstOrDefault().Ay.Name })
-        .Select(g => new { FacultyName = g.Key.FacName, AcademicYear = g.Key.Name, Count = g.Count() })
-        .ToList();
+    // var facultyData = _userManager.Users
+    //     .Include(u => u.Faculty)
+    //     .Include(u => u.Contributions)
+    //     .Where(u => u.Contributions.Any())
+    //     .GroupBy(u => new { u.Faculty.FacName, u.Contributions.FirstOrDefault().Ay.Name })
+    //     .Select(g => new { FacultyName = g.Key.FacName, AcademicYear = g.Key.Name, Count = g.Count() })
+    //     .ToList();
 
-    var chartData = new Dictionary<string, Dictionary<string, int>>();
+    // var chartData = new Dictionary<string, Dictionary<string, int>>();
 
-    foreach (var facultyYear in facultyData)
-    {
-        if (!chartData.ContainsKey(facultyYear.FacultyName))
-            chartData[facultyYear.FacultyName] = new Dictionary<string, int>();
+    // foreach (var facultyYear in facultyData)
+    // {
+    //     if (!chartData.ContainsKey(facultyYear.FacultyName))
+    //         chartData[facultyYear.FacultyName] = new Dictionary<string, int>();
 
-        foreach (var academicYear in academicYears)
-        {
-            if (!chartData[facultyYear.FacultyName].ContainsKey(academicYear))
-                chartData[facultyYear.FacultyName][academicYear] = 0;
+    //     foreach (var academicYear in academicYears)
+    //     {
+    //         if (!chartData[facultyYear.FacultyName].ContainsKey(academicYear))
+    //             chartData[facultyYear.FacultyName][academicYear] = 0;
+    //     }
+
+    //     chartData[facultyYear.FacultyName][facultyYear.AcademicYear] = facultyYear.Count;
+    // }
+
+
+    // ViewBag.FacultyData = chartData;
+    
+
+            var academicYears = _context.AcademicYears.ToList();
+
+            var data1 = new List<object>();
+
+            foreach (var year in academicYears)
+            {
+                var yearData = _userManager.Users
+                    .Include(u => u.Faculty)
+                    .Include(u => u.Contributions)
+                    .Where(u => u.Contributions.Any(c => c.Ayid == year.Ayid))
+                    .GroupBy(u => u.Faculty.FacName)
+                    .Select(g => new { Faculty = g.Key, Count = g.Count() })
+                    .ToList();
+
+                foreach (var item in yearData)
+                {
+                    data1.Add(new { AcademicYear = year.Name, Faculty = item.Faculty, Count = item.Count });
+                }
+            }
+
+            // Data manipulation to prepare for the chart
+            var chartData = new Dictionary<string, Dictionary<string, int>>();
+            foreach (var item in data1.Cast<dynamic>()) // Replace dynamic with the actual type of item if known
+            {
+                if (!chartData.ContainsKey(item.Faculty))
+                {
+                    chartData[item.Faculty] = new Dictionary<string, int>();
+                }
+
+                if (!chartData[item.Faculty].ContainsKey(item.AcademicYear))
+                {
+                    chartData[item.Faculty][item.AcademicYear] = 0;
+                }
+
+                chartData[item.Faculty][item.AcademicYear] += item.Count;
+            }
+
+            // Convert chartData to format suitable for Chart.js
+            var chartLabels = chartData.SelectMany(kv => kv.Value.Keys).Distinct().OrderBy(x => x).ToList();
+            var chartDataset = new List<object>();
+            foreach (var faculty in chartData.Keys)
+            {
+                var facultyData = chartData[faculty];
+                var counts = chartLabels.Select(label => facultyData.ContainsKey(label) ? facultyData[label] : 0).ToList();
+                chartDataset.Add(new
+                {
+                    label = faculty,
+                    data = counts,
+                    backgroundColor = GetRandomColor(), // You can define this function to get random colors
+                    borderColor = "rgba(75, 192, 192, 1)",
+                    borderWidth = 1
+                });
+            }
+
+            ViewBag.ChartLabels = chartLabels;
+            ViewBag.ChartDataset = chartDataset;
+            return View();
         }
 
-        chartData[facultyYear.FacultyName][facultyYear.AcademicYear] = facultyYear.Count;
-    }
-
-
-    ViewBag.FacultyData = chartData;
-
-            return View();
-
+        private string GetRandomColor()
+        {
+            // Generate random color code
+            var random = new Random();
+            return String.Format("#{0:X6}", random.Next(0x1000000));
         }
     }
 }

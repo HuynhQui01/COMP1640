@@ -233,63 +233,26 @@
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
                         
-                        <canvas id="myChart123" width="400" height="400"></canvas>
-
+                        <canvas id="myChart123" width="400" height="200"></canvas>
                         <script>
                             var ctx = document.getElementById('myChart123').getContext('2d');
-
-                            var data = @Html.Raw(Json.Serialize(ViewBag.FacultyData));
-
-                            var labels = Object.keys(data[Object.keys(data)[0]]);
-                            var datasets = [];
-
-                            Object.keys(data).forEach(function (faculty) {
-                                var facultyData = data[faculty];
-                                var facultyDataset = {
-                                    label: faculty,
-                                    data: [],
-                                    backgroundColor: getRandomColor(),
-                                    borderColor: getRandomColor(),
-                                    borderWidth: 1
-                                };
-
-                                labels.forEach(function (academicYear) {
-                                    if (facultyData.hasOwnProperty(academicYear)) {
-                                        facultyDataset.data.push(facultyData[academicYear]);
-                                    } else {
-                                        facultyDataset.data.push(0);
-                                    }
-                                });
-
-                                datasets.push(facultyDataset);
-                            });
-
-                            var myChart = new Chart(ctx, {
+                            var chart = new Chart(ctx, {
                                 type: 'bar',
                                 data: {
-                                    labels: labels,
-                                    datasets: datasets
-                                },
+                                    labels: @Html.Raw(Json.Serialize(ViewBag.ChartLabels)),
+                                    datasets: @Html.Raw(Json.Serialize(ViewBag.ChartDataset))
+            },
                                 options: {
+                                    responsive: true,
                                     scales: {
                                         yAxes: [{
                                             ticks: {
-                                                beginAtZero: true,
-                                                stepSize: 1
+                                                beginAtZero: true
                                             }
                                         }]
                                     }
                                 }
                             });
-
-                            function getRandomColor() {
-                                var letters = '0123456789ABCDEF';
-                                var color = '#';
-                                for (var i = 0; i < 6; i++) {
-                                    color += letters[Math.floor(Math.random() * 16)];
-                                }
-                                return color;
-                            }
                         </script>
                     </div>
                 </div>
